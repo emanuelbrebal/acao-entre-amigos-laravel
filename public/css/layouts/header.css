@@ -1,0 +1,35 @@
+.icon-header{
+    height: 60px;
+}
+
+.navbar.nav{
+    padding: 20px;
+    background-color: var(--primary-green);
+    border-bottom: 1rem solid var(--secondary-green);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navbar-brand-text{
+    color: #fff;
+    padding-left: 5px;
+    font-size: 30px;
+    text-shadow: 1px 1px 1px var(--black);
+}
+
+.navigation-item{
+    text-decoration: none;
+    padding: 10px;
+}
+
+.login-icon{
+    height: 22px;
+}
