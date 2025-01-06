@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Minha Aplicação')</title>
+    <title>@yield('title')</title>
 
     <link rel="shortcut icon" href="{{asset('img/rifa_icon.png')}}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -14,13 +14,12 @@
         href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/layouts/reset.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/layouts/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/layouts/color.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layouts/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layouts/footer.css') }}">
 </head>
 
 <body>
-
-    <!-- Cabeçalho -->
     <header>
         <nav class="navbar nav">
             <div class="navbar-brand">
@@ -43,14 +42,19 @@
         </nav>
     </header>
 
-    <!-- Conteúdo Principal -->
     <main>
         @yield('content')
     </main>
 
-    <!-- Rodapé -->
-    <footer>
-        <p>&copy; {{ date('Y') }} Ação Entre Amigos</p>
+    <footer class="footer">
+        <p class="footer-copy">&copy; {{ date('Y') }} Ação Entre Amigos</p>
+        <div>
+            <a href="https://github.com/emanuelbrebal" class="footer-link">github</a>
+            <a href="https://www.linkedin.com/in/emanuel-victor-brebal/" class="footer-link">linkedin</a>
+            <a href="" class="footer-link">contatos</a>
+            {{-- fazer um modal com todos os contatos --}}
+
+        </div>
     </footer>
     <script src="https://kit.fontawesome.com/f6fb35c3c9.js" crossorigin="anonymous"></script>
 </body>

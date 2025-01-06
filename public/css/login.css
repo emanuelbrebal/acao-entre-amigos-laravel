@@ -1,0 +1,16 @@
+.form-login{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.login-main{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box{
+    width: 400px;
+}

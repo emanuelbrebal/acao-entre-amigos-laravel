@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Página inicial')
-<link rel="stylesheet" href="{{ asset('css/layouts/mainInicial.css') }}">
+@section('title', 'Ação Entre Amigos - Home Page')
+<link rel="stylesheet" href="{{ asset('css/mainInicial.css') }}">
 @section('content')
     <div class="d-flex main-search">
         <h1 class="main-text">Campanhas ativas</h1>
