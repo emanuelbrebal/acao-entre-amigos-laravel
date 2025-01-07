@@ -27,30 +27,40 @@
             <div class="navbar-brand ">
                 <img class="icon-header" src="{{ asset('img/rifa_icon.png') }}"
                     alt="Desenho de uma urna e uma mão, que está tirando uma rifa sorteada.">
-                <p class="navbar-brand-text"><strong>Ação Entre Amigos <br> Rifas Online</strong></p>
+                <p class="navbar-brand-text"><strong>Ação Entre Amigos</strong></p>
             </div>
         </nav>
     </header>
 
-    <main class="main-login">
-        <section class="section-login">
+    <main class="main-login -register">
+        <section class="section-login -register">
             <div class="login-box">
                 <form action="" class="form-login">
                     @csrf
-                    <h3 class="form-title">Faça o seu login!</h3>
+                    <h3 class="form-title">Faça o seu Registro!</h3>
+                    <input class="form-input" type="text" placeholder="CPF" name="cpf">
+                    <input class="form-input" type="text" placeholder="Nome" name="nome">
                     <input class="form-input" type="text" placeholder="Email" name="email">
-                    <input class="form-input" type="password" placeholder="Senha" name="password" id="passwordInput">
+                    <input class="form-input" type="text" placeholder="Número de celular" name="num_celular">
+                    <input class="form-input" type="password" placeholder="Senha" name="password" id="passwordInput1">
                     <div class="show-password-div">
                         <p class="show-password">
                             Mostrar a senha?
                         </p>
-                        <input class="form-checkbox" type="checkbox" onclick="togglePasswordVisible()">
+                        <input class="form-checkbox" type="checkbox" onclick="togglePasswordVisible1()">
                     </div>
-                    <button class="form-button"  type="submit" href="" >Login</button>
+                    <input class="form-input" type="password" placeholder="Repita Senha" name="password-check" id="passwordInput2">
+                    <div class="show-password-div">
+                        <p class="show-password">
+                            Mostrar a senha?
+                        </p>
+                        <input class="form-checkbox" type="checkbox" onclick="togglePasswordVisible2()">
+                    </div>
+                    <button class="form-button" type="submit" href="">Login</button>
                     <p class="form-p">
-                        Não tem cadastro?
-                        <a class="form-a" href="{{Route('redirecionarRegistro')}}">
-                            Registre-se agora!
+                        Já tem cadastro?
+                        <a class="form-a" href="{{Route('redirecionarLogin')}}">
+                            Faça login agora!
                         </a>
                     </p>
                 </form>
@@ -58,20 +68,26 @@
         </section>
     </main>
 
-
-
 </body>
 
 <script>
-    function togglePasswordVisible(){
-        var passwordInput = document.getElementById('passwordInput');
-        if (passwordInput.type === "password"){
+    function togglePasswordVisible1() {
+        var passwordInput = document.getElementById('passwordInput1');
+        if (passwordInput.type === "password") {
             passwordInput.type = "text";
         } else {
             passwordInput.type = "password";
         }
     }
 
+    function togglePasswordVisible2() {
+        var passwordInput = document.getElementById('passwordInput2');
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    }
 </script>
 
 </html>

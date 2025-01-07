@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', function () {
-    return view('login');
-});
+Route::get('/home', [UsuarioController::class,'redirecionarHome'])->name('redirecionarHome');
+Route::get('/signin', [UsuarioController::class, 'redirecionarRegistro'])->name('redirecionarRegistro');
+Route::get('/login', [UsuarioController::class, 'redirecionarLogin'])->name('redirecionarLogin');
 
-Route::get('/', function () {
-    return view('main');
-});
+// Route::middleware('usuarioLogado')->controller(UsuarioController::class)->group(function () {
+
+// });
