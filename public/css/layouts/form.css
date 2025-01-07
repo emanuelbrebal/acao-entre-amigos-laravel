@@ -1,0 +1,60 @@
+.form-input{
+    height: 40px;
+    padding: 1rem;
+    border: solid 3px var(--secondary-green);
+}
+
+.form-title{
+    color: var(--white);
+    text-transform: uppercase;
+    font-weight: 800;
+    /* text-shadow: 1px 1px 1px var(--black); */
+}
+
+.form-button{
+    border: none;
+    background-color: var(--secondary-green);
+    box-shadow: 0px 1px 2px var(--black);
+    color: var(--white);
+    font-weight: 600;
+    height: 40px;
+}
+
+.form-button:hover{
+    transform: scale(1.04);
+    cursor: pointer;
+}
+
+.form-checkbox{
+    border-radius: 15px;
+}
+
+.form-p{
+    color: var(--white);
+    font-weight: 500;
+    /* text-shadow: 1px 1px 1px var(--black); */
+}
+
+.form-a{
+
+    color: var(--white);
+    text-shadow: none;
+    font-weight: 700;
+}
+
+.form-a:hover{
+    color: var(--blue-click);
+}
+
+.show-password-div{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.show-password{
+    font-size: 14px;
+    margin-right: 10px;
+    color: var(--white);
+    /* text-shadow: .5px .5px 1px var(--black); */
+}
