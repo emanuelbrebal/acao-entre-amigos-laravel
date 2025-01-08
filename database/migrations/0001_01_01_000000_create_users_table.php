@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('cpf')->unique();
+            $table->string('cpf', 11)->unique();
             $table->string('name');
-            $table->string('password');
             $table->string('email')->unique();
-            $table->string('num_celular')->unsigned();
+            $table->string('password');
+            $table->unsignedBigInteger('celular')->unsigned();
+            $table->string('endereco');
         });
 
 

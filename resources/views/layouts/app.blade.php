@@ -7,7 +7,6 @@
     <title>@yield('title')</title>
 
     <link rel="shortcut icon" href="{{asset('img/rifa_icon.png')}}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
