@@ -1,93 +1,69 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Tela de Login')</title>
-
-    <link rel="shortcut icon" href="{{ asset('img/rifa_icon.png') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/layouts/reset.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/layouts/color.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/layouts/header.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/layouts/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/layouts/form.css') }}">
-</head>
-
-<body>
-    <header>
-        <nav class="navbar nav -login">
-            <div class="navbar-brand ">
-                <img class="icon-header" src="{{ asset('img/rifa_icon.png') }}"
-                    alt="Desenho de uma urna e uma mão, que está tirando uma rifa sorteada.">
-                <p class="navbar-brand-text"><strong>Ação Entre Amigos</strong></p>
-            </div>
-        </nav>
-    </header>
-
-    <main class="main-login -register">
-        <section class="section-login -register">
-            <div class="login-box">
-                <form action="" class="form-login">
-                    @csrf
-                    <h3 class="form-title">Faça o seu Registro!</h3>
-                    <input class="form-input" type="text" placeholder="CPF" name="cpf">
-                    <input class="form-input" type="text" placeholder="Nome" name="nome">
-                    <input class="form-input" type="text" placeholder="Email" name="email">
-                    <input class="form-input" type="text" placeholder="Número de celular" name="num_celular">
+@extends('layouts.loginLayout')
+@section('title', 'Ação Entre Amigos - Tela de Cadastro')
+@section('content')
+    <section class="section-login -register">
+        <div class="login-box">
+            <form action="" class="form-login">
+                @csrf
+                <h3 class="form-title">Faça o seu Registro!</h3>
+                <input class="form-input" type="text" placeholder="CPF" name="cpf">
+                <input class="form-input" type="text" placeholder="Nome" name="nome">
+                <input class="form-input" type="text" placeholder="Email" name="email">
+                <input class="form-input" type="text" placeholder="Número de celular" name="num_celular">
+                <div class="show-password-div">
+                    <svg class="show-password" id="togglePassword1" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24">
+                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2">
+                            <path
+                                d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19s-7.764-4.013-9.257-5.962a1.69 1.69 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5s7.764 4.013 9.257 5.962" />
+                            <circle cx="12" cy="12" r="3" />
+                        </g>
+                    </svg>
                     <input class="form-input" type="password" placeholder="Senha" name="password" id="passwordInput1">
-                    <div class="show-password-div">
-                        <p class="show-password">
-                            Mostrar a senha?
-                        </p>
-                        <input class="form-checkbox" type="checkbox" onclick="togglePasswordVisible1()">
-                    </div>
-                    <input class="form-input" type="password" placeholder="Repita Senha" name="password-check" id="passwordInput2">
-                    <div class="show-password-div">
-                        <p class="show-password">
-                            Mostrar a senha?
-                        </p>
-                        <input class="form-checkbox" type="checkbox" onclick="togglePasswordVisible2()">
-                    </div>
-                    <button class="form-button" type="submit" href="">Login</button>
-                    <p class="form-p">
-                        Já tem cadastro?
-                        <a class="form-a" href="{{Route('redirecionarLogin')}}">
-                            Faça login agora!
-                        </a>
-                    </p>
-                </form>
-            </div>
-        </section>
-    </main>
+                </div>
 
-</body>
+                <div class="show-password-div">
+                    <svg class="show-password" id="togglePassword2" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24">
+                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2">
+                            <path
+                                d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19s-7.764-4.013-9.257-5.962a1.69 1.69 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5s7.764 4.013 9.257 5.962" />
+                            <circle cx="12" cy="12" r="3" />
+                        </g>
+                    </svg>
+                    <input class="form-input" type="password" placeholder="Repita Senha" name="password-check"
+                        id="passwordInput2">
+                </div>
 
-<script>
-    function togglePasswordVisible1() {
-        var passwordInput = document.getElementById('passwordInput1');
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-        } else {
-            passwordInput.type = "password";
-        }
-    }
+                <button class="form-button" type="submit" href="{{-- {{Route('fazerRegistro')}} --}}">Registro</button>
+                <p class="form-p">
+                    Já tem cadastro?
+                    <a class="form-a" href="{{ Route('redirecionarLogin') }}">
+                        Faça login agora!
+                    </a>
+                </p>
+            </form>
+        </div>
+    </section>
 
-    function togglePasswordVisible2() {
-        var passwordInput = document.getElementById('passwordInput2');
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-        } else {
-            passwordInput.type = "password";
-        }
-    }
-</script>
+    <script>
+        const passwordInput1 = document.getElementById("passwordInput1");
+        const passwordInput2 = document.getElementById("passwordInput2");
 
-</html>
+        const togglePassword1 = document.querySelector("#togglePassword1");
+        const togglePassword2 = document.querySelector("#togglePassword2");
+
+        togglePassword1.addEventListener("click", function() {
+            const type = passwordInput1.type === "password" ? "text" : "password";
+            passwordInput1.type = type;
+        })
+
+        togglePassword2.addEventListener("click", function() {
+            const type = passwordInput2.type === "password" ? "text" : "password";
+            passwordInput2.type = type;
+        })
+    </script>
+
+@endsection

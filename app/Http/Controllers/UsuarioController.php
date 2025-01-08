@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rifa;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -11,7 +12,8 @@ class UsuarioController extends Controller
      */
     public function redirecionarHome()
     {
-        return view('main');
+        $rifas = Rifa::all();
+        return view('main', compact('rifas'));
     }
 
     public function redirecionarRegistro()
@@ -22,6 +24,12 @@ class UsuarioController extends Controller
     public function redirecionarLogin()
     {
         return view('login');
+    }
+
+    public function redirecionarRifa($id)
+    {
+        $rifa  = Rifa::where('id', $id)->first();
+        return view('rifa', compact('rifa'));
     }
 
 
