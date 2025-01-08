@@ -7,6 +7,8 @@
 
 .main-text{
     font-weight: 600;
+    color: var(--secondary-green);
+
 }
 
 .search-bar {
@@ -14,10 +16,21 @@
     width: 535px;
     height: 60px;
     padding: 20px;
-    border-style: none;
-    background-color: transparent;
     box-shadow: 0px 0px 6px 0px #00000040 inset;
     margin: 16px 0px;
+}
+
+.input-svg-container{
+    position: relative;
+}
+
+.search-icon{
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    fill: #ccc;
 }
 
 .search-button {
@@ -62,10 +75,29 @@
     height: 550px;
     width: 360px;
     border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0px 1px 15px var(--primary-green);
+}
+
+.rifa-card:hover{
+    transform: scale(1.01);
 }
 
 .img-card-rifa{
     width: 90%;
     height: 65%;
     object-fit: cover;
+    border: solid 3px var(--primary-green);
+}
+
+.rifa-title{
+    text-transform: uppercase;
+    align-items: center !important;
+}
+
+.rifa-info{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 1rem;
 }

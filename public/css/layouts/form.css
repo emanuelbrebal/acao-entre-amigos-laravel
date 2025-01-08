@@ -1,7 +1,10 @@
 .form-input{
     height: 40px;
+    width: 100%;
     padding: 1rem;
     border: solid 3px var(--secondary-green);
+    position: relative;
+    z-index: 0;
 }
 
 .form-title{
@@ -49,12 +52,19 @@
 .show-password-div{
     display: flex;
     flex-direction: row;
-
+    position: relative;
+    width: 100%;
 }
 
 .show-password{
     font-size: 14px;
     margin-right: 10px;
-    color: var(--white);
-    /* text-shadow: .5px .5px 1px var(--black); */
+    color: var(--grey);
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
+    background-color: var(--white);
 }

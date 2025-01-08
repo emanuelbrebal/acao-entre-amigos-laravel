@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('nome');
             $table->string('cnpj', 18)->unique();
             $table->string('email');
-            $table->string('num_celular');
+            $table->unsignedBigInteger('celular');
+            $table->string('endereco');
         });
     }
 
