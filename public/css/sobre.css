@@ -1,0 +1,34 @@
+.sobre{
+    padding: 4rem;
+    background-color: var(--white);
+    height: 86vh;
+}
+
+.h1-sobre{
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    margin-top: 2rem;
+}
+
+.svg-sobre{
+    margin-left: 0.5rem;
+}
+
+.footer{
+    display: none;
+}
+
+.footer-link{
+    text-transform: capitalize;
+    color: var(--secondary-green);
+    font-weight: 600;
+}
+
+.footer-link:hover{
+    transform: scale(1.01);
+}
+
+.main-sobre p{
+    margin: .3rem;
+}

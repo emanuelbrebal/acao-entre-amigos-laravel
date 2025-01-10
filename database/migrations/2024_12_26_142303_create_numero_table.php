@@ -16,6 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('descricao')->unique();
             $table->boolean('comprado');
 
+            $table->bigInteger('comprador')->nullable();
+            $table->foreign('comprador')->references('id')->on('users');
+
             $table->unsignedBigInteger('id_rifa');
             $table->foreign('id_rifa')->references('id')->on('rifa');
         });

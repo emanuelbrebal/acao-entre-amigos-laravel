@@ -98,6 +98,12 @@
 .rifa-info{
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
     margin-top: 1rem;
 }
+
+.rifa-encerrada{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
 {
+    protected $table = 'pedido';
     protected $fillable = [
         'user_id',
         'numero_id',
@@ -16,7 +17,7 @@ class Pedido extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function numeros()
+    public function numero()
     {
         return $this->hasMany(Numero::class, 'numero_id');
     }
