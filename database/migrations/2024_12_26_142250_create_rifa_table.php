@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('preco_numeros');
             $table->string('premiacao');
             $table->date('data_sorteio');
+            $table->unsignedInteger('qtd_num');
 
             $table->unsignedBigInteger('id_usuario_vencedor')->nullable();
             $table->foreign('id_usuario_vencedor')->references('id')->on('users');
 
-            $table->unsignedBigInteger('id_instituicao')->nullable();
-            $table->foreign('id_instituicao')->references('id')->on('instituicao');
         });
+
     }
 
     /**

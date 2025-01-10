@@ -8,6 +8,8 @@ Route::get('/signin', [UsuarioController::class, 'redirecionarRegistro'])->name(
 Route::get('/login', [UsuarioController::class, 'redirecionarLogin'])->name('redirecionarLogin');
 Route::get('/rifa/{id}', [UsuarioController::class, 'redirecionarRifa'])->name('redirecionarRifa');
 Route::post('/fazerRegistro', [UsuarioController::class, 'redirecionarRifa'])->name('fazerRegistro');
+Route::get('/sobre', [UsuarioController::class, 'redirecionarSobre'])->name('redirecionarSobre');
+
 
 // Route::middleware('usuarioLogado')->controller(UsuarioController::class)->group(function () {
 

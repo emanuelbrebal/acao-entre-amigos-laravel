@@ -35,7 +35,14 @@
 .navigation-item{
     text-decoration: none;
     padding: 10px;
+    color: var(--white);
+    font-weight: 600;
 }
+
+.navigation-item:hover{
+    transform: scale(1.01);
+}
+
 
 .login-icon{
     height: 22px;

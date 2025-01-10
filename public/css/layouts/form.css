@@ -68,3 +68,21 @@
     z-index: 10;
     background-color: var(--white);
 }
+
+.btn{
+    color: var(--secondary-green);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.btn.-comprar-cotas{
+    margin-top: 5px;
+    background-color: var(--primary-green);
+    color: var(--white);
+    padding: 5px;
+    border-radius: 4px;
+}

@@ -20,13 +20,16 @@
                 <img src="{{ asset('img/time_1000.jpg') }}" alt="" class="img-card-rifa">
                 <div class="rifa-info">
                     <h3 class="rifa-title">{{ $rifa->titulo_rifa }}</h3>
-                    <p>Valor do bilhete: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.')  }} unid.</strong></p>
-                    <p>Data do sorteio: <strong> {{ $rifa->data_sorteio }} </strong></p>
-                    <p>Instituição responsável: <strong> {{ $rifa->id_instituicao }} </strong></p>
-                    <p>Data do sorteio: <strong> {{ $rifa->data_sorteio }}</strong></p>
-                    <p>Vencedor: <strong> {{ $rifa->id_usuario_vencedor }}</strong></p>
+                    @if ($rifa->id_usuario_vencedor === null)
+                    <p>Rifa aceitando participações!</p>
+                    <p>Valor do bilhete: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.')  }} unid.</strong></p>                    <p>Data do sorteio: <strong> {{ $rifa->data_sorteio }}</strong></p>
+                    @else
+                        <p class="rifa-encerrada">Rifa encerrada!</p>
+
+                    @endif
+
                 </div>
-                <a href="" class="search-button -more">Saiba +</a>
+                <a href="{{Route('redirecionarRifa', ['id' => $rifa->id])}}" class="search-button -more">Saiba +</a>
             </div>
         @endforeach
 
