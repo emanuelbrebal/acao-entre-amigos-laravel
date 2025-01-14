@@ -21,6 +21,6 @@ class Numero extends Model
 
     public function comprador()
     {
-        return $this->belongsTo(User::class, 'comprador', 'id');
+        return $this->belongsTo(Usuarios::class, 'comprador', 'id');
     }
 }

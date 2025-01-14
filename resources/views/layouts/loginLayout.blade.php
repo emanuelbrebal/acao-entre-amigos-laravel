@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/layouts/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link rel="stylesheet" href="{{ asset('css/layouts/form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/createRaffle.css') }}">
 </head>
 
 

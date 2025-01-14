@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->unsignedBigInteger('celular');
             $table->string('endereco');
+            $table->timestamps();
         });
     }
 

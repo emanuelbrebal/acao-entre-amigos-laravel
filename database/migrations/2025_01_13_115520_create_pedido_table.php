@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('usuarios');
 
             $table->unsignedBigInteger('numero_id');
             $table->foreign('numero_id')->references('id')->on('numero');
+            $table->timestamps();
         });
     }
 

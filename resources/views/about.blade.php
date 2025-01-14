@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Ação Entre Amigos - Home Page')
+@section('title', 'Ação Entre Amigos - About Page')
 
 @section('content')
 

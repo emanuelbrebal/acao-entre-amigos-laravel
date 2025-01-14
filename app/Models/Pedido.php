@@ -14,7 +14,7 @@ class Pedido extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Usuarios::class, 'user_id');
     }
 
     public function numero()

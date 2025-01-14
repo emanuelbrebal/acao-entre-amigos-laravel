@@ -13,7 +13,7 @@ class RifaSeeder extends Seeder
      */
     public function run(): void
     {
-        Rifa::factory()->create([
+        Rifa::create([
             'titulo_rifa' => 'carro 0km',
             'preco_numeros' => '10',
             'premiacao' => 'peugeot 208 0km',

@@ -22,6 +22,7 @@
 
 .input-svg-container{
     position: relative;
+
 }
 
 .search-icon{
@@ -42,6 +43,7 @@
     font-size: 20px;
     border: none;
     background-color: var(--primary-green);
+    cursor: pointer;
 }
 
 .search-button.-more{
@@ -60,7 +62,7 @@
 .rifas-section{
     display: grid;
     justify-self: center;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     margin-top: 7rem;
     gap: 5rem 17rem;
     padding: 0px 5rem;
