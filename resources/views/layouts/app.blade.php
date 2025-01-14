@@ -30,7 +30,7 @@
             </div>
 
             <ul class="navigation">
-                <a class="navigation-item" href="">Cadastrar Rifa</a>
+                <a class="navigation-item" href=" {{route('redirecionarCreateRaffle')}}">Cadastrar Rifa</a>
                 <a class="navigation-item" href="{{route('redirecionarSobre')}}">Sobre</a>
                 <a class="navigation-item" href="">Bem vindo(a)
                     <svg class="login-icon" xmlns="http://www.w3.org/2000/svg"

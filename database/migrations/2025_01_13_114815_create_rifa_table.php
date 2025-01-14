@@ -20,15 +20,19 @@ return new class extends Migration
             $table->unsignedInteger('qtd_num');
 
             $table->unsignedBigInteger('id_usuario_vencedor')->nullable();
-            $table->foreign('id_usuario_vencedor')->references('id')->on('users');
+            $table->foreign('id_usuario_vencedor')->references('id')->on('usuarios');
 
+            $table->unsignedBigInteger('id_instituicao');
+            $table->foreign('id_instituicao')->references('id')->on('instituicao');
+
+            $table->timestamps();
         });
 
     }
 
     /**
      * Reverse the migrations.
-     */
+    */
     public function down(): void
     {
         Schema::dropIfExists('rifa');

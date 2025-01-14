@@ -79,9 +79,11 @@
 
 .actions{
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
     align-items: center;
     height: 100%;
+    margin-left: 2rem;
+    margin-top: 1rem;
 }
 
 .-voltar{
@@ -93,3 +95,32 @@
 .-individual{
     max-width: 70% !important;
 }
+
+
+.pagination{
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1rem;
+    text-decoration: none;
+    list-style: none;
+    max-width: 450px;
+}
+
+.pagination-list{
+    margin: .5rem 0;
+}
+
+.page-item{
+    text-decoration: none;
+    margin: 0 .4rem;
+}
+
+.page-increment, .page-decrement{
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    
+    cursor: pointer;
+
+}
+

@@ -24,7 +24,7 @@ class Rifa extends Model
 
     public function user_vencedor()
     {
-        return $this->belongsTo(User::class, 'id_usuario_vencedor');
+        return $this->belongsTo(Usuarios::class, 'id_usuario_vencedor');
     }
 
     public function instituicao()

@@ -17,10 +17,11 @@ return new class extends Migration
             $table->boolean('comprado');
 
             $table->bigInteger('comprador')->nullable();
-            $table->foreign('comprador')->references('id')->on('users');
+            $table->foreign('comprador')->references('id')->on('usuarios');
 
             $table->unsignedBigInteger('id_rifa');
             $table->foreign('id_rifa')->references('id')->on('rifa');
+            $table->timestamps();
         });
     }
 

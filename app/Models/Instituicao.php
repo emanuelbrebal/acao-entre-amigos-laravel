@@ -11,8 +11,9 @@ class Instituicao extends Model
         'nome',
         'cnpj',
         'email',
-        'num_celular',
-        'rifa'
+        'celular',
+        'endereco',
+        'id_rifa'
     ];
 
     public function rifa()
