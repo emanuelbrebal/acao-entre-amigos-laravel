@@ -36,28 +36,31 @@
         </div>
         <div class="tabela-rifa">
             <h1 class="cotacao">cotas disponíveis abaixo:</h1>
-            <table class="tabela-numeros">
-                @for ($i = 1; $i <= min(100, $rifa->qtd_num); $i++)
-                    @if ($i % 10 === 1)
-                        <tr>
-                    @endif
+            <div class="organiza-tabela">
+                <table class="tabela-numeros">
+                    @for ($i = 1; $i <= min(100, $rifa->qtd_num); $i++)
+                        @if ($i % 10 === 1)
+                            <tr>
+                        @endif
 
-                    <td class="numero"> {{ $i }}</td>
+                        <td class="numero"> {{ $i }}</td>
 
-                    @if ($i % 10 === 0 || $i === $rifa->qtd_num)
-                        </tr>
-                    @endif
-                @endfor
-            </table>
-            <ul class="pagination-list">
-                <li class="pagination">
-                    <button class="page-decrement">Anterior</button>
-                    <div id="pagination-container"></div>
-
-                    <button class="page-increment">Próximo</button>
-                </li>
-            </ul>
-            <a href="{{route('')}}" class="btn -comprar-cotas">Comprar cotas</a>
+                        @if ($i % 10 === 0 || $i === $rifa->qtd_num)
+                            </tr>
+                        @endif
+                    @endfor
+                </table>
+            </div>
+            @if ($rifa->qtd_num > 100)
+                <ul class="pagination-list">
+                    <li class="pagination">
+                        <button class="page-decrement">Anterior</button>
+                        <div id="pagination-container"></div>
+                        <button class="page-increment">Próximo</button>
+                    </li>
+                </ul>
+            @endif
+            <a href="{{ route('buyRaffleNumbers', ['id' => $rifa->id]) }}" class="btn -comprar-cotas">Comprar cotas</a>
         </div>
 
 
@@ -87,7 +90,7 @@
                 link.classList.add("page-item");
                 link.href = `#secao-${i}`;
                 link.textContent =
-                `${(i - 1) * maxItems + 1} - ${Math.min(i * maxItems, qtdNum)}`; // Texto do intervalo (exemplo: 1-100, 101-200)
+                    `${(i - 1) * maxItems + 1} - ${Math.min(i * maxItems, qtdNum)}`; // Texto do intervalo (exemplo: 1-100, 101-200)
 
                 // Adicionar o link ao container
                 paginationContainer.appendChild(link);

@@ -1,10 +1,9 @@
 .form-input{
     height: 40px;
     width: 100%;
-    padding: 1rem;
-    border: solid 3px var(--secondary-green);
     position: relative;
     z-index: 0;
+    color: var(--black);
 }
 
 .form-title{
@@ -39,7 +38,6 @@
 }
 
 .form-a{
-
     color: var(--white);
     text-shadow: none;
     font-weight: 700;
@@ -85,4 +83,20 @@
     color: var(--white);
     padding: 5px;
     border-radius: 4px;
+}
+
+.btn.btn-submit{
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+    border-radius: 8px;
+    border: none;
+    justify-self: center;
+    align-self: center;
+    cursor: pointer;
+}
+
+.btn.btn-submit:hover{
+    background-color: var(--secondary-green);
+    color: var(--white);
 }

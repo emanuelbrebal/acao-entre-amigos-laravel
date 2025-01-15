@@ -18,11 +18,12 @@ return new class extends Migration
             $table->string('premiacao');
             $table->date('data_sorteio');
             $table->unsignedInteger('qtd_num');
+            $table->string('imagem')->nullable();
 
             $table->unsignedBigInteger('id_usuario_vencedor')->nullable();
             $table->foreign('id_usuario_vencedor')->references('id')->on('usuarios');
 
-            $table->unsignedBigInteger('id_instituicao');
+            $table->unsignedBigInteger('id_instituicao')->nullable();
             $table->foreign('id_instituicao')->references('id')->on('instituicao');
 
             $table->timestamps();

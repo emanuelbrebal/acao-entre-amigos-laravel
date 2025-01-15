@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\RedirectController;
+use App\Http\Controllers\RifaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +20,5 @@ Route::get('/buscar', [RedirectController::class, 'redirecionarBusca'])->name('b
 // Route::middleware('usuarioLogado')->controller(UsuarioController::class)->group(function () {
 
 // });
+
+Route::post('/createRaffle/store', [RifaController::class, 'store'])->name('cadastrarRifa');

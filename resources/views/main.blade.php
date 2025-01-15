@@ -26,7 +26,8 @@
         @else
             @foreach ($rifas as $rifa)
                 <div class="rifa-card">
-                    <img src="{{ asset('img/time_1000.jpg') }}" alt="" class="img-card-rifa">
+                    {{-- <img src="{{ asset($registro->caminho_imagem) }}" alt="Imagem"> --}}
+                    <img src="{{ asset('img/time_1000.jpg') }}" alt="Imagem" class="img-card-rifa">
                     <div class="rifa-info">
                         <h3 class="rifa-title">{{ $rifa->titulo_rifa }}</h3>
                         @if ($rifa->id_usuario_vencedor === null)

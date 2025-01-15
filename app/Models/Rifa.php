@@ -14,7 +14,8 @@ class Rifa extends Model
         'premiacao',
         'data_sorteio',
         'id_usuario_vendedor',
-        'id_instituicao'
+        'id_instituicao',
+        'imagem'
     ];
 
     public function numeros()
