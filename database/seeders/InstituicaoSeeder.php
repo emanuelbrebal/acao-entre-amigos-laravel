@@ -20,5 +20,13 @@ class InstituicaoSeeder extends Seeder
             'celular' => '82999654909',
             'endereco' => 'Rua das aroeiras 243'
         ]);
+
+        Instituicao::create([
+            'nome' => 'Casa do Jambeiro',
+            'cnpj' => '20.031.221/0002-46',
+            'email' => 'jamboebom@gmail.com',
+            'celular' => '82999644909',
+            'endereco' => 'Rua das macaxeiras 12'
+        ]);
     }
 }

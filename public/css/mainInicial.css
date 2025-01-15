@@ -63,9 +63,8 @@
     display: grid;
     justify-self: center;
     grid-template-columns: repeat(4, 1fr);
-    margin-top: 7rem;
-    gap: 5rem 17rem;
-    padding: 0px 5rem;
+    margin-top: 5rem;
+    gap: 5rem;
 }
 
 .rifa-card{

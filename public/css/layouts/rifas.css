@@ -29,12 +29,13 @@
 .tabela-rifa{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--white);
     padding: 1rem;
     margin: 1rem;
     border-radius: 8px;
+
 }
 
 .tabela-numeros{
@@ -119,7 +120,7 @@
     text-decoration: none;
     border: none;
     background-color: transparent;
-    
+
     cursor: pointer;
 
 }
