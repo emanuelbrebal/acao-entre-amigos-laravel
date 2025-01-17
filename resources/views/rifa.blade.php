@@ -17,11 +17,13 @@
 
     <section class="rifa-infos">
         <div class="rifa-info -rifa-info-card">
-            <img class="img-card-rifa -individual" src="{{ asset('img/time_1000.jpg') }}" alt="">
+            <img class="img-card-rifa -individual" src="{{ asset('img/raffles/' . $rifa->imagem) }}" alt="Imagem da Rifa">
             <h3 class="rifa-title">{{ $rifa->titulo_rifa }}</h3>
             <div class="info-sorteio">
-                <p>Valor do bilhete: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
+                <p>Valor de cada cota: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
                         unid.</strong></p>
+                        <p>Quantidade de cotas: qtd de numeros - qtd de numeros comprados</p>
+                        <p>Quantidade de cotas disponíveis: <strong>{{$rifa->qtd_num}}</strong></p>
                 <p>Data do sorteio: <strong> {{ date('m/d/Y', strtotime($rifa->data_sorteio)) }} </strong></p>
                 @if ($rifa->id_usuario_vendedor != null)
                     <p>Vencedor: <strong> {{ $rifa->id_usuario_vencedor }}</strong></p>
@@ -37,19 +39,7 @@
         <div class="tabela-rifa">
             <h1 class="cotacao">cotas disponíveis abaixo:</h1>
             <div class="organiza-tabela">
-                <table class="tabela-numeros">
-                    @for ($i = 1; $i <= min(100, $rifa->qtd_num); $i++)
-                        @if ($i % 10 === 1)
-                            <tr>
-                        @endif
-
-                        <td class="numero"> {{ $i }}</td>
-
-                        @if ($i % 10 === 0 || $i === $rifa->qtd_num)
-                            </tr>
-                        @endif
-                    @endfor
-                </table>
+                <table class="tabela-numeros" id="tabelaNumeros"> </table>
             </div>
             @if ($rifa->qtd_num > 100)
                 <ul class="pagination-list">
@@ -68,51 +58,75 @@
 
     <script>
         const offset = 100;
-        const maxItems = 100; // Cada link mostra 100 números
-        let paginationIndex = 0; // O índice da página
+        const maxItems = 100;
+        let paginationIndex = 0;
         const anterior = document.querySelector('.page-decrement');
         const proximo = document.querySelector('.page-increment');
 
         const paginationContainer = document.getElementById("pagination-container");
-        const qtdNum = {{ $qtdNum }}; // A quantidade total de números
-        const totalPages = Math.ceil(qtdNum / maxItems); // Calcula o total de páginas
+        const qtdNum = {{ $qtdNum }};
+        const totalPages = Math.ceil(qtdNum / maxItems);
 
-        // Função para gerar links de paginação
-        function gerarLinksPagina() {
-            paginationContainer.innerHTML = ""; // Limpar o conteúdo atual
 
-            // Calcular os intervalos de 3 links que serão exibidos
-            const start = paginationIndex * 3 + 1;
-            const end = Math.min(start + 2, totalPages); // Exibe até 3 links
+        // function gerarLinksPagina() {
+        //     paginationContainer.innerHTML = "";
+
+        //     const start = paginationIndex * 3 + 1;
+        //     const end = Math.min(start + 2, totalPages);
+
+        //     for (let i = start; i <= end; i++) {
+        //         const link = document.createElement("a");
+        //         link.classList.add("page-item");
+        //         link.href = `#`;
+        //         link.textContent =
+        //             `${(i - 1) * maxItems + 1} - ${Math.min(i * maxItems, qtdNum)}`;
+
+        //         paginationContainer.appendChild(link);
+        //     }
+        // }
+        let contPage = 0;
+
+        function gerarTabela(paginationIndex) {
+            const tabelaNumeros = document.getElementById("tabelaNumeros");
+            tabelaNumeros.innerHTML = "";
+
+            const start = paginationIndex * 100 + 1;
+            const end = Math.min(start + 100, start + 99);
+
+            let tableRow = document.createElement("tr");
 
             for (let i = start; i <= end; i++) {
-                const link = document.createElement("a");
-                link.classList.add("page-item");
-                link.href = `#secao-${i}`;
-                link.textContent =
-                    `${(i - 1) * maxItems + 1} - ${Math.min(i * maxItems, qtdNum)}`; // Texto do intervalo (exemplo: 1-100, 101-200)
+                const tableData = document.createElement("td");
+                tableData.classList.add("numero");
+                tableData.textContent = i;
 
-                // Adicionar o link ao container
-                paginationContainer.appendChild(link);
+                tableRow.appendChild(tableData);
+
+                if (i % 10 === 0 || i === end) {
+                    tabelaNumeros.appendChild(tableRow);
+                    tableRow = document.createElement("tr");
+                }
             }
         }
 
-        // Função de controle de navegação
         anterior.addEventListener("click", function() {
             if (paginationIndex > 0) {
-                paginationIndex--; // Navegar para a página anterior
-                gerarLinksPagina();
+                contPage--;
+                paginationIndex--;
+                gerarTabela(contPage);
+
             }
         });
 
         proximo.addEventListener("click", function() {
-            if (paginationIndex < Math.floor(totalPages / 3)) {
-                paginationIndex++; // Navegar para a próxima página
-                gerarLinksPagina();
+            if (paginationIndex < totalPages-1) {
+                contPage++;
+                paginationIndex++;
+                gerarTabela(contPage);
             }
         });
 
-        // Inicializar os links de página ao carregar a página
-        gerarLinksPagina();
+        // gerarLinksPagina();
+        gerarTabela(0);
     </script>
 @endsection

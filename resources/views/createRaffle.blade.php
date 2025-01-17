@@ -63,7 +63,7 @@
 
             <div class="campo-formulario">
                 <label for="imagem">Imagem</label>
-                <input class="form-input" type="file" placeholder="Selecione uma imagem" name="imagem" required>
+                <input class="form-input" type="file" placeholder="Selecione uma imagem" name="imagem" >
             </div>
             <div class="campo-formulario">
                 <label for="imagem">Instituição responsável.</label>

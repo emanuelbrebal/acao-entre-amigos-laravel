@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Instituicao;
 use App\Models\Numero;
 use App\Models\Rifa;
+use App\Models\Usuarios;
 use Illuminate\Http\Request;
 
 class RedirectController extends Controller
 {
     public function redirecionarHome(Request $request)
     {
-        $rifas = Rifa::all();
+        $rifas = Rifa::with('user_vencedor')->get();
+    
         return view('main', compact('rifas'));
     }
 

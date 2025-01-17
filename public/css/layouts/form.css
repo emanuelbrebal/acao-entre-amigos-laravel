@@ -100,3 +100,7 @@
     background-color: var(--secondary-green);
     color: var(--white);
 }
+
+.btn.-voltar{
+    gap: 0.4rem;
+}

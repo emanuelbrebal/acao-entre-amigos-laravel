@@ -46,7 +46,6 @@
                 </p>
             </form>
         </div>
-    </section>
 
     <script>
         const passwordInput1 = document.getElementById("passwordInput1");
