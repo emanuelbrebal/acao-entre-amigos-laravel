@@ -6,6 +6,10 @@
             <form action="" class="form-login">
                 @csrf
                 <h3 class="form-title">Faça o seu login!</h3>
+                <select name="" id="">
+                    <option value="">Pessoa Física</option>
+                    <option value="">Instituição - Pessoa Jurídica</option>
+                </select>
                 <input class="form-input" type="text" placeholder="Email" name="email">
                 <div class="show-password-div">
                     <svg class="show-password" id="togglePassword" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

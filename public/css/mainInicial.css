@@ -70,7 +70,7 @@
 .rifa-card{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     background-color: #EAEAEA;
     height: 550px;

@@ -38,11 +38,17 @@
 
 }
 
-.tabela-numeros{
-
-
-
+#tabelaNumeros {
+    border-collapse: collapse;
+    width: 100%;
 }
+
+#tabelaNumeros td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
 
 .cotacao{
     text-transform: uppercase;
