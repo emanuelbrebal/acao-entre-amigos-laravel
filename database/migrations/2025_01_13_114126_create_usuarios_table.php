@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
             $table->string('cpf', 14)->unique();
-            $table->string('name')->unique();
+            $table->string('nome')->unique();
             $table->string('email')->unique();
             $table->string('password')->unique();
-            $table->unsignedBigInteger('celular')->unsigned();
+            $table->string('celular')->unsigned();
             $table->string('endereco')->unique();
             $table->timestamps();
         });

@@ -108,3 +108,12 @@
     font-weight: bold;
 }
 
+.container-main{
+    height: 100%;
+    width: 100%;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
