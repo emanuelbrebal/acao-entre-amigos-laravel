@@ -3,13 +3,21 @@
 @section('content')
     <section class="section-login -register">
         <div class="login-box">
-            <form action="" class="form-login">
+            <form action="{{route('criarRegistro')}}" class="form-login" method="POST" id="registroForm">
                 @csrf
                 <h3 class="form-title">Faça o seu Registro!</h3>
-                <input class="form-input" type="text" placeholder="CPF" name="cpf">
+                <select class="form-input" name="tipo_usuario" id="select-login">
+                    <option value="cpf">Pessoa Física</option>
+                    <option value="cnpj">Instituição - Pessoa Jurídica</option>
+                </select>
+                <input class="form-input" type="text" placeholder="CPF" name="cpf" id="campo-cpf">
+                <input class="form-input" type="text" placeholder="CNPJ" name="cnpj" id="campo-cnpj"
+                    style="display: none;" disabled>
+
                 <input class="form-input" type="text" placeholder="Nome" name="nome">
                 <input class="form-input" type="text" placeholder="Email" name="email">
-                <input class="form-input" type="text" placeholder="Número de celular" name="num_celular">
+                <input class="form-input" type="text" placeholder="Número de celular" name="celular">
+                <input class="form-input" type="text" placeholder="Endereço" name="endereco">
                 <div class="show-password-div">
                     <svg class="show-password" id="togglePassword1" xmlns="http://www.w3.org/2000/svg" width="24"
                         height="24" viewBox="0 0 24 24">
@@ -37,7 +45,7 @@
                         id="passwordInput2">
                 </div>
 
-                <button class="form-button" type="submit" href="{{-- {{Route('fazerRegistro')}} --}}">Registro</button>
+                <button class="form-button" type="submit" id="registroBtn">Registre sua conta!</button>
                 <p class="form-p">
                     Já tem cadastro?
                     <a class="form-a" href="{{ Route('redirecionarLogin') }}">
@@ -46,23 +54,5 @@
                 </p>
             </form>
         </div>
-
-    <script>
-        const passwordInput1 = document.getElementById("passwordInput1");
-        const passwordInput2 = document.getElementById("passwordInput2");
-
-        const togglePassword1 = document.querySelector("#togglePassword1");
-        const togglePassword2 = document.querySelector("#togglePassword2");
-
-        togglePassword1.addEventListener("click", function() {
-            const type = passwordInput1.type === "password" ? "text" : "password";
-            passwordInput1.type = type;
-        })
-
-        togglePassword2.addEventListener("click", function() {
-            const type = passwordInput2.type === "password" ? "text" : "password";
-            passwordInput2.type = type;
-        })
-    </script>
-
-@endsection
+        <script src="{{ asset('js/register.js') }}"></script>
+    @endsection
