@@ -105,4 +105,6 @@
 
 .btn.-voltar{
     gap: 0.4rem;
+    align-self: start;
+    margin-bottom: 20px;
 }

@@ -1,8 +1,9 @@
 @extends('layouts.rifas')
 @section('title', 'Página da Rifa')
 @section('content')
-    <section class="rifa-controls">
-        <div class="actions">
+
+    <section class="rifa-infos">
+        <div class="rifa-info -rifa-info-card">
             <a href="javascript:void(0)" onclick="history.back()" class="btn -voltar"> <svg class="btn"
                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -11,28 +12,26 @@
                     </g>
                 </svg>
                 voltar</a>
-
-        </div>
-    </section>
-
-    <section class="rifa-infos">
-        <div class="rifa-info -rifa-info-card">
+            <h1 class="">Informações da rifa:</h1>
             <img class="img-card-rifa -individual" src="{{ asset('img/raffles/' . $rifa->imagem) }}" alt="Imagem da Rifa">
             <h3 class="rifa-title">{{ $rifa->titulo_rifa }}</h3>
             <div class="info-sorteio">
-                <p>Valor de cada cota: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
+                <p>Valor por cota: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
                         unid.</strong></p>
-                        <p>Quantidade de cotas: qtd de numeros - qtd de numeros comprados</p>
-                        <p>Quantidade de cotas disponíveis: <strong>{{$rifa->qtd_num}}</strong></p>
+                <p>Total de cotas: <strong>{{ $rifa->qtd_num }}</strong></p>
+                <p>Cotas disponíveis: <strong>{{ $rifa->qtd_num }}</strong></p>
                 <p>Data do sorteio: <strong> {{ date('m/d/Y', strtotime($rifa->data_sorteio)) }} </strong></p>
                 @if ($rifa->id_usuario_vendedor != null)
                     <p>Vencedor: <strong> {{ $rifa->id_usuario_vencedor }}</strong></p>
                 @endif
             </div>
+
             <div class="info-instituicao">
-                <p>Instituição responsável: <strong> {{ $instituicao->nome }} </strong></p>
-                <p>Contato: <strong>{{ $instituicao->celular }}</strong></p>
+                <p>Instituição: <strong> {{ $instituicao->nome }} </strong></p>
+                <p>CNPJ: <strong>{{ $instituicao->cnpj }}</strong></p>
+                <p>E-mail: <strong>{{ $instituicao->email }}</strong></p>
                 <p>Endereço: <strong>{{ $instituicao->endereco }}</strong></p>
+                <p>Contato: <strong>{{ $instituicao->celular }}</strong></p>
             </div>
 
         </div>
@@ -119,7 +118,7 @@
         });
 
         proximo.addEventListener("click", function() {
-            if (paginationIndex < totalPages-1) {
+            if (paginationIndex < totalPages - 1) {
                 contPage++;
                 paginationIndex++;
                 gerarTabela(contPage);

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
 
-    <link rel="shortcut icon" href="{{asset('img/rifa_icon.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/rifa_icon.png') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -25,11 +25,9 @@
     <header>
         <nav class="navbar nav">
             <div class="navbar-brand">
-                <img class="icon-header" src="{{ asset('img/rifa_icon.png') }}" alt="Desenho de uma urna e uma mão, que está tirando uma rifa sorteada.">
+                <img class="icon-header" src="{{ asset('img/rifa_icon.png') }}"
+                    alt="Desenho de uma urna e uma mão, que está tirando uma rifa sorteada.">
                 <p class="navbar-brand-text"><strong>Ação Entre Amigos</strong></p>
-            </div>
-            <div class="info-rifa">
-                <h3 class="titulo-rifa">{{$rifa->titulo_rifa}}</h3>
             </div>
         </nav>
     </header>
