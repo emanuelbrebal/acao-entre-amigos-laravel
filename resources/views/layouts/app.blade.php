@@ -31,23 +31,23 @@
             </div>
 
             <ul class="navigation">
-                <a class="navigation-item" href=" {{ route('redirecionarCreateRaffle') }}">Cadastrar Rifa</a>
+                <a class="navigation-item" href="{{ route('redirecionarCreateRaffle') }}">Cadastrar Rifa</a>
                 <a class="navigation-item" href="{{ route('redirecionarSobre') }}">Sobre</a>
-                <a class="navigation-item" href="">Bem vindo(a) {{ $user->nome }}
-                    <svg class="login-icon" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                        <path
-                            d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
-                    </svg>
-                    <div class="logout-wrapper">
-                        <form action="{{ route('fazerLogout') }}" method="POST">
-                            @csrf
-                            <button type="submit">Sair</button>
-                        </form>
-
-                    </div>
-                </a>
+                <div class="logout-wrapper">
+                    <a class="navigation-item -logged-user" id="userLogado">
+                        Bem vindo(a), {{ $user->nome }}
+                        <svg class="login-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path
+                                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+                        </svg>
+                    </a>
+                    <form action="{{ route('fazerLogout') }}" method="POST" id="form-logout">
+                        @csrf
+                        <button type="submit" class="btn-logout">Fazer Logout</button>
+                    </form>
+                </div>
             </ul>
+
         </nav>
     </header>
     <div class="container-alerta">
@@ -79,3 +79,5 @@
 </body>
 
 </html>
+
+<script src="{{asset('js/logout.js')}}"></script>
