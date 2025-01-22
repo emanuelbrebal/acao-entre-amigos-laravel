@@ -15,9 +15,9 @@ class UserSeeder extends Seeder
     {
         Usuarios::create([
             'nome' => 'Lara Veloso',
-            'cpf' => '12345678910',
+            'cpf' => '123',
             'email' => 'laraveloso@gmail.com',
-            'password' => bcrypt('12345678912'),
+            'password' => bcrypt('123'),
             'celular' => '1415253256',
             'endereco' => 'Rua das laranjeiras 123',
         ]);

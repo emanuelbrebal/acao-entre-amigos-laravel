@@ -4,7 +4,7 @@
 
     <section class="rifa-infos">
         <div class="rifa-info -rifa-info-card">
-            <a href="javascript:void(0)" onclick="history.back()" class="btn -voltar"> <svg class="btn"
+            <a href="{{ route('redirecionarHome') }}" class="btn -voltar"> <svg class="btn"
                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                         <path d="M21 12h-17.5" />
@@ -36,96 +36,154 @@
 
         </div>
         <div class="tabela-rifa">
-            <h1 class="cotacao">cotas disponíveis abaixo:</h1>
-            <div class="organiza-tabela">
-                <table class="tabela-numeros" id="tabelaNumeros"> </table>
-            </div>
-            @if ($rifa->qtd_num > 100)
-                <ul class="pagination-list">
-                    <li class="pagination">
-                        <button class="page-decrement">Anterior</button>
-                        <div id="pagination-container"></div>
-                        <button class="page-increment">Próximo</button>
-                    </li>
-                </ul>
-            @endif
-            <a href="{{ route('buyRaffleNumbers', ['id' => $rifa->id]) }}" class="btn -comprar-cotas">Comprar cotas</a>
+            <h1 class="cotacao">Cotas disponíveis abaixo:</h1>
+            <form action="{{ route('buyRaffleNumbers') }}" method="POST" id="form-selecionados">
+                @csrf
+                <div class="organiza-tabela">
+                    <table class="tabela-numeros" id="tabelaNumeros"></table>
+                </div>
+
+                @if ($rifa->qtd_num > 100)
+                    <ul class="pagination-list">
+                        <li class="pagination">
+                            <button type="button" class="page-decrement">Anterior</button>
+                            <div id="pagination-container"></div>
+                            <button type="button" class="page-increment">Próximo</button>
+                        </li>
+                    </ul>
+                @endif
+
+                <input type="hidden" name="selecionados" id="selecionados">
+
+                <button type="submit" class="btn -comprar-cotas" id="btnCompraRifas">Comprar cotas</button>
+            </form>
         </div>
 
 
+        <div class="rifa-info -rifa-info-card -carrinho">
+            <h1 class="">Resumo do pedido:</h1>
+            <div class="info-instituicao">
+                <div class="info-sorteio">
+                    <p>Cotas selecionadas: </p>
+                </div>
+            </div>
+            <div class="info-instituicao">
+                <div class="info-sorteio">
+                    <p>Qtd Cotas Selecionadas: <strong>{{ $rifa->qtd_num }}</strong></p>
+                    <p>Valor por cota: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
+                            unid.</strong></p>
+                    <p>Cotas disponíveis: <strong>{{ $rifa->qtd_num }}</strong></p>
+                </div>
+                <p>Subtotal:</p>
+                <p class="taxa">Taxa:</p>
+                <p>Total:</p>
+
+            </div>
+
+        </div>
+
     </section>
+    <script src="{{ asset('js/selecionados.js') }}"></script>
 
     <script>
-        const offset = 100;
-        const maxItems = 100;
-        let paginationIndex = 0;
-        const anterior = document.querySelector('.page-decrement');
-        const proximo = document.querySelector('.page-increment');
-
-        const paginationContainer = document.getElementById("pagination-container");
-        const qtdNum = {{ $qtdNum }};
-        const totalPages = Math.ceil(qtdNum / maxItems);
-
-
-        // function gerarLinksPagina() {
-        //     paginationContainer.innerHTML = "";
-
-        //     const start = paginationIndex * 3 + 1;
-        //     const end = Math.min(start + 2, totalPages);
-
-        //     for (let i = start; i <= end; i++) {
-        //         const link = document.createElement("a");
-        //         link.classList.add("page-item");
-        //         link.href = `#`;
-        //         link.textContent =
-        //             `${(i - 1) * maxItems + 1} - ${Math.min(i * maxItems, qtdNum)}`;
-
-        //         paginationContainer.appendChild(link);
-        //     }
-        // }
-        let contPage = 0;
-
-        function gerarTabela(paginationIndex) {
+        document.addEventListener("DOMContentLoaded", () => {
+            const maxItems = 100;
+            let paginationIndex = 0;
+            const anterior = document.querySelector(".page-decrement");
+            const proximo = document.querySelector(".page-increment");
             const tabelaNumeros = document.getElementById("tabelaNumeros");
-            tabelaNumeros.innerHTML = "";
+            const qtdNum = {{ $rifa->qtd_num }};
+            const totalPages = Math.ceil(qtdNum / maxItems);
+            const numerosSelecionados = new Set();
 
-            const start = paginationIndex * 100 + 1;
-            const end = Math.min(start + 100, start + 99);
+            function gerarTabela(index) {
+                tabelaNumeros.innerHTML = "";
 
-            let tableRow = document.createElement("tr");
+                const start = index * maxItems + 1;
+                const end = Math.min(start + maxItems - 1, qtdNum);
 
-            for (let i = start; i <= end; i++) {
-                const tableData = document.createElement("td");
-                tableData.classList.add("numero");
-                tableData.textContent = i;
+                let tableRow = document.createElement("tr");
 
-                tableRow.appendChild(tableData);
+                for (let i = start; i <= end; i++) {
+                    const tableData = document.createElement("td");
+                    tableData.classList.add('numero');
+                    tableData.id = `numero_${i}`;
 
-                if (i % 10 === 0 || i === end) {
-                    tabelaNumeros.appendChild(tableRow);
-                    tableRow = document.createElement("tr");
+                    const divQuota = document.createElement("div");
+                    divQuota.classList.add("div-quota");
+
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.value = i;
+                    checkbox.classList = "check-quota";
+                    checkbox.id = `checkbox-${i}`;
+                    checkbox.checked = numerosSelecionados.has(i);
+
+                    const label = document.createElement("label");
+                    label.htmlFor = `checkbox-${i}`;
+                    label.classList = "label-quota";
+                    label.textContent = i;
+
+                    checkbox.addEventListener("click", () => {
+                        const checkboxClicada = document.getElementById(`numero_${i}`)
+                        if (checkbox.checked) {
+                            numerosSelecionados.add(i);
+                            checkboxClicada.style.backgroundColor = 'var(--primary-green)';
+                        } else {
+                            numerosSelecionados.delete(i);
+                            checkboxClicada.style.backgroundColor = '';
+                        }
+                    });
+
+                    divQuota.appendChild(checkbox);
+                    divQuota.appendChild(label);
+
+                    tableData.appendChild(divQuota);
+                    tableRow.appendChild(tableData);
+
+                    if (i % 10 === 0 || i === end) {
+                        tabelaNumeros.appendChild(tableRow);
+                        tableRow = document.createElement("tr");
+                    }
                 }
             }
-        }
 
-        anterior.addEventListener("click", function() {
-            if (paginationIndex > 0) {
-                contPage--;
-                paginationIndex--;
-                gerarTabela(contPage);
 
+            anterior.addEventListener("click", (event) => {
+                event.preventDefault();
+                if (paginationIndex > 0) {
+                    paginationIndex--;
+                    gerarTabela(paginationIndex);
+                }
+            });
+
+            proximo.addEventListener("click", (event) => {
+                event.preventDefault();
+                if (paginationIndex < totalPages - 1) {
+                    paginationIndex++;
+                    gerarTabela(paginationIndex);
+                }
+            });
+
+            function obterCheckboxesMarcados() {
+                return Array.from(numerosSelecionados);
             }
-        });
 
-        proximo.addEventListener("click", function() {
-            if (paginationIndex < totalPages - 1) {
-                contPage++;
-                paginationIndex++;
-                gerarTabela(contPage);
-            }
-        });
+            const formSelecionados = document.getElementById("form-selecionados");
+            formSelecionados.addEventListener("submit", (event) => {
+                const selecionados = obterCheckboxesMarcados();
+                document.getElementById("selecionados").value = JSON.stringify(selecionados);
 
-        // gerarLinksPagina();
-        gerarTabela(0);
+                if (selecionados.length === 0) {
+                    event.preventDefault();
+                    alert("Por favor, selecione ao menos uma cota antes de continuar.");
+                }
+            });
+
+
+
+            gerarTabela(0);
+        });
     </script>
+
 @endsection

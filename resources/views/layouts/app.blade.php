@@ -68,9 +68,9 @@
     <footer class="footer">
         <p class="footer-copy">&copy; {{ date('Y') }} Ação Entre Amigos</p>
         <div>
-            <a href="https://github.com/emanuelbrebal" class="footer-link">github</a>
-            <a href="https://www.linkedin.com/in/emanuel-victor-brebal/" class="footer-link">linkedin</a>
-            <a href="" class="footer-link">contatos</a>
+            <a href="https://github.com/emanuelbrebal" target="_blank" class="footer-link">github</a>
+            <a href="https://www.linkedin.com/in/emanuel-victor-brebal/"  target="_blank" class="footer-link">linkedin</a>
+            <a href="" class="footer-link" target="_blank">contatos</a>
             {{-- fazer um modal com todos os contatos --}}
 
         </div>
