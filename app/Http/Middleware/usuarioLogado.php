@@ -16,8 +16,12 @@ class usuarioLogado
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!Auth::guard('usuarios')->check()){
-           return redirect()->to('/login')->with('error', 'Sessão expirada e usuário deslogado. Por favor, entre novamente.');
+        $rotaAtual = $request->route()->getName();
+
+        $rotasPermitidas = ['redirecionarLogin', 'redirecionarRegistro', 'fazerLogin', 'criarRegistro'];
+
+        if (!Auth::guard('usuarios')->check() && !in_array($rotaAtual, $rotasPermitidas)) {
+            return redirect()->to('/login')->with('error', 'Sessão expirada. Por favor, entre novamente.');
         }
 
         return $next($request);

@@ -55,4 +55,15 @@ class RifaController extends Controller
 
         return redirect()->route('redirecionarHome')->with('success', 'Rifa criada com sucesso!');
     }
+
+    public function buyRaffleNumbers(Request $request) {
+        dd($request);
+    }
+
+    public function receberCheckboxes(Request $request)
+{
+    $selecionados = json_decode($request->input('selecionados'), true);
+
+    return response()->json(['recebidos' => $selecionados]);
+}
 }
