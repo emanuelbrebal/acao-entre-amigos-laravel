@@ -122,7 +122,8 @@
     gap: 1rem;
     text-decoration: none;
     list-style: none;
-    max-width: 450px;
+    width: 100%;
+    margin: 1rem 0;
 }
 
 .pagination-list {
@@ -185,6 +186,7 @@
     color: #000;
     pointer-events: none;
 }
+
 
 
 
