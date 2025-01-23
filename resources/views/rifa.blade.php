@@ -44,18 +44,16 @@
                 </div>
 
                 @if ($rifa->qtd_num > 100)
-                    <ul class="pagination-list">
-                        <li class="pagination">
-                            <button type="button" class="page-decrement">Anterior</button>
-                            <div id="pagination-container"></div>
-                            <button type="button" class="page-increment">Próximo</button>
-                        </li>
-                    </ul>
+                    <div class="pagination-list">
+                            <button type="button" class="btn btn-pagination" id="page-decrement">Anterior</button>
+                            <button type="button" class="btn btn-pagination" id="page-increment">Próximo</button>
+                    </div>
                 @endif
-
                 <input type="hidden" name="selecionados" id="selecionados">
-
-                <button type="submit" class="btn -comprar-cotas" id="btnCompraRifas">Comprar cotas</button>
+                <div class="buttonSubmit">
+                    <button type="reset" class="btn -comprar-cotas">Limpar Cotas</button>
+                    <button type="submit" class="btn -comprar-cotas" id="btnCompraRifas">Comprar cotas</button>
+                </div>
             </form>
         </div>
 
@@ -65,18 +63,17 @@
             <div class="info-instituicao">
                 <div class="info-sorteio">
                     <p>Cotas selecionadas: </p>
+                    <p id="array-quotas"></p>
                 </div>
             </div>
             <div class="info-instituicao">
                 <div class="info-sorteio">
-                    <p>Qtd Cotas Selecionadas: <strong>{{ $rifa->qtd_num }}</strong></p>
+                    <p>Qtd. Cotas Selecionadas: <strong> <span id="qtdQuotas"> </span> </strong></p>
                     <p>Valor por cota: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
                             unid.</strong></p>
-                    <p>Cotas disponíveis: <strong>{{ $rifa->qtd_num }}</strong></p>
+
                 </div>
-                <p>Subtotal:</p>
-                <p class="taxa">Taxa:</p>
-                <p>Total:</p>
+                <p>Total: <strong> <span id="total"></span></strong></p>
 
             </div>
 
@@ -89,12 +86,18 @@
         document.addEventListener("DOMContentLoaded", () => {
             const maxItems = 100;
             let paginationIndex = 0;
-            const anterior = document.querySelector(".page-decrement");
-            const proximo = document.querySelector(".page-increment");
+            const anterior = document.getElementById("page-decrement");
+            const proximo = document.getElementById("page-increment");
             const tabelaNumeros = document.getElementById("tabelaNumeros");
             const qtdNum = {{ $rifa->qtd_num }};
             const totalPages = Math.ceil(qtdNum / maxItems);
             const numerosSelecionados = new Set();
+            const arrayQuotas = document.getElementById("array-quotas");
+
+            function atualizarArrayQuotas() {
+                arrayQuotas.textContent = Array.from(numerosSelecionados).sort((a, b) => a - b).join(", ") ||
+                    "Nenhuma cota selecionada";
+            }
 
             function gerarTabela(index) {
                 tabelaNumeros.innerHTML = "";
@@ -119,20 +122,29 @@
                     checkbox.id = `checkbox-${i}`;
                     checkbox.checked = numerosSelecionados.has(i);
 
+                    if (checkbox.checked) {
+                        tableData.style.backgroundColor = 'var(--primary-green)';
+                    }
+
                     const label = document.createElement("label");
                     label.htmlFor = `checkbox-${i}`;
                     label.classList = "label-quota";
                     label.textContent = i;
 
                     checkbox.addEventListener("click", () => {
-                        const checkboxClicada = document.getElementById(`numero_${i}`)
+                        const checkboxClicada = document.getElementById(`numero_${i}`);
                         if (checkbox.checked) {
                             numerosSelecionados.add(i);
                             checkboxClicada.style.backgroundColor = 'var(--primary-green)';
+                            mostraTotalCotas();
+                            mostraTotal();
                         } else {
                             numerosSelecionados.delete(i);
                             checkboxClicada.style.backgroundColor = '';
+                            mostraTotalCotas();
+                            mostraTotal();
                         }
+                        atualizarArrayQuotas();
                     });
 
                     divQuota.appendChild(checkbox);
@@ -147,7 +159,6 @@
                     }
                 }
             }
-
 
             anterior.addEventListener("click", (event) => {
                 event.preventDefault();
@@ -166,7 +177,7 @@
             });
 
             function obterCheckboxesMarcados() {
-                return Array.from(numerosSelecionados);
+                return Array.from(numerosSelecionados).sort();
             }
 
             const formSelecionados = document.getElementById("form-selecionados");
@@ -179,10 +190,30 @@
                     alert("Por favor, selecione ao menos uma cota antes de continuar.");
                 }
             });
+            const qtdQuotas = document.getElementById('qtdQuotas');
+            const subtotal = document.getElementById('subtotal');
+            const taxa = document.getElementById('tax');
+            const total = document.getElementById('total');
+            const pricePerQuota = @json($rifa->preco_numeros);
 
+            function mostraTotalCotas() {
+                qtdQuotas.innerHTML = numerosSelecionados.size || "Nenhuma.";
+            }
+
+
+            function mostraTotal() {
+                const totalPrice = numerosSelecionados.size * pricePerQuota || 0;
+                total.innerHTML = new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                }).format(totalPrice);
+            }
 
 
             gerarTabela(0);
+            mostraTotalCotas();
+            mostraTotal();
+
         });
     </script>
 
