@@ -25,8 +25,10 @@
     <header>
         <nav class="navbar nav">
             <div class="navbar-brand">
-                <img class="icon-header" src="{{ asset('img/rifa_icon.png') }}"
-                    alt="Desenho de uma urna e uma mão, que está tirando uma rifa sorteada.">
+                <a href="{{ route('redirecionarHome') }}" class="navbrand-link">
+                    <img class="icon-header" src="{{ asset('img/rifa_icon.png') }}"
+                        alt="Desenho de uma urna e uma mão, que está tirando uma rifa sorteada.">
+                </a>
                 <p class="navbar-brand-text"><strong>Ação Entre Amigos</strong></p>
             </div>
 
@@ -41,7 +43,7 @@
                                 d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
                         </svg>
                     </a>
-                    <form action="{{ route('fazerLogout') }}" method="POST" id="form-logout">
+                    <form class="form-logout" action="{{ route('fazerLogout') }}" method="POST" id="form-logout">
                         @csrf
                         <button type="submit" class="btn-logout">Fazer Logout</button>
                     </form>
@@ -69,7 +71,8 @@
         <p class="footer-copy">&copy; {{ date('Y') }} Ação Entre Amigos</p>
         <div>
             <a href="https://github.com/emanuelbrebal" target="_blank" class="footer-link">github</a>
-            <a href="https://www.linkedin.com/in/emanuel-victor-brebal/"  target="_blank" class="footer-link">linkedin</a>
+            <a href="https://www.linkedin.com/in/emanuel-victor-brebal/" target="_blank"
+                class="footer-link">linkedin</a>
             <a href="" class="footer-link" target="_blank">contatos</a>
             {{-- fazer um modal com todos os contatos --}}
 
@@ -80,4 +83,4 @@
 
 </html>
 
-<script src="{{asset('js/logout.js')}}"></script>
+<script src="{{ asset('js/logout.js') }}"></script>

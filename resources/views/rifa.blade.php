@@ -45,13 +45,13 @@
 
                 @if ($rifa->qtd_num > 100)
                     <div class="pagination-list">
-                            <button type="button" class="btn btn-pagination" id="page-decrement">Anterior</button>
-                            <button type="button" class="btn btn-pagination" id="page-increment">Próximo</button>
+                        <button type="button" class="btn btn-pagination" id="page-decrement">Anterior</button>
+                        <button type="button" class="btn btn-pagination" id="page-increment">Próximo</button>
                     </div>
                 @endif
                 <input type="hidden" name="selecionados" id="selecionados">
                 <div class="buttonSubmit">
-                    <button type="reset" class="btn -comprar-cotas">Limpar Cotas</button>
+                    <a class="btn -comprar-cotas" id="btnReset">Limpar Cotas</a>
                     <button type="submit" class="btn -comprar-cotas" id="btnCompraRifas">Comprar cotas</button>
                 </div>
             </form>
@@ -190,6 +190,7 @@
                     alert("Por favor, selecione ao menos uma cota antes de continuar.");
                 }
             });
+
             const qtdQuotas = document.getElementById('qtdQuotas');
             const subtotal = document.getElementById('subtotal');
             const taxa = document.getElementById('tax');
@@ -200,7 +201,6 @@
                 qtdQuotas.innerHTML = numerosSelecionados.size || "Nenhuma.";
             }
 
-
             function mostraTotal() {
                 const totalPrice = numerosSelecionados.size * pricePerQuota || 0;
                 total.innerHTML = new Intl.NumberFormat('pt-BR', {
@@ -208,6 +208,14 @@
                     currency: 'BRL',
                 }).format(totalPrice);
             }
+
+            btnReset.addEventListener('click', function() {
+                numerosSelecionados.clear();
+                gerarTabela(0);
+                mostraTotalCotas();
+                mostraTotal();
+                atualizarArrayQuotas();
+            });
 
 
             gerarTabela(0);

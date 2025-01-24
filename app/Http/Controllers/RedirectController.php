@@ -61,7 +61,8 @@ class RedirectController extends Controller
 
     public function redirecionarSobre()
     {
-        return view('about');
+        $user = Auth::guard('usuarios')->user();
+        return view('about', compact('user'));
     }
 
     public function buyNumbers($id)

@@ -24,10 +24,12 @@
 <body>
     <header>
         <nav class="navbar nav -login">
-            <div class="navbar-brand ">
-                <img class="icon-header" src="{{ asset('img/rifa_icon.png') }}"
-                    alt="Desenho de uma urna e uma mão, que está tirando uma rifa sorteada.">
-                <p class="navbar-brand-text"><strong>Ação Entre Amigos <br> Rifas Online</strong></p>
+            <div class="navbar-brand">
+                <a href="{{ route('redirecionarHome') }}" class="navbrand-link">
+                    <img class="icon-header" src="{{ asset('img/rifa_icon.png') }}"
+                        alt="Desenho de uma urna e uma mão, que está tirando uma rifa sorteada.">
+                </a>
+                <p class="navbar-brand-text"><strong>Ação Entre Amigos</strong></p>
             </div>
         </nav>
     </header>
