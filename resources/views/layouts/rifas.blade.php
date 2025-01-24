@@ -25,8 +25,10 @@
     <header>
         <nav class="navbar nav">
             <div class="navbar-brand">
-                <img class="icon-header" src="{{ asset('img/rifa_icon.png') }}"
-                    alt="Desenho de uma urna e uma mão, que está tirando uma rifa sorteada.">
+                <a href="{{ route('redirecionarHome') }}" class="navbrand-link">
+                    <img class="icon-header" src="{{ asset('img/rifa_icon.png') }}"
+                        alt="Desenho de uma urna e uma mão, que está tirando uma rifa sorteada.">
+                </a>
                 <p class="navbar-brand-text"><strong>Ação Entre Amigos</strong></p>
             </div>
         </nav>
