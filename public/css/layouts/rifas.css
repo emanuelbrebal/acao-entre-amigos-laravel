@@ -1,5 +1,6 @@
 .info-main {
     min-height: 80vh;
+    height: fit-content;
 }
 
 .info-sorteio {
@@ -27,8 +28,7 @@
     border-radius: 8px;
     width: fit-content;
     width: 30%;
-    min-height: 100%;
-    height: 100%;
+    height: 95%;
     justify-content: space-evenly;
 }
 
@@ -47,8 +47,15 @@
     margin: 1rem;
     margin-left: 0;
     width: 100%;
-    height: 100%;
+    height: 95%;
+    border-radius: 8px;
+}
 
+.tabela-cotas{
+    /* width: 50%;
+    height: 100%;
+    display: inline-block;
+    justify-content: center; */
 }
 
 #tabelaNumeros {
@@ -68,6 +75,7 @@
 .cotacao {
     text-transform: uppercase;
     color: var(--primary-green);
+    font-weight: 700;
 }
 
 .numero {
@@ -84,15 +92,6 @@
     cursor: pointer;
 
 }
-
-/* .-disponivel{
-
-}
-
-.indisponivel{
-
-} */
-
 
 .rifa-controls {
     width: 100%;
@@ -125,10 +124,6 @@
     margin: 1rem 0;
 }
 
-.pagination-list {
-    margin: .5rem 0;
-}
-
 .page-item {
     text-decoration: none;
     margin: 0 .4rem;
@@ -139,16 +134,15 @@
     text-decoration: none;
     border: none;
     background-color: transparent;
-
     cursor: pointer;
-
 }
 
 .img-card-rifa.-individual {
-    width: 100%;
-    height: 35%;
+    width: 90%;
+    height: 25%;
     object-fit: cover;
     border: solid 3px var(--primary-green);
+    margin-bottom: 1rem;
 }
 
 .numero {
@@ -187,5 +181,39 @@
 }
 
 
+.organiza-infos, .organiza-btns {
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid 1px var(--grey);
+    justify-content: space-between;
+}
 
 
+
+.legenda, .legenda-p {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: start;
+    align-items: center;
+    height: 40px;
+}
+
+.cota {
+    background-color: transparent;
+    height: 20px;
+    width: 20px;
+    border: solid 1px var(--black);
+    border-radius: 40px;
+}
+
+.-disponivel {
+
+}
+
+.-selecionada {
+    background-color: var(--primary-green);
+}
+.-comprada {
+    background-color: var(--grey);
+}

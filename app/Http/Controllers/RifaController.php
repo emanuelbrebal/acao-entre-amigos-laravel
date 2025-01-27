@@ -56,14 +56,27 @@ class RifaController extends Controller
         return redirect()->route('redirecionarHome')->with('success', 'Rifa criada com sucesso!');
     }
 
-    public function buyRaffleNumbers(Request $request) {
-        dd($request);
+    public function receberCheckboxes(Request $request)
+    {
+        $selecionados = json_decode($request->input('selecionados'), true);
+        return $selecionados;
     }
 
-    public function receberCheckboxes(Request $request)
-{
-    $selecionados = json_decode($request->input('selecionados'), true);
+    public function buyRaffleNumbers(Request $request)
+    {
+        $pedido = $request;
+        $carrinhoCotas = $this->receberCheckboxes($pedido);
+        dd($pedido);
+        if (empty($carrinhoCotas)) {
+            return response()->json(['erro' => 'Nenhuma cota selecionada.'], 400);
+        }
 
-    return response()->json(['recebidos' => $selecionados]);
-}
+        if (is_array($carrinhoCotas)) {
+            sort($carrinhoCotas);
+        }
+
+        return response()->json(['cotas_selecionadas' => $carrinhoCotas]);
+
+
+    }
 }

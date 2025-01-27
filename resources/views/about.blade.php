@@ -4,17 +4,17 @@
 @section('content')
 
     <div class="sobre">
-        <a href="{{route('redirecionarHome')}}"  class="btn -voltar"> <svg class="btn" xmlns="http://www.w3.org/2000/svg"
-            width="20" height="20" viewBox="0 0 24 24">
-            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                <path d="M21 12h-17.5" />
-                <path d="M3 12l7 7M3 12l7 -7" />
-            </g>
-        </svg>
-        voltar</a>
+        <a href="{{ route('redirecionarHome') }}" class="btn -voltar"> <svg xmlns="http://www.w3.org/2000/svg"
+                width="20" height="20" viewBox="0 0 24 24">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M21 12h-17.5" />
+                    <path d="M3 12l7 7M3 12l7 -7" />
+                </g>
+            </svg>
+            voltar</a>
         <div class="main-sobre -br">
-            <h1 class="h1-sobre">Sobre o projeto: Ação Entre Amigos <svg class="svg-sobre" xmlns="http://www.w3.org/2000/svg" width="36" height="36"
-                    viewBox="0 0 36 36">
+            <h1 class="h1-sobre">Sobre o projeto: Ação Entre Amigos <svg class="svg-sobre"
+                    xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
                     <path fill="#009b3a" d="M36 27a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4z" />
                     <path fill="#fedf01" d="M32.728 18L18 29.124L3.272 18L18 6.875z" />
                     <circle cx="17.976" cy="17.924" r="6.458" fill="#002776" />
@@ -36,15 +36,16 @@
                 ideias sobre como posso contribuir para o seu projeto.</p>
             <p>Meus contatos estão logo abaixo. Será um prazer conversar com você!</p>
             <a href="https://github.com/emanuelbrebal" class="footer-link" target="_blank">github</a>
-            <a href="https://github.com/emanuelbrebal/acao-entre-amigos-laravel" class="footer-link" target="_blank">github do projeto</a>
+            <a href="https://github.com/emanuelbrebal/acao-entre-amigos-laravel" class="footer-link" target="_blank">github
+                do projeto</a>
             <a href="https://www.linkedin.com/in/emanuel-victor-brebal/" class="footer-link" target="_blank">linkedin</a>
             <a href="mailto:manu.brebal@gmail.com?subject=Interesse no seu projeto&body=Olá%20Emanuel,%0A%0AEspero%20que%20este%20e-mail%20o%20encontre%20bem.%0A%0AConheci%20seu%20projeto%20e%20fiquei%20muito%20interessado(a)!%20Gostaria%20de%20marcar%20uma%20entrevista%20ou%20reunião%20para%20conversarmos%20melhor.%0A%0AAguardo%20sua%20resposta.%0A%0AAtenciosamente,%0A[Seu Nome]"
                 class="footer-link -email" target="_blank">Enviar E-mail</a>
         </div>
 
         <div class="main-sobre -en">
-            <h1 class="h1-sobre">About the Project: Ação Entre Amigos <svg class="svg-sobre" xmlns="http://www.w3.org/2000/svg" width="36" height="36"
-                    viewBox="0 0 36 36">
+            <h1 class="h1-sobre">About the Project: Ação Entre Amigos <svg class="svg-sobre"
+                    xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
                     <path fill="#b22334"
                         d="M35.445 7C34.752 5.809 33.477 5 32 5H18v2zM0 25h36v2H0zm18-8h18v2H18zm0-4h18v2H18zM0 21h36v2H0zm4 10h28c1.477 0 2.752-.809 3.445-2H.555c.693 1.191 1.968 2 3.445 2M18 9h18v2H18z" />
                     <path fill="#eee"
@@ -65,7 +66,8 @@
             <p>You’ll find my contact details below. I’d love to connect with you!
             </p>
             <a href="https://github.com/emanuelbrebal" class="footer-link">github</a>
-            <a href="https://github.com/emanuelbrebal/acao-entre-amigos-laravel" class="footer-link" target="_blank">Project's Github</a>
+            <a href="https://github.com/emanuelbrebal/acao-entre-amigos-laravel" class="footer-link"
+                target="_blank">Project's Github</a>
             <a href="https://www.linkedin.com/in/emanuel-victor-brebal/" class="footer-link">linkedin</a>
             <a href="mailto:manu.brebal@gmail.com?subject=Interest in your project&body=Hello%20Emanuel,%0A%0AI%20hope%20this%20email%20finds%20you%20well.%0A%0AI%20came%20across%20your%20project%20and%20was%20very%20impressed!%20I%20would%20love%20to%20schedule%20an%20interview%20or%20meeting%20to%20discuss%20further.%0A%0ALooking%20forward%20to%20hearing%20from%20you.%0A%0ABest%20regards,%0A[Your Name]"
                 class="footer-link -email">Send Email</a>
