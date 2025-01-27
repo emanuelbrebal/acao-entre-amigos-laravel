@@ -2,13 +2,21 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Open Sans', 'Roboto', sans-serif;
+    font-family: 'Open Sans', 'Roboto', sans-serif !important;
 }
 
-html{
-    background-color: var(--background-color);
+html, body{
+    background-color: var(--background-color) !important;
 }
 
 .d-flex{
     display: flex;
+}
+
+h1{
+    font-size: 1.5rem !important;
+}
+
+p{
+    margin: 0 !important;
 }

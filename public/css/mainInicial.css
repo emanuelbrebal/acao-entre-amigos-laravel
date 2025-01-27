@@ -70,7 +70,7 @@
 .rifa-card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: #EAEAEA;
     height: 550px;
@@ -85,8 +85,8 @@
 }
 
 .img-card-rifa {
-    width: 90%;
-    height: 55%;
+    width: 80%;
+    height: 100%;
     object-fit: cover;
     border: solid 3px var(--primary-green);
 }
@@ -95,6 +95,7 @@
 .rifa-title {
     text-transform: uppercase;
     align-items: center !important;
+    font-size: large;
 }
 
 .rifa-info {
@@ -102,6 +103,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 1rem;
+    
 }
 
 .rifa-encerrada {
@@ -140,7 +142,7 @@
     color: var(--white);
     text-transform: uppercase;
     font-weight: 600;
-   
+
 }
 
 .navigation {

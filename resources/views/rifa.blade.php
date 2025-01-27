@@ -4,8 +4,8 @@
 
     <section class="rifa-infos">
         <div class="rifa-info -rifa-info-card">
-            <a href="{{ route('redirecionarHome') }}" class="btn -voltar"> <svg class="btn"
-                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <a href="{{ route('redirecionarHome') }}" class="btn -voltar"> <svg xmlns="http://www.w3.org/2000/svg"
+                    width="20" height="20" viewBox="0 0 24 24">
                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                         <path d="M21 12h-17.5" />
                         <path d="M3 12l7 7M3 12l7 -7" />
@@ -36,26 +36,37 @@
 
         </div>
         <div class="tabela-rifa">
-            <h1 class="cotacao">Cotas disponíveis abaixo:</h1>
-            <form action="{{ route('buyRaffleNumbers') }}" method="POST" id="form-selecionados">
-                @csrf
-                <div class="organiza-tabela">
-                    <table class="tabela-numeros" id="tabelaNumeros"></table>
-                </div>
-
-                @if ($rifa->qtd_num > 100)
-                    <div class="pagination-list">
-                        <button type="button" class="btn btn-pagination" id="page-decrement">Anterior</button>
-                        <button type="button" class="btn btn-pagination" id="page-increment">Próximo</button>
+            <h1 class="cotacao">escolha suas cotas:</h1>
+            <div class="tabela-cotas">
+                <form action="{{ route('buyRaffleNumbers') }}" method="POST" id="form-selecionados">
+                    @csrf
+                    <div class="organiza-tabela">
+                        <table class="tabela-numeros" id="tabelaNumeros"></table>
                     </div>
-                @endif
-                <input type="hidden" name="selecionados" id="selecionados">
-                <div class="buttonSubmit">
-                    <a class="btn -comprar-cotas" id="btnReset">Limpar Cotas</a>
-                    <button type="submit" class="btn -comprar-cotas" id="btnCompraRifas">Comprar cotas</button>
-                </div>
+                    <div class="organiza-infos">
+                        <p class="legenda-p">Legenda:</p>
+                        <div class="legenda">
+                            <div class="cota -disponivel"></div>
+                            <p>Disponível</p>
+                            <div class="cota -selecionada"></div>
+                            <p>Selecionada</p>
+                            <div class="cota -comprada"></div>
+                            <p>Comprada</p>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="selecionados" id="selecionados">
+
+                    @if ($rifa->qtd_num > 100)
+                        <div class="pagination-list">
+                            <button type="button" class="btn btn-pagination" id="pageDecrement">Anterior</button>
+                            <button type="button" class="btn btn-pagination" id="pageIncrement">Próximo</button>
+                        </div>
+                    @endif
+            </div>
             </form>
         </div>
+
 
 
         <div class="rifa-info -rifa-info-card -carrinho">
@@ -74,42 +85,70 @@
 
                 </div>
                 <p>Total: <strong> <span id="total"></span></strong></p>
-
+                <div class="buttonSubmit">
+                    <a class="btn -reset-cotas" id="btnReset">Limpar Cotas</a>
+                    <button type="button" class="btn -comprar-cotas" data-toggle="modal" data-target="#modalConfirmaCompra"
+                        id="btnCompraRifas">Comprar cotas</button>
+                </div>
             </div>
 
         </div>
 
+        <div class="modal fade" id="modalConfirmaCompra" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmação de pedido</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Você, cliente, confirma seu pedido das cotas dos seguintes números:
+                        <p id="array-quotas-carrinho"><strong></strong></p>
+                        <p>No valor de <strong>R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }} </strong>
+                            por cota,</p>
+                        <p>Com o valor total de: <strong><span id="valor-total"></span></strong></p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
-    <script src="{{ asset('js/selecionados.js') }}"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const maxItems = 100;
             let paginationIndex = 0;
-            const anterior = document.getElementById("page-decrement");
-            const proximo = document.getElementById("page-increment");
+            const anterior = document.getElementById("pageDecrement");
+            const proximo = document.getElementById("pageIncrement");
             const tabelaNumeros = document.getElementById("tabelaNumeros");
             const qtdNum = {{ $rifa->qtd_num }};
             const totalPages = Math.ceil(qtdNum / maxItems);
             const numerosSelecionados = new Set();
-            const arrayQuotas = document.getElementById("array-quotas");
+            const pricePerQuota = {{ $rifa->preco_numeros }};
 
             function atualizarArrayQuotas() {
-                arrayQuotas.textContent = Array.from(numerosSelecionados).sort((a, b) => a - b).join(", ") ||
-                    "Nenhuma cota selecionada";
+                const arrayQuotas = document.getElementById("array-quotas");
+                const quotasCarrinho = document.getElementById("array-quotas-carrinho");
+                const selectedArray = Array.from(numerosSelecionados).sort((a, b) => a - b);
+                arrayQuotas.textContent = selectedArray.join(", ") || "Nenhuma cota selecionada";
+                quotasCarrinho.textContent = selectedArray.join(", ") || "Nenhuma cota selecionada";
             }
 
             function gerarTabela(index) {
                 tabelaNumeros.innerHTML = "";
-
                 const start = index * maxItems + 1;
                 const end = Math.min(start + maxItems - 1, qtdNum);
-
                 let tableRow = document.createElement("tr");
 
                 for (let i = start; i <= end; i++) {
                     const tableData = document.createElement("td");
-                    tableData.classList.add('numero');
+                    tableData.classList.add("numero");
                     tableData.id = `numero_${i}`;
 
                     const divQuota = document.createElement("div");
@@ -118,33 +157,30 @@
                     const checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
                     checkbox.value = i;
-                    checkbox.classList = "check-quota";
+                    checkbox.classList.add("check-quota");
                     checkbox.id = `checkbox-${i}`;
                     checkbox.checked = numerosSelecionados.has(i);
 
                     if (checkbox.checked) {
-                        tableData.style.backgroundColor = 'var(--primary-green)';
+                        tableData.style.backgroundColor = "var(--primary-green)";
                     }
 
                     const label = document.createElement("label");
                     label.htmlFor = `checkbox-${i}`;
-                    label.classList = "label-quota";
+                    label.classList.add("label-quota");
                     label.textContent = i;
 
                     checkbox.addEventListener("click", () => {
-                        const checkboxClicada = document.getElementById(`numero_${i}`);
                         if (checkbox.checked) {
                             numerosSelecionados.add(i);
-                            checkboxClicada.style.backgroundColor = 'var(--primary-green)';
-                            mostraTotalCotas();
-                            mostraTotal();
+                            tableData.style.backgroundColor = "var(--primary-green)";
                         } else {
                             numerosSelecionados.delete(i);
-                            checkboxClicada.style.backgroundColor = '';
-                            mostraTotalCotas();
-                            mostraTotal();
+                            tableData.style.backgroundColor = "";
                         }
                         atualizarArrayQuotas();
+                        mostraTotalCotas();
+                        mostraTotal();
                     });
 
                     divQuota.appendChild(checkbox);
@@ -153,49 +189,39 @@
                     tableData.appendChild(divQuota);
                     tableRow.appendChild(tableData);
 
-                    if (i % 10 === 0 || i === end) {
-                        tabelaNumeros.appendChild(tableRow);
-                        tableRow = document.createElement("tr");
+                    if (qtdNum < 100) {
+                        if (i % 5 === 0 || i === end) {
+                            tabelaNumeros.appendChild(tableRow);
+                            tableRow = document.createElement("tr");
+                        }
+                    } else {
+                        if (i % 10 === 0 || i === end) {
+                            tabelaNumeros.appendChild(tableRow);
+                            tableRow = document.createElement("tr");
+                        }
                     }
+
                 }
             }
 
-            anterior.addEventListener("click", (event) => {
-                event.preventDefault();
-                if (paginationIndex > 0) {
-                    paginationIndex--;
-                    gerarTabela(paginationIndex);
-                }
-            });
+            if (anterior && proximo) {
 
-            proximo.addEventListener("click", (event) => {
-                event.preventDefault();
-                if (paginationIndex < totalPages - 1) {
-                    paginationIndex++;
-                    gerarTabela(paginationIndex);
-                }
-            });
-
-            function obterCheckboxesMarcados() {
-                return Array.from(numerosSelecionados).sort();
-            }
-
-            const formSelecionados = document.getElementById("form-selecionados");
-            formSelecionados.addEventListener("submit", (event) => {
-                const selecionados = obterCheckboxesMarcados();
-                document.getElementById("selecionados").value = JSON.stringify(selecionados);
-
-                if (selecionados.length === 0) {
+                anterior.addEventListener("click", (event) => {
                     event.preventDefault();
-                    alert("Por favor, selecione ao menos uma cota antes de continuar.");
-                }
-            });
+                    if (paginationIndex > 0) {
+                        paginationIndex--;
+                        gerarTabela(paginationIndex);
+                    }
+                });
 
-            const qtdQuotas = document.getElementById('qtdQuotas');
-            const subtotal = document.getElementById('subtotal');
-            const taxa = document.getElementById('tax');
-            const total = document.getElementById('total');
-            const pricePerQuota = @json($rifa->preco_numeros);
+                proximo.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    if (paginationIndex < totalPages - 1) {
+                        paginationIndex++;
+                        gerarTabela(paginationIndex);
+                    }
+                });
+            }
 
             function mostraTotalCotas() {
                 qtdQuotas.innerHTML = numerosSelecionados.size || "Nenhuma.";
@@ -209,16 +235,17 @@
                 }).format(totalPrice);
             }
 
-            btnReset.addEventListener('click', function() {
+            const btnReset = document.getElementById("btnReset");
+            btnReset.addEventListener("click", () => {
                 numerosSelecionados.clear();
-                gerarTabela(0);
+                gerarTabela(paginationIndex);
+                atualizarArrayQuotas();
                 mostraTotalCotas();
                 mostraTotal();
-                atualizarArrayQuotas();
             });
 
-
             gerarTabela(0);
+            atualizarArrayQuotas();
             mostraTotalCotas();
             mostraTotal();
 

@@ -46,7 +46,7 @@ class RifaSeeder extends Seeder
             'premiacao' => 'Jogo de panela e utensilios',
             'imagem' => 'KIT00000150_1.png',
             'data_sorteio' => '22/01/2025',
-            'qtd_num' => '0',
+            'qtd_num' => '10',
             'id_instituicao' => '2',
         ]);
     }
