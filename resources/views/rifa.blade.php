@@ -50,6 +50,8 @@
                             <p>Disponível</p>
                             <div class="cota -selecionada"></div>
                             <p>Selecionada</p>
+                            <div class="cota -sua-cota"></div>
+                            <p>Sua cota</p>
                             <div class="cota -comprada"></div>
                             <p>Comprada</p>
                         </div>
@@ -64,7 +66,7 @@
                         </div>
                     @endif
             </div>
-            </form>
+
         </div>
 
 
@@ -86,9 +88,10 @@
                 </div>
                 <p>Total: <strong> <span id="total"></span></strong></p>
                 <div class="buttonSubmit">
-                    <a class="btn -reset-cotas" id="btnReset">Limpar Cotas</a>
-                    <button type="button" class="btn -comprar-cotas" data-toggle="modal" data-target="#modalConfirmaCompra"
-                        id="btnCompraRifas">Comprar cotas</button>
+                    <button type="button" class="btn -reset-cotas" id="btnReset">Limpar Cotas</button>
+                    <button type="button" class="btn -comprar-cotas" data-bs-toggle="modal"
+                        data-bs-target="#modalConfirmaCompra" id="btnCompraRifas">Comprar cotas</button>
+
                 </div>
             </div>
 
@@ -107,17 +110,17 @@
                         <p id="array-quotas-carrinho"><strong></strong></p>
                         <p>No valor de <strong>R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }} </strong>
                             por cota,</p>
-                        <p>Com o valor total de: <strong><span id="valor-total"></span></strong></p>
+                        <p>Com o valor total de:  <strong> <span id="total-modal"></span></strong></p>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Comprar</button>
                     </div>
                 </div>
             </div>
         </div>
-
+    </form>
     </section>
 
     <script>
@@ -131,6 +134,7 @@
             const totalPages = Math.ceil(qtdNum / maxItems);
             const numerosSelecionados = new Set();
             const pricePerQuota = {{ $rifa->preco_numeros }};
+            const totalModal = document.getElementById("total-modal")
 
             function atualizarArrayQuotas() {
                 const arrayQuotas = document.getElementById("array-quotas");
@@ -230,6 +234,11 @@
             function mostraTotal() {
                 const totalPrice = numerosSelecionados.size * pricePerQuota || 0;
                 total.innerHTML = new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                }).format(totalPrice);
+
+                totalModal.innerHTML = new Intl.NumberFormat('pt-BR', {
                     style: 'currency',
                     currency: 'BRL',
                 }).format(totalPrice);

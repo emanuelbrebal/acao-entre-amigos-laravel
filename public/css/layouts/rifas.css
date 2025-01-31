@@ -214,6 +214,11 @@
 .-selecionada {
     background-color: var(--primary-green);
 }
+
 .-comprada {
     background-color: var(--grey);
+}
+
+.-sua-cota {
+    background-color: var(--orange);
 }
