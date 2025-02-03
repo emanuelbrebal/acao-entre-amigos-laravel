@@ -96,14 +96,16 @@
     text-transform: uppercase;
     align-items: center !important;
     font-size: large;
+    width: 50%;
+
 }
 
 .rifa-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-top: 1rem;
-    
+    align-items: center;
+
 }
 
 .rifa-encerrada {

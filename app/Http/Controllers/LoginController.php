@@ -6,7 +6,7 @@ use App\Models\Instituicao;
 use App\Models\Usuarios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -61,43 +61,41 @@ class LoginController extends Controller
 
     public function fazerLogin(Request $request)
     {
-        if ($request->tipo_usuario == "cpf") {
-            $validated = $request->validate([
-                'cpf' => 'required|string',
-                'password' => 'required|string'
-            ]);
+        try {
+            if ($request->tipo_usuario == "cpf") {
+                $validated = $request->validate([
+                    'cpf' => 'required|string',
+                    'password' => 'required|string'
+                ]);
 
-            $credenciais = [
-                'cpf' => $validated['cpf'],
-                'password' => $validated['password']
-            ];
+                if (Auth::guard('usuarios')->attempt($validated)) {
+                    return redirect()->route('redirecionarHome')->with('success', 'Login realizado com sucesso!');
+                }
+            } elseif ($request->tipo_usuario == "cnpj") {
+                $validated = $request->validate([
+                    'cnpj' => 'required|string',
+                    'password' => 'required|string'
+                ]);
 
-            if (Auth::guard('usuarios')->attempt($credenciais)) {
-                return redirect()->route('redirecionarHome')->with('success', 'Login realizado com sucesso!');
+                if (Auth::guard('instituicao')->attempt($validated)) {
+                    return redirect()->route('redirecionarHome')->with('success', 'Login realizado com sucesso!');
+                }
             }
+
+            return back()->withErrors(['login' => 'Credenciais inválidas. Verifique seus dados e tente novamente.']);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
         }
-
-        if ($request->tipo_usuario == "cnpj") {
-            $validated = $request->validate([
-                'cnpj' => 'required|string',
-                'password' => 'required|string'
-            ]);
-
-            $credenciais = [
-                'cnpj' => $validated['cnpj'],
-                'password' => $validated['password']
-            ];
-
-            if (Auth::guard('usuarios')->attempt($credenciais)) {
-                return redirect()->route('redirecionarHome')->with('success', 'Login realizado com sucesso!');
-            }
-        }
-
-        return back()->withErrors(['login' => 'Credenciais inválidas. Verifique seus dados e tente novamente.']);
     }
 
-    public function FazerLogout() {
-        Auth::guard('usuarios')->logout();
-        return redirect()->route('redirecionarHome')->with('success', 'Você foi desconectado com sucesso!');
+    public function FazerLogout()
+    {
+        if(Auth::guard('usuarios')->check()){
+            Auth::guard('usuarios')->logout();
+        }
+        elseif(Auth::guard('instituicao')->check()){
+            Auth::guard('instituicao')->logout();
+        }
+        return redirect()->route('redirecionarLogin')->with('success', 'Você foi desconectado com sucesso!');
     }
 }
