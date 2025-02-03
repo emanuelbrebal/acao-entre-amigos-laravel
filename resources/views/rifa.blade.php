@@ -16,6 +16,7 @@
             <img class="img-card-rifa -individual" src="{{ asset('img/raffles/' . $rifa->imagem) }}" alt="Imagem da Rifa">
             <h3 class="rifa-title">{{ $rifa->titulo_rifa }}</h3>
             <div class="info-sorteio">
+                <p>Prêmio da rifa: <strong>{{ $rifa->premiacao }}</strong></p>
                 <p>Valor por cota: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
                         unid.</strong></p>
                 <p>Total de cotas: <strong>{{ $rifa->qtd_num }}</strong></p>
@@ -58,6 +59,7 @@
                     </div>
 
                     <input type="hidden" name="selecionados" id="selecionados">
+                    <input type="hidden" name="id_rifa" id="id_rifa" value="{{ $rifa->id }}">
 
                     @if ($rifa->qtd_num > 100)
                         <div class="pagination-list">
@@ -66,10 +68,7 @@
                         </div>
                     @endif
             </div>
-
         </div>
-
-
 
         <div class="rifa-info -rifa-info-card -carrinho">
             <h1 class="">Resumo do pedido:</h1>
@@ -84,7 +83,6 @@
                     <p>Qtd. Cotas Selecionadas: <strong> <span id="qtdQuotas"> </span> </strong></p>
                     <p>Valor por cota: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
                             unid.</strong></p>
-
                 </div>
                 <p>Total: <strong> <span id="total"></span></strong></p>
                 <div class="buttonSubmit">
@@ -110,7 +108,7 @@
                         <p id="array-quotas-carrinho"><strong></strong></p>
                         <p>No valor de <strong>R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }} </strong>
                             por cota,</p>
-                        <p>Com o valor total de:  <strong> <span id="total-modal"></span></strong></p>
+                        <p>Com o valor total de: <strong> <span id="total-modal"></span></strong></p>
 
                     </div>
                     <div class="modal-footer">
@@ -120,8 +118,30 @@
                 </div>
             </div>
         </div>
-    </form>
+        </form>
     </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let cotasSelecionadas = [];
+            document.getElementById("btnCompraRifas").addEventListener("click", function() {
+                cotasSelecionadas = document.getElementById("array-quotas-carrinho").innerText.trim();
+                document.getElementById("selecionados").value = cotasSelecionadas;
+
+            });
+
+            document.getElementById("form-selecionados").addEventListener("submit", function() {
+                let idRifaInput = document.getElementById("id_rifa");
+                if (!idRifaInput.value) {
+                    idRifaInput.value = "{{ $rifa->id }}";
+                }
+            });
+
+            // document.getElementById("btnReset").addEventListener("click", function() {
+            //     let cotasSelecionadas = [];
+            // });
+        });
+    </script>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {

@@ -74,6 +74,16 @@ class RedirectController extends Controller
 
     public function redirecionarCreateRaffle()
     {
-        return view('createRaffle');
+        if (Auth::guard('instituicao')->check()) {
+            $instituicao_nome = Auth::guard('instituicao')->user()->nome;
+            $instituicao_id = Auth::guard('instituicao')->user()->id;
+
+            return view('createRaffle', [
+                'instituicao_nome' => $instituicao_nome,
+                'instituicao_id' => $instituicao_id
+                ]);
+        } else {
+            return;
+        }
     }
 }

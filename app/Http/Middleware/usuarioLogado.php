@@ -20,7 +20,7 @@ class usuarioLogado
 
         $rotasPermitidas = ['redirecionarLogin', 'redirecionarRegistro', 'fazerLogin', 'criarRegistro'];
 
-        if (!Auth::guard('usuarios')->check() && !in_array($rotaAtual, $rotasPermitidas)) {
+        if (!Auth::guard('usuarios')->check() && !Auth::guard('instituicao')->check() && !in_array($rotaAtual, $rotasPermitidas)) {
             return redirect()->to('/login')->with('error', 'Sessão expirada. Por favor, entre novamente.');
         }
 
