@@ -55,8 +55,9 @@ class RedirectController extends Controller
         $numero = Numero::where('id_rifa', $id)->get();
         $instituicao = Instituicao::where('id', $rifa->id_instituicao)->first();
         $qtdNum = $rifa->qtd_num;
+        $numerosComprados = Numero::where('id_rifa', $id)->where('comprado', true)->get();
 
-        return view('rifa', compact('rifa', 'numero', 'instituicao', 'qtdNum'));
+        return view('rifa', compact('rifa', 'numero', 'instituicao', 'qtdNum', 'numerosComprados'));
     }
 
     public function redirecionarSobre()
@@ -67,9 +68,10 @@ class RedirectController extends Controller
 
     public function buyNumbers($id)
     {
+        //rota de mostrar todas as cotas compradas
         $rifa = Rifa::where('id', $id)->first();
         $numeros = Numero::where('id_rifa', $id);
-        return view('buyRaffleNumbers');
+        return view('boughtRaffleNumbers');
     }
 
     public function redirecionarCreateRaffle()

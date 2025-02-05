@@ -194,6 +194,8 @@
                     label.classList.add("label-quota");
                     label.textContent = i;
 
+
+
                     checkbox.addEventListener("click", () => {
                         if (checkbox.checked) {
                             numerosSelecionados.add(i);
@@ -202,6 +204,7 @@
                             numerosSelecionados.delete(i);
                             tableData.style.backgroundColor = "";
                         }
+
                         atualizarArrayQuotas();
                         mostraTotalCotas();
                         mostraTotal();
@@ -235,6 +238,7 @@
                     if (paginationIndex > 0) {
                         paginationIndex--;
                         gerarTabela(paginationIndex);
+                        atualizaEstadoCotas();
                     }
                 });
 
@@ -243,6 +247,7 @@
                     if (paginationIndex < totalPages - 1) {
                         paginationIndex++;
                         gerarTabela(paginationIndex);
+                        atualizaEstadoCotas();
                     }
                 });
             }
@@ -271,13 +276,41 @@
                 atualizarArrayQuotas();
                 mostraTotalCotas();
                 mostraTotal();
+
             });
+
+            function atualizaEstadoCotas() {
+                const numerosComprados = @json($numerosComprados);
+                const comprador = numerosComprados.comprador;
+                const usuarioLogado =
+                    {{ Auth::guard('usuarios')->check() ? Auth::guard('usuarios')->user()->id : (Auth::guard('instituicao')->check() ? Auth::guard('instituicao')->user()->id : null) }};
+                numerosComprados.forEach(cota => {
+                    const checkbox = document.getElementById(`checkbox-${cota.descricao}`);
+                    if (checkbox) {
+                        if (checkbox.value == cota.descricao && cota.comprador == usuarioLogado) {
+                            const tableData = document.getElementById(
+                                `numero_${cota.descricao}`);
+                            tableData.style.backgroundColor = "var(--orange)";
+                            tableData.style.pointerEvents =
+                                "none";
+                            checkbox.disabled = true;
+                        } else if (checkbox.value == cota.descricao) {
+                            const tableData = document.getElementById(
+                                `numero_${cota.descricao}`);
+                            tableData.style.backgroundColor = "var(--grey)";
+                            tableData.style.pointerEvents =
+                                "none";
+                            checkbox.disabled = true;
+                        }
+                    }
+                });
+            }
 
             gerarTabela(0);
             atualizarArrayQuotas();
             mostraTotalCotas();
             mostraTotal();
-
+            atualizaEstadoCotas();
         });
     </script>
 

@@ -30,6 +30,7 @@ Route::controller(LoginController::class)->group(function () {
 Route::controller(RifaController::class)->middleware('usuarioLogado')->group(function () {
     Route::post('/createRaffle/store', 'store')->name('cadastrarRifa');
     Route::post('/buyRaffleNumbers', 'buyRaffleNumbers')->name('buyRaffleNumbers');
+    Route::get('/boughtRaffleNumbers', 'boughtRaffleNumbers')->name('boughtRaffleNumbers');
 
 });
 

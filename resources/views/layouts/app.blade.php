@@ -42,7 +42,7 @@
                     <a class="navigation-item" href="{{ route('redirecionarSobre') }}">Sobre</a>
                     @if (Auth::guard('usuarios')->check())
                         <a class="navigation-item" href=""></a>
-                        <a class="navigation-item" href="">Minhas Participações</a>
+                        <a class="navigation-item" href="{{route('boughtRaffleNumbers')}}">Minhas cotas</a>
                     @elseif (Auth::guard('instituicao')->check())
                         <a class="navigation-item" href="{{ route('redirecionarCreateRaffle') }}">Cadastrar
                             Rifa</a>
