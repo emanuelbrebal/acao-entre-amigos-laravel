@@ -31,9 +31,9 @@ Route::controller(RifaController::class)->middleware('usuarioLogado')->group(fun
     Route::post('/createRaffle/store', 'store')->name('cadastrarRifa');
     Route::post('/buyRaffleNumbers', 'buyRaffleNumbers')->name('buyRaffleNumbers');
     Route::get('/boughtRaffleNumbers', 'boughtRaffleNumbers')->name('boughtRaffleNumbers');
-
 });
 
-
-
-
+Route::controller(UsuarioController::class)->middleware('usuarioLogado')->group(function () {
+    Route::get('/listarUsuario', 'listarUsuario')->name('listarUsuario');
+    Route::post('/updateUsuario', 'updateUsuario')->name('updateUsuario');
+});

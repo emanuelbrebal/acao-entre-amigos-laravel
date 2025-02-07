@@ -20,7 +20,7 @@
                 <p>Valor por cota: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
                         unid.</strong></p>
                 <p>Total de cotas: <strong>{{ $rifa->qtd_num }}</strong></p>
-                <p>Cotas disponíveis: <strong>{{ $rifa->qtd_num }}</strong></p>
+                <p>Cotas disponíveis: <strong>{{ $rifasDisponiveis }}</strong></p>
                 <p>Data do sorteio: <strong> {{ date('m/d/Y', strtotime($rifa->data_sorteio)) }} </strong></p>
                 @if ($rifa->id_usuario_vendedor != null)
                     <p>Vencedor: <strong> {{ $rifa->id_usuario_vencedor }}</strong></p>
@@ -216,17 +216,12 @@
                     tableData.appendChild(divQuota);
                     tableRow.appendChild(tableData);
 
-                    if (qtdNum < 100) {
-                        if (i % 5 === 0 || i === end) {
-                            tabelaNumeros.appendChild(tableRow);
-                            tableRow = document.createElement("tr");
-                        }
-                    } else {
-                        if (i % 10 === 0 || i === end) {
-                            tabelaNumeros.appendChild(tableRow);
-                            tableRow = document.createElement("tr");
-                        }
+
+                    if (i % 10 === 0 || i === end) {
+                        tabelaNumeros.appendChild(tableRow);
+                        tableRow = document.createElement("tr");
                     }
+
 
                 }
             }

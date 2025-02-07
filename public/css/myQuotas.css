@@ -2,10 +2,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    justify-self: end;
-    border: solid 1px var(--black);
-    width: 80vw;
-    height: 100vh;
+    padding: 2rem;
     background-color: var(--white);
 }
 
@@ -19,6 +16,7 @@
 .link-rifa{
     text-decoration: none;
     max-height: fit-content;
+    color: var(--white);
 }
 
 .link-rifa:hover{
@@ -26,7 +24,8 @@
 }
 
 .caixa-numero {
-    width: 100%;
+    max-width: 100%;
+    flex-wrap: wrap;
     height: 10%;
     background-color: var(--orange);
     display: flex;
@@ -51,17 +50,22 @@
 
 }
 
-.rifa-title{
+.rifa-title.-quotas{
     font-size: 20px;
     font-weight: 700;
     text-wrap: nowrap;
+    width: 100%;
 }
 
 .rifa-icon {
     height: 70px;
     width: 70px;
     border-radius: 50px;
-    border: solid 1px var(--orange);
+    border: solid 2px var(--black);
     object-fit: cover;
     margin-right: 10px;
+}
+
+.numero.-show{
+    color: var(--black);
 }

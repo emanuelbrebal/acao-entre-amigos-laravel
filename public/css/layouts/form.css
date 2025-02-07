@@ -104,13 +104,16 @@
 
 .btn.btn-submit{
     justify-content: center;
-    width: 100px;
+    width: fit-content;
     height: 50px;
     border-radius: 8px;
     border: none;
     justify-self: center;
     align-self: center;
     cursor: pointer;
+    background-color: var(--primary-green);
+    color: var(--white);
+    font-weight: 700;
 }
 
 .btn.btn-submit:hover{
@@ -127,6 +130,7 @@
     flex-direction: row;
     align-items: center;
     width: fit-content;
+    font-weight: 700;
 }
 
 .buttonSubmit{

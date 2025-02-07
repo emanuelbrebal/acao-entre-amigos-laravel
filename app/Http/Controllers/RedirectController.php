@@ -56,8 +56,9 @@ class RedirectController extends Controller
         $instituicao = Instituicao::where('id', $rifa->id_instituicao)->first();
         $qtdNum = $rifa->qtd_num;
         $numerosComprados = Numero::where('id_rifa', $id)->where('comprado', true)->get();
+        $rifasDisponiveis = $qtdNum - $numerosComprados->count();
 
-        return view('rifa', compact('rifa', 'numero', 'instituicao', 'qtdNum', 'numerosComprados'));
+        return view('rifa', compact('rifa', 'numero', 'instituicao', 'qtdNum', 'numerosComprados', 'rifasDisponiveis'));
     }
 
     public function redirecionarSobre()

@@ -37,7 +37,17 @@
             </div>
         </nav>
     </header>
-
+    <div class="container-alerta">
+        @if (session('error'))
+            <div class="alert alert-danger" role="alert">
+                <p class="text-center">{{ session('error') }}</p>
+            </div>
+        @elseif (session('success'))
+            <div class="alert alert-success" role="alert">
+                <p class="text-center">{{ session('success') }}</p>
+            </div>
+        @endif
+    </div>
     <main class="main-login">
         @yield('content')
     </main>

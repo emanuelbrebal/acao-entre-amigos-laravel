@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="{{ asset('css/mainInicial.css') }}">
     <link rel="stylesheet" href="{{ asset('css/rifas.css') }}">
     <link rel="stylesheet" href="{{ asset('css/myQuotas.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
 
@@ -37,7 +38,17 @@
             </div>
         </nav>
     </header>
-
+    <div class="container-alerta">
+        @if (session('error'))
+            <div class="alert alert-danger" role="alert">
+                <p class="text-center">{{ session('error') }}</p>
+            </div>
+        @elseif (session('success'))
+            <div class="alert alert-success" role="alert">
+                <p class="text-center">{{ session('success') }}</p>
+            </div>
+        @endif
+    </div>
     <main class="info-main">
         @yield('content')
     </main>
@@ -46,14 +57,17 @@
         <p class="footer-copy">&copy; {{ date('Y') }} Ação Entre Amigos</p>
         <div>
             <a href="https://github.com/emanuelbrebal" target="_blank" class="footer-link">github</a>
-            <a href="https://www.linkedin.com/in/emanuel-victor-brebal/" target="_blank" class="footer-link">linkedin</a>
+            <a href="https://www.linkedin.com/in/emanuel-victor-brebal/" target="_blank"
+                class="footer-link">linkedin</a>
             <a href="" class="footer-link" target="_blank">contatos</a>
             {{-- fazer um modal com todos os contatos --}}
 
         </div>
     </footer>
     <script src="https://kit.fontawesome.com/f6fb35c3c9.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 
 </body>
 

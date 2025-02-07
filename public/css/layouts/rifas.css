@@ -194,8 +194,8 @@
 .organiza-infos, .organiza-btns {
     display: flex;
     flex-direction: row;
-    border-bottom: solid 1px var(--grey);
     justify-content: space-between;
+    padding: 1rem;
 }
 
 
