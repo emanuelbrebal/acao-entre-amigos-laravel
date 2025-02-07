@@ -20,7 +20,7 @@
                 <p>Valor por cota: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
                         unid.</strong></p>
                 <p>Total de cotas: <strong>{{ $rifa->qtd_num }}</strong></p>
-                <p>Cotas disponíveis: <strong>{{ $rifa->qtd_num }}</strong></p>
+                <p>Cotas disponíveis: <strong>{{ $rifasDisponiveis }}</strong></p>
                 <p>Data do sorteio: <strong> {{ date('m/d/Y', strtotime($rifa->data_sorteio)) }} </strong></p>
                 @if ($rifa->id_usuario_vendedor != null)
                     <p>Vencedor: <strong> {{ $rifa->id_usuario_vencedor }}</strong></p>
@@ -194,6 +194,8 @@
                     label.classList.add("label-quota");
                     label.textContent = i;
 
+
+
                     checkbox.addEventListener("click", () => {
                         if (checkbox.checked) {
                             numerosSelecionados.add(i);
@@ -202,6 +204,7 @@
                             numerosSelecionados.delete(i);
                             tableData.style.backgroundColor = "";
                         }
+
                         atualizarArrayQuotas();
                         mostraTotalCotas();
                         mostraTotal();
@@ -213,17 +216,12 @@
                     tableData.appendChild(divQuota);
                     tableRow.appendChild(tableData);
 
-                    if (qtdNum < 100) {
-                        if (i % 5 === 0 || i === end) {
-                            tabelaNumeros.appendChild(tableRow);
-                            tableRow = document.createElement("tr");
-                        }
-                    } else {
-                        if (i % 10 === 0 || i === end) {
-                            tabelaNumeros.appendChild(tableRow);
-                            tableRow = document.createElement("tr");
-                        }
+
+                    if (i % 10 === 0 || i === end) {
+                        tabelaNumeros.appendChild(tableRow);
+                        tableRow = document.createElement("tr");
                     }
+
 
                 }
             }
@@ -235,6 +233,7 @@
                     if (paginationIndex > 0) {
                         paginationIndex--;
                         gerarTabela(paginationIndex);
+                        atualizaEstadoCotas();
                     }
                 });
 
@@ -243,6 +242,7 @@
                     if (paginationIndex < totalPages - 1) {
                         paginationIndex++;
                         gerarTabela(paginationIndex);
+                        atualizaEstadoCotas();
                     }
                 });
             }
@@ -271,13 +271,41 @@
                 atualizarArrayQuotas();
                 mostraTotalCotas();
                 mostraTotal();
+
             });
+
+            function atualizaEstadoCotas() {
+                const numerosComprados = @json($numerosComprados);
+                const comprador = numerosComprados.comprador;
+                const usuarioLogado =
+                    {{ Auth::guard('usuarios')->check() ? Auth::guard('usuarios')->user()->id : (Auth::guard('instituicao')->check() ? Auth::guard('instituicao')->user()->id : null) }};
+                numerosComprados.forEach(cota => {
+                    const checkbox = document.getElementById(`checkbox-${cota.descricao}`);
+                    if (checkbox) {
+                        if (checkbox.value == cota.descricao && cota.comprador == usuarioLogado) {
+                            const tableData = document.getElementById(
+                                `numero_${cota.descricao}`);
+                            tableData.style.backgroundColor = "var(--orange)";
+                            tableData.style.pointerEvents =
+                                "none";
+                            checkbox.disabled = true;
+                        } else if (checkbox.value == cota.descricao) {
+                            const tableData = document.getElementById(
+                                `numero_${cota.descricao}`);
+                            tableData.style.backgroundColor = "var(--grey)";
+                            tableData.style.pointerEvents =
+                                "none";
+                            checkbox.disabled = true;
+                        }
+                    }
+                });
+            }
 
             gerarTabela(0);
             atualizarArrayQuotas();
             mostraTotalCotas();
             mostraTotal();
-
+            atualizaEstadoCotas();
         });
     </script>
 

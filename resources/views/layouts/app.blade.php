@@ -41,12 +41,13 @@
 
                     <a class="navigation-item" href="{{ route('redirecionarSobre') }}">Sobre</a>
                     @if (Auth::guard('usuarios')->check())
-                        <a class="navigation-item" href=""></a>
-                        <a class="navigation-item" href="">Minhas Participações</a>
+                        <a class="navigation-item" href="{{ route('boughtRaffleNumbers') }}">Minhas cotas</a>
+                        <a class="navigation-item" href="{{ route('listarUsuario') }}">Minha conta</a>
                     @elseif (Auth::guard('instituicao')->check())
                         <a class="navigation-item" href="{{ route('redirecionarCreateRaffle') }}">Cadastrar
                             Rifa</a>
                         <a class="navigation-item" href="">Minhas Rifas</a>
+                        <a class="navigation-item" href="">Fazer Sorteio</a>
                     @endif
                     <div class="logout-wrapper">
                         <a class="navigation-item -logged-user" id="userLogado">
@@ -60,9 +61,17 @@
                                     d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
                             </svg>
                         </a>
-                        <form class="form-logout" action="{{ route('fazerLogout') }}" method="POST" id="form-logout">
+                        <form class="form-logout" id="formLogout" action="{{ route('fazerLogout') }}" method="POST" id="form-logout">
                             @csrf
-                            <button type="submit" class="btn-logout">Fazer Logout</button>
+                            <div class="organiza-logout">
+                                <button type="submit" class="btn-logout" id="btnLogout">Fazer Logout</button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fff"
+                                        d="M4 20V4h8.02v1H5v14h7.02v1zm12.462-4.461l-.702-.72l2.319-2.319H9.192v-1h8.887l-2.32-2.32l.702-.718L20 12z"
+                                        stroke-width="0.5" stroke="#fff" />
+                                </svg>
+                            </div>
                         </form>
                     </div>
                 </ul>
@@ -94,12 +103,16 @@
 
         </div>
     </footer>
-    <script src="https://kit.fontawesome.com/f6fb35c3c9.js" crossorigin="anonymous"></script>
+
 </body>
+<script>
 
-</html>
+</script>
 
-<script src="{{ asset('js/logout.js') }}"></script>
+<script src="https://kit.fontawesome.com/f6fb35c3c9.js" crossorigin="anonymous"></script>
+<script src="{{ asset('js/logout.js') }}" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
 </script>
+
+</html>

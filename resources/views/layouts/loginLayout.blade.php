@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link rel="stylesheet" href="{{ asset('css/layouts/form.css') }}">
     <link rel="stylesheet" href="{{ asset('css/createRaffle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/myQuotas.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/layouts/reset.css') }}">
@@ -36,7 +37,17 @@
             </div>
         </nav>
     </header>
-
+    <div class="container-alerta">
+        @if (session('error'))
+            <div class="alert alert-danger" role="alert">
+                <p class="text-center">{{ session('error') }}</p>
+            </div>
+        @elseif (session('success'))
+            <div class="alert alert-success" role="alert">
+                <p class="text-center">{{ session('success') }}</p>
+            </div>
+        @endif
+    </div>
     <main class="main-login">
         @yield('content')
     </main>

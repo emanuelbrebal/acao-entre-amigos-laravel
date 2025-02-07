@@ -3,6 +3,14 @@
 @section('content')
 
     <section class="cadastro-main">
+        <a href="{{ route('redirecionarHome') }}" class="btn -voltar"> <svg xmlns="http://www.w3.org/2000/svg"
+            width="20" height="20" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M21 12h-17.5" />
+                <path d="M3 12l7 7M3 12l7 -7" />
+            </g>
+        </svg>
+        voltar</a>
         <div class="informacoes-cadastro">
             <h1 class="form-title">Criar Rifa</h1>
             <h5>Insira os dados de como deseja a sua rifa. Os dados poderão ser editados depois.</h5>
@@ -24,7 +32,7 @@
             <div class="organiza-valor">
                 <div class="campo-formulario numeros-options">
                     <label for="qtd_numeros">Quantidade de cotas</label>
-                    <input class="form-input" type="number" min="1" max="1000000" name="qtd_num" id="qtd_numeros"
+                    <input class="form-input" type="number" min="10" max="1000000" step="10" name="qtd_num" id="qtd_numeros"
                         value="1">
                 </div>
 
@@ -76,24 +84,6 @@
                 pValorArrecadado.innerText = `R$ ${valorTotal.toFixed(2).replace('.', ',')}`; // Atualiza o valor total
             }
         }
-
-        // function ajustarQuantidade() {
-        //     let valor = this.value;
-
-        //     // Caso o valor não seja um número ou seja menor que 1, corrige para 1
-        //     if (isNaN(valor) || valor < 1) {
-        //         valor = 1;
-        //     } else {
-        //         // Ajusta o valor para múltiplos de 5
-        //         valor = Math.max(1, Math.round((valor - 1) / 5) * 5 + 1);
-        //     }
-
-        //     // Atualiza o campo de input com o valor ajustado
-        //     this.value = valor;
-
-        //     // Recalcula o total
-        //     calcularTotal();
-        // }
 
         // Adiciona event listeners
         qtdCotas.addEventListener("input", calcularTotal);

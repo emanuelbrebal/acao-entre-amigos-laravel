@@ -1,17 +1,11 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const userLogado = document.getElementById('userLogado');
-    const btnLogado = document.getElementById('btn-logout');
+const userLogado = document.getElementById('userLogado');
+const formLogout = document.getElementById('formLogout');
 
-    if (userLogado && btnLogado) {
-        console.log(`user logado: ${userLogado}, form logado: ${btnLogado}`);
-
-        userLogado.addEventListener('click', function (event) {
-            event.preventDefault();
-            btnLogado.style.display = btnLogado.style.display === "block" ? "none" : "block";
-        });
-    } else {
-        console.error('Elementos userLogado ou btnLogado não encontrados.');
-    }
-});
-
-
+if (formLogout) {
+    userLogado.addEventListener('click', function(event) {
+        event.preventDefault();
+        formLogout.style.display = (formLogout.style.display === "block") ? "none" : "block";
+    });
+} else {
+    console.error('Elementos userLogado ou formLogout não encontrados.');
+}

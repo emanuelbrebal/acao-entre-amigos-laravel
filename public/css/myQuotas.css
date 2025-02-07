@@ -1,0 +1,71 @@
+.minhas-cotas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--white);
+}
+
+.rifa-container{
+    padding: 10px;
+    margin: 1rem;
+    background-color: var(--primary-green);
+    border-radius: 5px;
+}
+
+.link-rifa{
+    text-decoration: none;
+    max-height: fit-content;
+    color: var(--white);
+}
+
+.link-rifa:hover{
+    transform: scale(1.02);
+}
+
+.caixa-numero {
+    max-width: 100%;
+    flex-wrap: wrap;
+    height: 10%;
+    background-color: var(--orange);
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    gap: 2px;
+    background-color: var(--secondary-green);
+}
+
+.rifa-top-top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.rifa-top{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    justify-content: start;
+    color: var(--white);
+
+}
+
+.rifa-title.-quotas{
+    font-size: 20px;
+    font-weight: 700;
+    text-wrap: nowrap;
+    width: 100%;
+}
+
+.rifa-icon {
+    height: 70px;
+    width: 70px;
+    border-radius: 50px;
+    border: solid 2px var(--black);
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.numero.-show{
+    color: var(--black);
+}

@@ -39,20 +39,8 @@ class RifaController extends Controller
                 $validated['imagem'] = $imageName;
             }
 
-            $rifa = Rifa::create($validated);
+            Rifa::create($validated);
 
-            $idRifa = $rifa->id;
-            $cotas = $request->qtd_num;
-
-
-            for ($i = 1; $i < $cotas + 1; $i++) {
-                Numero::create([
-                    'descricao' => $i,
-                    'comprado' => false,
-                    'comprador' => null,
-                    'id_rifa' => $idRifa
-                ]);
-            }
             return redirect()->route('redirecionarHome')->with('success', 'Rifa criada com sucesso!');
         } catch (\Exception $e) {
             dd($e);
@@ -67,23 +55,17 @@ class RifaController extends Controller
 
     public function buyRaffleNumbers(Request $request)
     {
-
         $user = Auth::guard('usuarios')->user();
         $idRifa = $request->input('id_rifa');
         $selecionados = explode(', ', $request->input('selecionados'));
 
-
         foreach ($selecionados as $numero) {
-            $numeroModel = Numero::where('descricao', trim($numero))
-                ->where('id_rifa', $idRifa)
-                ->first();
-
-            if ($numeroModel && $numeroModel->comprado != true) {
-                $numeroModel->update([
-                    'comprado' => true,
-                    'comprador' => $user->id,
-                ]);
-            }
+            $numeroModel = Numero::create([
+                'descricao' => trim($numero),
+                'id_rifa' => $idRifa,
+                'comprado' => true,
+                'comprador' => $user->id
+            ]);
 
             Pedido::create([
                 'user_id' => $user->id,
@@ -91,7 +73,14 @@ class RifaController extends Controller
             ]);
         }
 
-
         return redirect()->back()->with('success', 'Compra realizada com sucesso!');
+    }
+
+    public function boughtRaffleNumbers()
+    {
+        $usuarioLogado = Auth::guard('usuarios')->user()->id;
+        $numerosComprados = Numero::where('comprador', $usuarioLogado)->with('rifa')->get()->groupBy('id_rifa');
+        // dd($numerosComprados);
+        return view('boughtRaffleNumbers', compact('numerosComprados'));
     }
 }
