@@ -6,7 +6,7 @@
 }
 
 html, body{
-    background-color: var(--background-color) !important;
+    background-color: var(--white) !important;
 }
 
 .d-flex{

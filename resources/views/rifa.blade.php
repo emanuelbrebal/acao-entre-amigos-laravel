@@ -1,7 +1,7 @@
 @extends('layouts.rifas')
 @section('title', 'Página da Rifa')
 @section('content')
-
+ <link rel="stylesheet" href="{{ asset('css/layouts/rifas.css') }}">
     <section class="rifa-infos">
         <div class="rifa-info -rifa-info-card">
             <a href="{{ route('redirecionarHome') }}" class="btn -voltar"> <svg xmlns="http://www.w3.org/2000/svg"
