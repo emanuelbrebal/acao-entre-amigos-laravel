@@ -1,7 +1,15 @@
+html, body{
+    background-color: var(--white);
+}
+
+.content-main{
+    background-color: var(--white) !important;
+}
+
 .sobre{
     padding: 4rem;
     background-color: var(--white);
-    height: 86vh;
+    height: 80vh;
 }
 
 .h1-sobre{

@@ -1,8 +1,8 @@
-.icon-header{
+.icon-header {
     height: 60px;
 }
 
-.navbar.nav{
+.navbar.nav {
     padding: 20px;
     background-color: var(--primary-green);
     border-bottom: 1rem solid var(--secondary-green);
@@ -15,37 +15,45 @@
 
 }
 
-.navbar-brand{
+.navbar-brand {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.navbar.nav.-login{
+.navbar.nav.-login {
     justify-content: center;
 }
 
-.navbar-brand-text{
+.navbar-brand-text {
     color: #fff;
     padding-left: 5px;
     font-size: 30px;
     text-shadow: 1px 1px 1px var(--black);
 }
 
-.navigation-item{
+.navigation-item {
     text-decoration: none;
     padding: 10px;
     color: var(--white);
     font-weight: 600;
-}
-
-.navigation-item:hover{
-    transform: scale(1.1);
+    text-wrap: nowrap;
 }
 
 
-.login-icon{
+.organiza-logout{
+    background-color: var(--secondary-green);
+    border-radius: 4px;
+}
+
+.navigation-item:hover {
+    /* text-decoration: underline; */
+    text-decoration: underline;
+    transition: ease-in;
+}
+
+
+.login-icon {
     height: 22px;
     fill: var(--white);
 }
-

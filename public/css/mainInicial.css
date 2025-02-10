@@ -51,6 +51,12 @@ main{
     cursor: pointer;
 }
 
+.search-button.-more:hover{
+    color: var(--white);
+    transition: ease-in-out;
+    background-color: var(--secondary-green);
+}
+
 .search-button.-more {
     display: flex !important;
     color: var(--secondary-green);
@@ -106,12 +112,17 @@ main{
     font-weight: 700;
 }
 
-.rifa-info {
+.rifa-info.main {
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
     align-items: center;
     justify-content: center;
+}
+
+.rifa-info{
+    display: flex;
+    flex-direction: column;
 }
 
 .rifa-encerrada {

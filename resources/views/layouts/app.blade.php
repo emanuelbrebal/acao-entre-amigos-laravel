@@ -42,7 +42,6 @@
                     <a class="navigation-item" href="{{ route('redirecionarSobre') }}">Sobre</a>
                     @if (Auth::guard('usuarios')->check())
                         <a class="navigation-item" href="{{ route('boughtRaffleNumbers') }}">Minhas cotas</a>
-                        <a class="navigation-item" href="{{ route('listarUsuario') }}">Minha conta</a>
                     @elseif (Auth::guard('instituicao')->check())
                         <a class="navigation-item" href="{{ route('redirecionarCreateRaffle') }}">Cadastrar
                             Rifa</a>
@@ -53,26 +52,42 @@
                         <a class="navigation-item -logged-user" id="userLogado">
                             @if (Auth::guard('usuarios')->check())
                                 Bem-vindo(a), {{ Auth::guard('usuarios')->user()->nome }}
+                                <svg class="login-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+                                </svg>
                             @elseif (Auth::guard('instituicao')->check())
                                 Bem-vindo(a), {{ Auth::guard('instituicao')->user()->nome }}
-                            @endif
-                            <svg class="login-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                <path
-                                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
-                            </svg>
-                        </a>
-                        <form class="form-logout" id="formLogout" action="{{ route('fazerLogout') }}" method="POST" id="form-logout">
-                            @csrf
-                            <div class="organiza-logout">
-                                <button type="submit" class="btn-logout" id="btnLogout">Fazer Logout</button>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                <svg class="login-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
-                                    <path fill="#fff"
-                                        d="M4 20V4h8.02v1H5v14h7.02v1zm12.462-4.461l-.702-.72l2.319-2.319H9.192v-1h8.887l-2.32-2.32l.702-.718L20 12z"
-                                        stroke-width="0.5" stroke="#fff" />
+                                    <g fill="none" stroke="#fff" stroke-width="1.5">
+                                        <path stroke-linecap="round"
+                                            d="M22 22H2m0-11l8.126-6.5a3 3 0 0 1 3.748 0L22 11m-6.5-5.5v-2A.5.5 0 0 1 16 3h2.5a.5.5 0 0 1 .5.5v5M4 22V9.5M20 22V9.5" />
+                                        <path
+                                            d="M15 22v-5c0-1.414 0-2.121-.44-2.56C14.122 14 13.415 14 12 14s-2.121 0-2.56.44C9 14.878 9 15.585 9 17v5m5-12.5a2 2 0 1 1-4 0a2 2 0 0 1 4 0Z" />
+                                    </g>
                                 </svg>
-                            </div>
-                        </form>
+                            @endif
+
+                        </a>
+                        <div class="user-options">
+                            <form class="form-logout" id="formLogout" action="{{ route('fazerLogout') }}"
+                                method="POST" id="form-logout">
+                                @csrf
+                                <div class="organiza-logout">
+                                    <a class="navigation-item" href="{{ route('listarUsuario') }}">Minha conta</a>
+                                    <button type="submit" class="navigation-item btn-logout" id="btnLogout">
+                                        Fazer Logout
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24">
+                                            <path fill="#fff"
+                                                d="M4 20V4h8.02v1H5v14h7.02v1zm12.462-4.461l-.702-.72l2.319-2.319H9.192v-1h8.887l-2.32-2.32l.702-.718L20 12z"
+                                                stroke-width="0.5" stroke="#fff" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </ul>
         </nav>
@@ -88,7 +103,7 @@
             </div>
         @endif
     </div>
-    <main>
+    <main class="content-main">
         @yield('content')
     </main>
 
@@ -105,9 +120,7 @@
     </footer>
 
 </body>
-<script>
-
-</script>
+<script></script>
 
 <script src="https://kit.fontawesome.com/f6fb35c3c9.js" crossorigin="anonymous"></script>
 <script src="{{ asset('js/logout.js') }}" crossorigin="anonymous"></script>

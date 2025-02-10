@@ -1,7 +1,6 @@
 @extends('layouts.rifas')
 @section('title', 'Minhas Cotas')
 @section('content')
-
     <div class="organiza-btns">
 
         <a href="{{ route('redirecionarHome') }}" class="btn -voltar"> <svg xmlns="http://www.w3.org/2000/svg" width="20"

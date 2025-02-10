@@ -25,7 +25,7 @@
                 <div class="rifa-card">
                     <img class="img-card-rifa -individual" src="{{ asset('img/raffles/' . $rifa->imagem) }}"
                         alt="Imagem da Rifa">
-                    <div class="rifa-info">
+                    <div class="rifa-info main">
                         <h3 class="rifa-title">{{ $rifa->titulo_rifa }}</h3>
                         @if ($rifa->id_usuario_vencedor === null)
                             <p class="participacao">Rifa aceitando participações!</p>
