@@ -73,6 +73,8 @@ class RifaController extends Controller
             ]);
         }
 
+
+
         return redirect()->back()->with('success', 'Compra realizada com sucesso!');
     }
 
@@ -80,7 +82,23 @@ class RifaController extends Controller
     {
         $usuarioLogado = Auth::guard('usuarios')->user()->id;
         $numerosComprados = Numero::where('comprador', $usuarioLogado)->with('rifa')->get()->groupBy('id_rifa');
-        // dd($numerosComprados);
-        return view('boughtRaffleNumbers', compact('numerosComprados'));
+
+        $qtsComprei = [];
+        $chanceVitoria = [];
+
+
+        foreach ($numerosComprados as $idRifa => $numeros){
+            $totalNumeros = Rifa::where('id', $idRifa)->value('qtd_num');
+
+            $qtdComprada = $numeros->count();
+
+            $chance = $totalNumeros ? ($qtdComprada / $totalNumeros) * 100 : 0;
+
+            $chancesVitoria[$idRifa] = round($chance, 2);
+
+            $qtsComprei[$idRifa] = $qtdComprada;
+        }
+
+        return view('boughtRaffleNumbers', compact('numerosComprados', 'chancesVitoria', 'qtsComprei'));
     }
 }

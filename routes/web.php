@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\InstituicaoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\RifaController;
@@ -35,5 +36,10 @@ Route::controller(RifaController::class)->middleware('usuarioLogado')->group(fun
 
 Route::controller(UsuarioController::class)->middleware('usuarioLogado')->group(function () {
     Route::get('/listarUsuario', 'listarUsuario')->name('listarUsuario');
+    Route::post('/updateUsuario', 'updateUsuario')->name('updateUsuario');
+});
+
+Route::controller(InstituicaoController::class)->middleware('usuarioLogado')->group(function () {
+    Route::get('/listMyRaffles', 'listMyRaffles')->name('listMyRaffles');
     Route::post('/updateUsuario', 'updateUsuario')->name('updateUsuario');
 });

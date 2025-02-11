@@ -28,7 +28,7 @@ class RedirectController extends Controller
         if ($pesquisa) {
             $rifas = Rifa::where('titulo_rifa', 'ilike', '%' . $pesquisa . '%')->get();
         } else {
-            $rifas = Rifa::all();
+            $rifas = Rifa::orderBy('created_at', 'desc')->get();
         }
         return view('main', compact('rifas'));
     }
