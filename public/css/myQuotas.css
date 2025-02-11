@@ -73,3 +73,14 @@ html, body, main{
 .numero.-show{
     color: var(--black);
 }
+
+.titulo-my-quotas{
+    margin-left: 1rem;
+}
+
+.options{
+    margin-top: 1rem;
+    gap: 5px;
+    display: flex;
+    justify-content: center;
+}

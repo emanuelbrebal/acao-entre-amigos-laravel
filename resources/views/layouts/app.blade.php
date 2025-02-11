@@ -45,19 +45,23 @@
                     @elseif (Auth::guard('instituicao')->check())
                         <a class="navigation-item" href="{{ route('redirecionarCreateRaffle') }}">Cadastrar
                             Rifa</a>
-                        <a class="navigation-item" href="">Minhas Rifas</a>
+                        <a class="navigation-item" href="{{ route('listMyRaffles') }}">Minhas Rifas</a>
                         <a class="navigation-item" href="">Fazer Sorteio</a>
                     @endif
                     <div class="logout-wrapper">
                         <a class="navigation-item -logged-user" id="userLogado">
                             @if (Auth::guard('usuarios')->check())
-                                Bem-vindo(a), {{ Auth::guard('usuarios')->user()->nome }}
                                 <svg class="login-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path
                                         d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
                                 </svg>
+                                Bem-vindo(a), {{ Auth::guard('usuarios')->user()->nome }}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fff"
+                                        d="m17.5 8.086l-5.5 5.5l-5.5-5.5L5.086 9.5L12 16.414L18.914 9.5z" />
+                                </svg>
                             @elseif (Auth::guard('instituicao')->check())
-                                Bem-vindo(a), {{ Auth::guard('instituicao')->user()->nome }}
                                 <svg class="login-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
                                     <g fill="none" stroke="#fff" stroke-width="1.5">
@@ -66,6 +70,12 @@
                                         <path
                                             d="M15 22v-5c0-1.414 0-2.121-.44-2.56C14.122 14 13.415 14 12 14s-2.121 0-2.56.44C9 14.878 9 15.585 9 17v5m5-12.5a2 2 0 1 1-4 0a2 2 0 0 1 4 0Z" />
                                     </g>
+                                </svg>
+                                Bem-vindo(a), {{ Auth::guard('instituicao')->user()->nome }}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#fff"
+                                        d="m17.5 8.086l-5.5 5.5l-5.5-5.5L5.086 9.5L12 16.414L18.914 9.5z" />
                                 </svg>
                             @endif
 

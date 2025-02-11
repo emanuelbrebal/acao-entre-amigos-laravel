@@ -11,9 +11,13 @@
                 </g>
             </svg>
             voltar</a>
-        <h1>Minha carteira de cotas:</h1>
-    </div>
-    <section class="minhas-cotas">
+        </div>
+        <ul class="titulo-my-quotas">
+            <li>
+                <h1 >Minha carteira de cotas:</h1>
+            </li>
+        </ul>
+        <section class="minhas-cotas">
         @foreach ($numerosComprados as $idRifa => $numeros)
             <a class="link-rifa" href="{{ route('redirecionarRifa', ['id' => $numeros->first()->rifa->id]) }}">
                 <div class="rifa-container">
@@ -33,7 +37,8 @@
                         </div>
                     </div>
                     <div class="cotas">
-                        <p>Cotas compradas:</p>
+                        <p>Cotas compradas: {{ $qtsComprei[$idRifa]}}</p>
+                        <p>Chance de vitória: {{ $chancesVitoria[$idRifa] }}%</p>
                         <div class="caixa-numero">
                             @foreach ($numeros as $numero)
                                 <div class="numero -show">

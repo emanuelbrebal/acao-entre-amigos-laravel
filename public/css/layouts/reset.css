@@ -20,3 +20,24 @@ h1{
 p{
     margin: 0 !important;
 }
+
+.rifa-description.-raffle-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1rem;
+    margin-top: 0;
+    width: 90%;
+    p {
+        text-wrap: nowrap;
+        margin: 3px;
+    }
+}
+
+.progress{
+    width: 60%;
+    background-color: var(--secondary-green);
+    margin: 0 5px;
+    align-self: center;
+
+}
