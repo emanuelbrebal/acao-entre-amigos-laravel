@@ -9,16 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class InstituicaoController extends Controller
 {
-    public function listMyRaffles(){
+    public function listMyRaffles()
+    {
         $instituicaoLogada = Auth::guard('instituicao')->user();
 
         $minhasRifas = Rifa::where('id_instituicao', $instituicaoLogada->id)->get();
 
         $numerosTotais = Numero::where('comprado', true)
-        ->selectRaw('id_rifa, COUNT(*) as total')
-        ->groupBy('id_rifa')
-        ->get()
-        ->keyBy('id_rifa');
+            ->selectRaw('id_rifa, COUNT(*) as total')
+            ->groupBy('id_rifa')
+            ->get()
+            ->keyBy('id_rifa');
 
         $valorCotas = Rifa::where('id_instituicao', $instituicaoLogada->id)->pluck('preco_numeros', 'id');
 
@@ -28,5 +29,17 @@ class InstituicaoController extends Controller
         $totalArrecadado = $numerosTotais;
 
         return view('listMyQuotas', compact('minhasRifas', 'numerosTotais', 'qtdTotais', 'instituicaoLogada', 'valorCotas'));
+    }
+
+    public function updateMyRaffles($id)
+    {
+        $rifa = Rifa::where("id", $id)->first();
+        return view('updateRaffle', compact('rifa'));
+    }
+
+    public function editarRifas(Request $request)
+    {
+        $rifa = Rifa::where()->first();
+        return view('listMyQuotas', with("success", "Rifa editada com sucesso!"));
     }
 }

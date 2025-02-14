@@ -17,7 +17,7 @@
                 <h1 >Minha carteira de cotas:</h1>
             </li>
         </ul>
-        <section class="minhas-cotas">
+        <section class="minhas-cotas rifas-section">
         @foreach ($numerosComprados as $idRifa => $numeros)
             <a class="link-rifa" href="{{ route('redirecionarRifa', ['id' => $numeros->first()->rifa->id]) }}">
                 <div class="rifa-container">

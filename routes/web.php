@@ -41,5 +41,7 @@ Route::controller(UsuarioController::class)->middleware('usuarioLogado')->group(
 
 Route::controller(InstituicaoController::class)->middleware('usuarioLogado')->group(function () {
     Route::get('/listMyRaffles', 'listMyRaffles')->name('listMyRaffles');
+    Route::get('/updateMyRaffles/{id}', 'updateMyRaffles')->name('updateMyRaffles');
+    Route::get('/editarRifa', 'editarRifa')->name('editarRifa');
     Route::post('/updateUsuario', 'updateUsuario')->name('updateUsuario');
 });

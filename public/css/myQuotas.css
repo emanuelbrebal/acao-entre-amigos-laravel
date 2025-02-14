@@ -3,6 +3,7 @@ html, body, main{
 }
 
 .minhas-cotas {
+    margin-top: 0 !important;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
