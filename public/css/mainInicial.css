@@ -2,6 +2,11 @@ main{
     padding-bottom: 2rem;
 }
 
+.content-main{
+    height: 100%;
+    width: 100%;
+}
+
 .main-search {
     margin-top: 6rem;
     flex-direction: column;
@@ -12,7 +17,11 @@ main{
 .main-text {
     font-weight: 600;
     color: var(--secondary-green);
+}
 
+.main-form{
+    width: 100%;
+    height: 100%;
 }
 
 .search-bar {

@@ -19,7 +19,7 @@
     </ul>
     <section class="minhas-cotas rifas-section">
         @foreach ($minhasRifas as $idRifa => $numeros)
-            <div class="rifa-container">
+            <div class="rifa-container {{$numeros->ativado ? '-ativado' : '-desativado'}}">
                 <div class="rifa-top">
                     <div class="rifa-top-top">
                         <img class="rifa-icon" src="{{ asset('img/raffles/' . $numeros->imagem) }}" alt="Imagem da rifa">
@@ -28,6 +28,9 @@
                     <p>Data do sorteio:
                         <strong> {{ \Carbon\Carbon::parse($numeros->data_sorteio)->format('d/m/Y') }}
                         </strong>
+                    </p>
+                    <p>Horario do sorteio
+                        <strong>{{ $numeros->hora_sorteio }}</strong>
                     </p>
                     <p>Cotas:</p>
                     <div class="rifa-description -raffle-list">
@@ -54,28 +57,39 @@
                         <a type class="btn btn-primary"
                             href="{{ route('updateMyRaffles', ['id' => $numeros->id]) }}">Editar Rifa</a>
                         <button type="button" class="btn {{ $numeros->ativado ? 'btn-danger' : 'btn-success' }}"
-                            data-bs-toggle="modal" data-bs-target="#modalConfirmaDesativação"
+                            data-bs-toggle="modal" data-bs-target="#modalConfirmaDesativação{{$numeros->id}}"
                             id="btnDesativaRifas">{{ $numeros->ativado ? 'Desativar Rifa' : 'Ativar Rifa' }}</button>
                     </div>
 
-                    <div class="modal fade" id="modalConfirmaDesativação" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    <div class="modal fade" id="modalConfirmaDesativação{{$numeros->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmação</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:var(--black);">
+                                        Confirmação
+                                    </h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Você, {{ Auth::guard('instituicao')->user()->nome }}, confirma que irá desativar a
-                                        rifa {{ $numeros->nome }}</p>
+                                    <p style="color:var(--black);">Você,
+                                        <strong>{{ Auth::guard('instituicao')->user()->nome }}</strong>, confirma que irá
+                                        desativar a
+                                        <br><strong> Rifa: <span
+                                                style="text-transform:uppercase">{{ $numeros->titulo_rifa }}</span></strong>
+                                    </p>
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Comprar</button>
+                                    <form
+                                        action="{{ $numeros->ativado ? route('desativarRifa', ['id' => $numeros->id]) : route('ativarRifa', ['id' => $numeros->id]) }}"
+                                        method="GET">
+                                        @csrf
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn {{ $numeros->ativado ? 'btn-danger' : 'btn-success' }}"> {{ $numeros->ativado ? 'Desativar Rifa' : 'Ativar Rifa' }}</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -85,5 +99,4 @@
         @endforeach
     </section>
 
-    <script></script>
 @endsection

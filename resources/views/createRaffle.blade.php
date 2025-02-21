@@ -1,4 +1,4 @@
-@extends('layouts.loginLayout')
+@extends('layouts.form')
 @section('title', 'Cadastrar nova Rifa')
 @section('content')
 
@@ -57,6 +57,12 @@
             <div class="campo-formulario">
                 <label for="data_sorteio">Data do sorteio</label>
                 <input class="form-input" type="date" placeholder="Selecione a data do sorteio" name="data_sorteio"
+                    required>
+            </div>
+
+            <div class="campo-formulario">
+                <label for="horario_sorteio">Horário do sorteio</label>
+                <input class="form-input" type="time" min="" step="600" placeholder="Selecione o horario do sorteio" name="horario_sorteio"
                     required>
             </div>
 

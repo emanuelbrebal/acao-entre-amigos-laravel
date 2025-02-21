@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('rifa', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo_rifa');
-            $table->string('preco_numeros');
-            $table->string('premiacao');
-            $table->date('data_sorteio');
-            $table->unsignedInteger('qtd_num');
+            $table->string('titulo_rifa')->nullable();
+            $table->string('preco_numeros')->nullable();
+            $table->string('premiacao')->nullable();
+            $table->date('data_sorteio')->nullable();
+            $table->unsignedInteger('qtd_num')->nullable();
             $table->string('imagem')->nullable();
 
             $table->unsignedBigInteger('id_usuario_vencedor')->nullable();
