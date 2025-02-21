@@ -1,4 +1,4 @@
-@extends('layouts.loginLayout')
+@extends('layouts.form')
 @section('title', 'Editar Rifa')
 @section('content')
 
@@ -15,11 +15,13 @@
             <h1 class="form-title">Editar Rifa</h1>
             <h5>Insira os dados de como deseja a sua rifa. Os dados poderão ser editados depois.</h5>
         </div>
-        <form class="cadastro-form" action="{{ route('editarRifa') }}" method="POST" enctype="multipart/form-data">
+        <form class="cadastro-form" method="GET" action="{{ route('editarRifa') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="campo-formulario">
                 <label for="id_instituicao">Instituição responsável.</label>
                 <input class="form-input" type="text" value="{{ Auth::guard('instituicao')->user()->nome }}" disabled>
+                <input class="form-input" type="hidden" name="id_rifa"
+                    value="{{ $rifa->id }}">
                 <input class="form-input" type="hidden" name="id_instituicao"
                     value="{{ Auth::guard('instituicao')->user()->id }}">
             </div>
@@ -33,7 +35,7 @@
                 <div class="campo-formulario numeros-options">
                     <label for="qtd_numeros">Quantidade de cotas</label>
                     <input class="form-input" type="number" min="10" max="1000000" step="10" name="qtd_num"
-                        id="qtd_numeros" value="{{ $rifa->qtd_num }}">
+                        id="qtd_numeros" value="{{ $rifa->qtd_num }}" disabled>
                 </div>
 
                 <div class="campo-formulario">
@@ -58,12 +60,17 @@
                 <input class="form-input" type="date" value="{{ $rifa->data_sorteio }}" name="data_sorteio">
             </div>
 
+            <div class="campo-formulario">
+                <label for="horario_sorteio">Horário do sorteio</label>
+                <input class="form-input" type="time" min="" step="600" placeholder="Selecione o horario do sorteio" name="horario_sorteio">
+            </div>
+
             <div class="row">
 
                 @if (isset($rifa->imagem))
                 <div class="preview-imagem">
                     <p>Imagem atual:</p>
-                    <img src="{{ asset('img/raffles/' . $rifa->imagem) }}" alt="Imagem da rifa" width="120" height="120" style="border: solid 2px var(--black)">
+                    <img src="{{ asset('img/raffles/' . $rifa->imagem) }}" alt="Imagem da rifa" width="140" height="140" style="border: solid 2px var(--black); object-fit: cover;">
                 </div>
                 @endif
 
@@ -72,9 +79,6 @@
                     <input class="form-input" type="file" name="imagem" accept="image/*">
                 </div>
             </div>
-
-
-
 
             <button class="btn btn-submit" type="submit">Editar rifa</button>
         </form>
@@ -96,11 +100,9 @@
             }
         }
 
-        // Adiciona event listeners
         qtdCotas.addEventListener("input", calcularTotal);
         precoNumeros.addEventListener("input", calcularTotal);
 
-        // Chama a função inicialmente para calcular o total
         calcularTotal();
     </script>
 @endsection

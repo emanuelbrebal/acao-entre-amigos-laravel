@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('rifa', function (Blueprint $table) {
-            $table->boolean('ativado')->default(true)->after('id_instituicao');
+            $table->time('hora_sorteio')->default('12:00:00')->after('data_sorteio');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('rifa', function (Blueprint $table) {
-            $table->dropColumn('ativado');
+            $table->dropColumn('hora_sorteio');
         });
     }
 };

@@ -42,7 +42,7 @@ class UsuarioController extends Controller
                 'nome' => $validated['nome'] ?? $usuario->nome,
                 'cpf' => $validated['cpf'] ?? $usuario->cpf,
                 'email' => $validated['email'] ?? $usuario->email,
-                'celular' => $validated['celular'] ?? $usuario->celular, // Evita sobrescrever com NULL
+                'celular' => $validated['celular'] ?? $usuario->celular,
                 'endereco' => $validated['endereco'] ?? $usuario->endereco,
             ]);
             DB::commit();

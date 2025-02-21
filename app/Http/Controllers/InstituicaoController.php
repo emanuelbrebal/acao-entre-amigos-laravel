@@ -13,7 +13,10 @@ class InstituicaoController extends Controller
     {
         $instituicaoLogada = Auth::guard('instituicao')->user();
 
-        $minhasRifas = Rifa::where('id_instituicao', $instituicaoLogada->id)->get();
+        $minhasRifas = Rifa::where('id_instituicao', $instituicaoLogada->id)
+            ->orderBy('ativado', 'desc')
+            ->get();
+
 
         $numerosTotais = Numero::where('comprado', true)
             ->selectRaw('id_rifa, COUNT(*) as total')
@@ -37,9 +40,43 @@ class InstituicaoController extends Controller
         return view('updateRaffle', compact('rifa'));
     }
 
-    public function editarRifas(Request $request)
+    public function editarRifa(Request $request)
     {
-        $rifa = Rifa::where()->first();
-        return view('listMyQuotas', with("success", "Rifa editada com sucesso!"));
+        $rifa = Rifa::where('id', $request->id_rifa)->firstOrFail();
+
+        $validated = $request->validate([
+            'id_rifa' => 'required|integer',
+            'id_instituicao' => 'required|integer',
+            'titulo_rifa' => 'nullable|string',
+            'preco_numeros' => 'nullable|string',
+            'premiacao' => 'nullable|string',
+            'data_sorteio' => 'nullable|date',
+            'horario_sorteio' => 'nullable|date_format:H:i'
+        ]);
+
+        $rifa->update($validated);
+
+
+        return redirect()->route('listMyRaffles')->with('success', 'Rifa editada com sucesso!');
+    }
+
+    public function desativarRifa($id)
+    {
+        $rifa = Rifa::where('id', $id)->first();
+
+        $rifa->ativado = false;
+        $rifa->save();
+
+        return redirect()->route('listMyRaffles')->with('success', 'Rifa desativada com sucesso!');
+    }
+
+    public function ativarRifa($id)
+    {
+        $rifa = Rifa::where('id', $id)->first();
+
+        $rifa->ativado = true;
+        $rifa->save();
+
+        return redirect()->route('listMyRaffles')->with('success', 'Rifa desativada com sucesso!');
     }
 }

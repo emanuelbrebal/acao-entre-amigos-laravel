@@ -21,9 +21,11 @@
                         unid.</strong></p>
                 <p>Total de cotas: <strong>{{ $rifa->qtd_num }}</strong></p>
                 <p>Cotas disponíveis: <strong>{{ $rifasDisponiveis }}</strong></p>
-                <p>Data do sorteio: <strong> {{ date('m/d/Y', strtotime($rifa->data_sorteio)) }} </strong></p>
                 @if ($rifa->id_usuario_vendedor != null)
-                    <p>Vencedor: <strong> {{ $rifa->id_usuario_vencedor }}</strong></p>
+                <p>Vencedor: <strong> {{ $rifa->id_usuario_vencedor }}</strong></p>
+                @else
+                <p>Data do sorteio: <strong> {{ date('d/m/Y', strtotime($rifa->data_sorteio)) }} </strong></p>
+                <p>Horário do sorteio: <strong>{{ $rifa->hora_sorteio }}</strong></p>
                 @endif
             </div>
 

@@ -5,6 +5,9 @@
     background-color: var(--light-grey);
     border-radius: 8px;
     padding: 2rem;
+    width: 45vw;
+    margin-bottom: 1rem;
+    justify-self: center;
 }
 
 .cadastro-form{

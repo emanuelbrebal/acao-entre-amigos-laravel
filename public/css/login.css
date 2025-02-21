@@ -5,11 +5,11 @@
 }
 
 .main-login{
-    height: 85.4vh;
+    height: 75vh;
     display: flex;
     justify-content: center;
     align-items: center;
-   
+
 }
 
 .main-login.-register{

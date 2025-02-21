@@ -1,4 +1,6 @@
-html, body, main{
+html,
+body,
+main {
     background-color: var(--white) !important;
 }
 
@@ -11,20 +13,27 @@ html, body, main{
     background-color: var(--white);
 }
 
-.rifa-container{
+.rifa-container {
     padding: 10px;
     margin: 1rem;
-    background-color: var(--primary-green);
     border-radius: 5px;
 }
 
-.link-rifa{
+.-ativado {
+    background-color: var(--primary-green);
+}
+
+.-desativado {
+    background-color: var(--red);
+}
+
+.link-rifa {
     text-decoration: none;
     max-height: fit-content;
     color: var(--white);
 }
 
-.link-rifa:hover{
+.link-rifa:hover {
     transform: scale(1.02);
 }
 
@@ -40,13 +49,13 @@ html, body, main{
     background-color: var(--secondary-green);
 }
 
-.rifa-top-top{
+.rifa-top-top {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.rifa-top{
+.rifa-top {
     display: flex;
     flex-direction: column;
     gap: 3px;
@@ -55,7 +64,7 @@ html, body, main{
 
 }
 
-.rifa-title.-quotas{
+.rifa-title.-quotas {
     font-size: 20px;
     font-weight: 700;
     text-wrap: nowrap;
@@ -71,15 +80,15 @@ html, body, main{
     margin-right: 10px;
 }
 
-.numero.-show{
+.numero.-show {
     color: var(--black);
 }
 
-.titulo-my-quotas{
+.titulo-my-quotas {
     margin-left: 1rem;
 }
 
-.options{
+.options {
     margin-top: 1rem;
     gap: 5px;
     display: flex;
