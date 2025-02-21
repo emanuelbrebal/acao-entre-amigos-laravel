@@ -36,8 +36,24 @@ p{
 
 .progress{
     width: 60%;
-    background-color: var(--secondary-green);
     margin: 0 5px;
     align-self: center;
+    border: solid 0.5px var(--black);
+}
 
+.progress::-webkit-progress-bar{
+    background-color: var(--white) !important;
+}
+
+.progress::-webkit-progress-value{
+    background-color: var(--secondary-green) !important;
+}
+
+.container-alerta{
+    margin-top: 1rem;
+    width: fit-content !important;
+    justify-self: center !important;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+    z-index: 1;
 }

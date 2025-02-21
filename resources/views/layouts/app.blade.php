@@ -102,7 +102,7 @@
                 </ul>
         </nav>
     </header>
-    <div class="container-alerta">
+    <div class="container-alerta container pt-3 fade">
         @if (session('error'))
             <div class="alert alert-danger" role="alert">
                 <p class="text-center">{{ session('error') }}</p>

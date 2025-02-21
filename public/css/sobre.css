@@ -9,7 +9,7 @@ html, body{
 .sobre{
     padding: 4rem;
     background-color: var(--white);
-    height: 80vh;
+    min-height: 80vh;
 }
 
 .h1-sobre{

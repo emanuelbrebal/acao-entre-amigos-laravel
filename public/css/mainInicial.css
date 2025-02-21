@@ -2,6 +2,11 @@ main{
     padding-bottom: 2rem;
 }
 
+.content-main{
+    height: 100%;
+    width: 100%;
+}
+
 .main-search {
     margin-top: 6rem;
     flex-direction: column;
@@ -12,7 +17,11 @@ main{
 .main-text {
     font-weight: 600;
     color: var(--secondary-green);
+}
 
+.main-form{
+    width: 100%;
+    height: 100%;
 }
 
 .search-bar {
@@ -198,8 +207,8 @@ main{
 
 @media (max-width:768px) {
     .rifas-section {
-        display: flex;
-        flex-direction: column;
+        display: flex !important;
+        flex-direction: column !important;
     }
 
     .search-bar {
@@ -244,8 +253,8 @@ main{
 
 @media (min-width: 769px) and (max-width: 1199px) {
     .rifas-section {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 
     .navbar-brand-text {
@@ -280,9 +289,9 @@ main{
 
 @media (min-width: 1200px) and (max-width: 1439px) {
     .rifas-section {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 2rem !important;
     }
 
     .search-bar {
@@ -322,9 +331,9 @@ main{
 
 @media (min-width: 1440px) and (max-width: 1800px) {
     .rifas-section {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 4rem;
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 4rem !important;
     }
 
     .-logged-user {
