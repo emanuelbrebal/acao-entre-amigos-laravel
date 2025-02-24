@@ -16,6 +16,7 @@ class RedirectController extends Controller
     {
         $user = Auth::guard('usuarios')->user();
         $rifas = Rifa::with('user_vencedor')
+            ->where('ativado', true)
             ->orderBy('created_at', 'desc')
             ->get();
         return view('main', compact('rifas', 'user'));
@@ -26,9 +27,13 @@ class RedirectController extends Controller
         $pesquisa = $request->input('search-bar');
 
         if ($pesquisa) {
-            $rifas = Rifa::where('titulo_rifa', 'ilike', '%' . $pesquisa . '%')->get();
+            $rifas = Rifa::where('titulo_rifa', 'ilike', '%' . $pesquisa . '%')
+            ->where('ativado', true)
+            ->get();
         } else {
-            $rifas = Rifa::orderBy('created_at', 'desc')->get();
+            $rifas = Rifa::orderBy('created_at', 'desc')
+            ->where('ativado', true)
+            ->get();
         }
         return view('main', compact('rifas'));
     }
@@ -84,7 +89,7 @@ class RedirectController extends Controller
             return view('createRaffle', [
                 'instituicao_nome' => $instituicao_nome,
                 'instituicao_id' => $instituicao_id
-                ]);
+            ]);
         } else {
             return;
         }

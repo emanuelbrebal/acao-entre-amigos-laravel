@@ -27,6 +27,10 @@ main {
     background-color: var(--red);
 }
 
+.-num-desativados {
+    background-color: var(--red) !important;
+}
+
 .link-rifa {
     text-decoration: none;
     max-height: fit-content;
@@ -41,7 +45,6 @@ main {
     max-width: 100%;
     flex-wrap: wrap;
     height: 10%;
-    background-color: var(--orange);
     display: flex;
     flex-direction: row;
     padding: 5px;
@@ -93,4 +96,8 @@ main {
     gap: 5px;
     display: flex;
     justify-content: center;
+}
+
+.rifas-section{
+    width: 100%;
 }

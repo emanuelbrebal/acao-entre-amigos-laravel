@@ -17,6 +17,7 @@
             </form>
     </div>
 
+    <h1>Rifas disponíveis:</h1>
     <section class="rifas-section">
         @if ($rifas->isEmpty())
             <p class="no-results">Nenhuma rifa encontrada.</p>
@@ -26,7 +27,7 @@
                     <img class="img-card-rifa -individual" src="{{ asset('img/raffles/' . $rifa->imagem) }}"
                         alt="Imagem da Rifa">
                     <div class="rifa-info main">
-                        <h3 class="rifa-title">{{ $rifa->titulo_rifa }}</h3>
+                        <h3 class="rifa-title">{{ Str::limit($rifa->titulo_rifa, 20, '...') }}</h3>
                         @if ($rifa->id_usuario_vencedor === null)
                             <p class="participacao">Rifa aceitando participações!</p>
                             <p>Valor do bilhete:
@@ -34,6 +35,9 @@
                             </p>
                             <p>Data do sorteio:
                                 <strong> {{ \Carbon\Carbon::parse($rifa->data_sorteio)->format('d/m/Y') }} </strong>
+                            </p>
+                            <p>Horário do sorteio:
+                                <strong> {{$rifa->hora_sorteio}} </strong>
                             </p>
                             <a href="{{ route('redirecionarRifa', ['id' => $rifa->id]) }}" class="search-button -more">PARTICIPAR</a>
                         @else
