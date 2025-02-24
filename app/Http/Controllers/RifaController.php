@@ -72,33 +72,40 @@ class RifaController extends Controller
                 'numero_id' => $numeroModel->id
             ]);
         }
-
-
-
         return redirect()->back()->with('success', 'Compra realizada com sucesso!');
     }
 
     public function boughtRaffleNumbers()
     {
         $usuarioLogado = Auth::guard('usuarios')->user()->id;
-        $numerosComprados = Numero::where('comprador', $usuarioLogado)->with('rifa')->get()->groupBy('id_rifa');
+
+        $numerosComprados = Numero::where('comprador', $usuarioLogado)
+            ->with('rifa')
+            ->orderBy('descricao', 'asc')
+            ->get()
+            ->groupBy('id_rifa');
 
         $qtsComprei = [];
-        $chanceVitoria = [];
+        $chancesVitoria = [];
 
+        $rifasAtivadas = [];
+        $rifasDesativadas = [];
 
-        foreach ($numerosComprados as $idRifa => $numeros){
-            $totalNumeros = Rifa::where('id', $idRifa)->value('qtd_num');
-
+        foreach ($numerosComprados as $idRifa => $numeros) {
+            $rifa = $numeros->first()->rifa;
+            $totalNumeros = $rifa->qtd_num;
             $qtdComprada = $numeros->count();
-
             $chance = $totalNumeros ? ($qtdComprada / $totalNumeros) * 100 : 0;
-
             $chancesVitoria[$idRifa] = round($chance, 2);
-
             $qtsComprei[$idRifa] = $qtdComprada;
+
+            if ($rifa->ativado) {
+                $rifasAtivadas[$idRifa] = $numeros;
+            } else {
+                $rifasDesativadas[$idRifa] = $numeros;
+            }
         }
 
-        return view('boughtRaffleNumbers', compact('numerosComprados', 'chancesVitoria', 'qtsComprei'));
+        return view('boughtRaffleNumbers', compact('rifasAtivadas', 'rifasDesativadas', 'chancesVitoria', 'qtsComprei'));
     }
 }

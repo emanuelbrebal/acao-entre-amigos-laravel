@@ -13,10 +13,14 @@ class InstituicaoController extends Controller
     {
         $instituicaoLogada = Auth::guard('instituicao')->user();
 
-        $minhasRifas = Rifa::where('id_instituicao', $instituicaoLogada->id)
-            ->orderBy('ativado', 'desc')
+        $activatedRaffles = Rifa::where('id_instituicao', $instituicaoLogada->id)
+            ->where('ativado', true)
             ->get();
 
+        $deactivatedRaffles = Rifa::where('id_instituicao', $instituicaoLogada->id)
+            ->where('ativado', false)
+            ->orderBy('data_sorteio', 'desc')
+            ->get();
 
         $numerosTotais = Numero::where('comprado', true)
             ->selectRaw('id_rifa, COUNT(*) as total')
@@ -28,10 +32,9 @@ class InstituicaoController extends Controller
 
         $qtdTotais = Rifa::where('id_instituicao', $instituicaoLogada->id)->pluck('qtd_num', 'id');
 
-
         $totalArrecadado = $numerosTotais;
 
-        return view('listMyQuotas', compact('minhasRifas', 'numerosTotais', 'qtdTotais', 'instituicaoLogada', 'valorCotas'));
+        return view('listMyQuotas', compact('activatedRaffles', 'deactivatedRaffles', 'numerosTotais', 'qtdTotais', 'instituicaoLogada', 'valorCotas'));
     }
 
     public function updateMyRaffles($id)

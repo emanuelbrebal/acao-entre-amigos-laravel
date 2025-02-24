@@ -11,39 +11,36 @@
                 </g>
             </svg>
             voltar</a>
-        </div>
-        <ul class="titulo-my-quotas">
-            <li>
-                <h1 >Minha carteira de cotas:</h1>
-            </li>
-        </ul>
-        <section class="minhas-cotas rifas-section">
-        @foreach ($numerosComprados as $idRifa => $numeros)
-            <a class="link-rifa" href="{{ route('redirecionarRifa', ['id' => $numeros->first()->rifa->id]) }}">
-                <div class="rifa-container">
+    </div>
+    <ul class="titulo-my-quotas">
+        <li>
+            <h1>Minha carteira de cotas:</h1>
+        </li>
+    </ul>
+    <section class="minhas-cotas rifas-section">
+        @foreach ($rifasAtivadas as $idRifa => $numeros)
+            @php
+                $rifa = $numeros->first()->rifa;
+            @endphp
+            <a class="link-rifa" href="{{ route('redirecionarRifa', ['id' => $rifa->id]) }}">
+                <div class="rifa-container {{ $rifa->ativado ? '-ativado' : '-desativado' }}">
                     <div class="rifa-top">
                         <div class="rifa-top-top">
-                            <img class="rifa-icon" src="{{ asset('img/raffles/' . $numeros->first()->rifa->imagem) }}"
-                                alt="Imagem da rifa">
-                            <h3 class="rifa-title -quotas">Rifa: {{ $numeros->first()->rifa->titulo_rifa }}</h3>
+                            <img class="rifa-icon" src="{{ asset('img/raffles/' . $rifa->imagem) }}" alt="Imagem da rifa">
+                            <h3 class="rifa-title -quotas">Rifa: {{ $rifa->titulo_rifa }}</h3>
                         </div>
                         <div class="rifa-description">
                             <p>Data do sorteio:
-                                <strong> {{ \Carbon\Carbon::parse($numeros->first()->rifa->data_sorteio)->format('d/m/Y') }}
-                                </strong>
+                                <strong>{{ \Carbon\Carbon::parse($rifa->data_sorteio)->format('d/m/Y') }}</strong>
                             </p>
-                            {{-- <p class="rifa-encerrada">Rifa encerrada!</p>
-                            <p>Vencedor(a) </p> --}}
                         </div>
                     </div>
                     <div class="cotas">
-                        <p>Cotas compradas: {{ $qtsComprei[$idRifa]}}</p>
+                        <p>Cotas compradas: {{ $qtsComprei[$idRifa] }}</p>
                         <p>Chance de vitória: {{ $chancesVitoria[$idRifa] }}%</p>
-                        <div class="caixa-numero">
+                        <div class="caixa-numero {{ $rifa->ativado ? '' : '-num-desativados' }}">
                             @foreach ($numeros as $numero)
-                                <div class="numero -show">
-                                    {{ $numero->descricao }}
-                                </div>
+                                <div class="numero -show">{{ $numero->descricao }}</div>
                             @endforeach
                         </div>
                     </div>
@@ -51,5 +48,33 @@
             </a>
         @endforeach
     </section>
-    <script></script>
+    <ul class="titulo-my-quotas">
+        <li>
+            <h1>Rifas encerradas:</h1>
+        </li>
+    </ul>
+    <section class="minhas-cotas rifas-section">
+        @foreach ($rifasDesativadas as $idRifa => $numeros)
+            @php
+                $rifa = $numeros->first()->rifa;
+            @endphp
+            <div class="rifa-container {{ $rifa->ativado ? '-ativado' : '-desativado' }}">
+                <div class="rifa-encerrada">
+                    <div class="rifa-top">
+                        <div class="rifa-top-top">
+                            <img class="rifa-icon" src="{{ asset('img/raffles/' . $rifa->imagem) }}" alt="Imagem da rifa">
+                            <h3 class="rifa-title -quotas">Rifa: {{ $rifa->titulo_rifa }}</h3>
+                        </div>
+                        <div class="rifa-description">
+                            <p>Rifa encerrada! Muito obrigado por participar!</p>
+                            <p><a class="form-a" href="{{ route('redirecionarHome') }}">Ver mais rifas disponíveis!</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </section>
+
+
+
 @endsection
