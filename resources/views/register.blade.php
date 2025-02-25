@@ -1,5 +1,5 @@
 @extends('layouts.loginLayout')
-@section('title', 'Ação Entre Amigos - Tela de Cadastro')
+@section('title', 'Tela de Cadastro - Ação Entre Amigos')
 @section('content')
     <section class="section-login -register">
         <div class="login-box">

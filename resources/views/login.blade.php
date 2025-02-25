@@ -1,5 +1,5 @@
 @extends('layouts.loginLayout')
-@section('title', 'Ação Entre Amigos - Tela de Login')
+@section('title', 'Tela de Login - Ação Entre Amigos')
 @section('content')
     <section class="section-login">
         <div class="login-box">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateRaffleRequest;
 use App\Models\Numero;
 use App\Models\Rifa;
 use Illuminate\Http\Request;
@@ -43,22 +44,11 @@ class InstituicaoController extends Controller
         return view('updateRaffle', compact('rifa'));
     }
 
-    public function editarRifa(Request $request)
+    public function editarRifa(UpdateRaffleRequest $request, $id)
     {
-        $rifa = Rifa::where('id', $request->id_rifa)->firstOrFail();
+        $rifa = Rifa::findOrFail($id);
 
-        $validated = $request->validate([
-            'id_rifa' => 'required|integer',
-            'id_instituicao' => 'required|integer',
-            'titulo_rifa' => 'nullable|string',
-            'preco_numeros' => 'nullable|string',
-            'premiacao' => 'nullable|string',
-            'data_sorteio' => 'nullable|date',
-            'horario_sorteio' => 'nullable|date_format:H:i'
-        ]);
-
-        $rifa->update($validated);
-
+        $rifa->update($request->validated());
 
         return redirect()->route('listMyRaffles')->with('success', 'Rifa editada com sucesso!');
     }

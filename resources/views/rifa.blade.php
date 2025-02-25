@@ -1,5 +1,5 @@
 @extends('layouts.rifas')
-@section('title', 'Página da Rifa')
+@section('title', 'Página da Rifa - Ação Entre Amigos')
 @section('content')
  <link rel="stylesheet" href="{{ asset('css/layouts/rifas.css') }}">
     <section class="rifa-infos">

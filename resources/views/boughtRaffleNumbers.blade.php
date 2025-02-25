@@ -1,5 +1,5 @@
 @extends('layouts.rifas')
-@section('title', 'Minhas Cotas')
+@section('title', 'Minhas Cotas - Ação Entre Amigos')
 @section('content')
     <div class="organiza-btns">
 

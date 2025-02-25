@@ -1,5 +1,5 @@
 @extends('layouts.loginLayout')
-@section('title', 'Minha Conta')
+@section('title', 'Minha Conta - Ação Entre Amigos')
 @section('content')
 
     <section class="cadastro-main">

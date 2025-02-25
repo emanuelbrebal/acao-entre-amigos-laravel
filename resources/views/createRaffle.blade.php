@@ -1,5 +1,5 @@
 @extends('layouts.form')
-@section('title', 'Cadastrar nova Rifa')
+@section('title', 'Cadastrar nova Rifa - Ação Entre Amigos')
 @section('content')
 
     <section class="cadastro-main">

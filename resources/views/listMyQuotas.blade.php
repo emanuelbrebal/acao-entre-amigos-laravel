@@ -1,5 +1,5 @@
 @extends('layouts.rifas')
-@section('title', 'Minhas Cotas')
+@section('title', 'Minhas Cotas - Ação Entre Amigos')
 @section('content')
     <div class="organiza-btns">
 
@@ -18,50 +18,50 @@
         </li>
     </ul>
     <section class="minhas-cotas rifas-section">
-        @foreach ($activatedRaffles as $idRifa => $numeros)
-            <div class="rifa-container {{ $numeros->ativado ? '-ativado' : '-desativado' }}">
+        @foreach ($activatedRaffles as $rifas )
+            <div class="rifa-container {{ $rifas->ativado ? '-ativado' : '-desativado' }}">
                 <div class="rifa-top">
                     <div class="rifa-top-top">
-                        <img class="rifa-icon" src="{{ asset('img/raffles/' . $numeros->imagem) }}" alt="Imagem da rifa">
-                        <h3 class="rifa-title -quotas">Rifa: {{ $numeros->titulo_rifa }}</h3>
+                        <img class="rifa-icon" src="{{ asset('img/raffles/' . $rifas->imagem) }}" alt="Imagem da rifa">
+                        <h3 class="rifa-title -quotas">Rifa: {{ $rifas->titulo_rifa }}</h3>
                     </div>
                     <p>Data do sorteio:
-                        <strong> {{ \Carbon\Carbon::parse($numeros->data_sorteio)->format('d/m/Y') }}
+                        <strong> {{ \Carbon\Carbon::parse($rifas->data_sorteio)->format('d/m/Y') }}
                         </strong>
                     </p>
                     <p>Horario do sorteio
-                        <strong>{{ $numeros->hora_sorteio }}</strong>
+                        <strong>{{ $rifas->hora_sorteio }}</strong>
                     </p>
                     <p>Cotas:</p>
                     <div class="rifa-description -raffle-list">
                         <p>
-                            Compradas: {{ $numerosTotais[$numeros->id]->total ?? 0 }}
+                            Compradas: {{ $numerosTotais[$rifas->id]->total ?? 0 }}
                         </p>
-                        <progress class="progress" max="{{ $qtdTotais[$numeros->id] }}"
-                            value="{{ $numerosTotais[$numeros->id]->total ?? 0 }}"> </progress>
+                        <progress class="progress" max="{{ $qtdTotais[$rifas->id] }}"
+                            value="{{ $numerosTotais[$rifas->id]->total ?? 0 }}"> </progress>
                         <p>
-                            Totais: {{ $qtdTotais[$numeros->id] }}
+                            Totais: {{ $qtdTotais[$rifas->id] }}
                         </p>
                     </div>
-                    <p>Valor por cota: R$<strong>{{ number_format($valorCotas->get($numeros->id) ?? 0, 2, ',', '.') }}
+                    <p>Valor por cota: R$<strong>{{ number_format($valorCotas->get($rifas->id) ?? 0, 2, ',', '.') }}
                         </strong></p>
 
                     <p>Total arrecadado:
-                        R$<strong>{{ number_format(($valorCotas->get($numeros->id) ?? 0) * ($numerosTotais->get($numeros->id)?->total ?? 0), 2, ',', '.') }}
+                        R$<strong>{{ number_format(($valorCotas->get($rifas->id) ?? 0) * ($numerosTotais->get($rifas->id)?->total ?? 0), 2, ',', '.') }}
                         </strong>
                     </p>
 
                     <div class="options">
-                        <a class="btn btn-secondary" href="{{ route('redirecionarRifa', ['id' => $numeros->id]) }}">Ver
+                        <a class="btn btn-secondary" href="{{ route('redirecionarRifa', ['id' => $rifas->id]) }}">Ver
                             Rifa</a>
                         <a type class="btn btn-primary"
-                            href="{{ route('updateMyRaffles', ['id' => $numeros->id]) }}">Editar Rifa</a>
-                        <button type="button" class="btn {{ $numeros->ativado ? 'btn-danger' : 'btn-success' }}"
-                            data-bs-toggle="modal" data-bs-target="#modalConfirmaDesativação{{ $numeros->id }}"
-                            id="btnDesativaRifas">{{ $numeros->ativado ? 'Desativar Rifa' : 'Ativar Rifa' }}</button>
+                            href="{{ route('updateMyRaffles', ['id' => $rifas->id]) }}">Editar Rifa</a>
+                        <button type="button" class="btn {{ $rifas->ativado ? 'btn-danger' : 'btn-success' }}"
+                            data-bs-toggle="modal" data-bs-target="#modalConfirmaDesativação{{ $rifas->id }}"
+                            id="btnDesativaRifas">{{ $rifas->ativado ? 'Desativar Rifa' : 'Ativar Rifa' }}</button>
                     </div>
 
-                    <div class="modal fade" id="modalConfirmaDesativação{{ $numeros->id }}" tabindex="-1"
+                    <div class="modal fade" id="modalConfirmaDesativação{{ $rifas->id }}" tabindex="-1"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -77,20 +77,20 @@
                                         <strong>{{ Auth::guard('instituicao')->user()->nome }}</strong>, confirma que irá
                                         desativar a
                                         <br><strong> Rifa: <span
-                                                style="text-transform:uppercase">{{ $numeros->titulo_rifa }}</span></strong>
+                                                style="text-transform:uppercase">{{ $rifas->titulo_rifa }}</span></strong>
                                     </p>
 
                                 </div>
                                 <div class="modal-footer">
                                     <form
-                                        action="{{ $numeros->ativado ? route('desativarRifa', ['id' => $numeros->id]) : route('ativarRifa', ['id' => $numeros->id]) }}"
+                                        action="{{ $rifas->ativado ? route('desativarRifa', ['id' => $rifas->id]) : route('ativarRifa', ['id' => $rifas->id]) }}"
                                         method="GET">
                                         @csrf
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
                                         <button type="submit"
-                                            class="btn {{ $numeros->ativado ? 'btn-danger' : 'btn-success' }}">
-                                            {{ $numeros->ativado ? 'Desativar Rifa' : 'Ativar Rifa' }}</button>
+                                            class="btn {{ $rifas->ativado ? 'btn-danger' : 'btn-success' }}">
+                                            {{ $rifas->ativado ? 'Desativar Rifa' : 'Ativar Rifa' }}</button>
                                     </form>
                                 </div>
                             </div>
@@ -106,51 +106,51 @@
         </li>
     </ul>
     <section class="minhas-cotas rifas-section">
-        @foreach ($deactivatedRaffles as $idRifa => $numeros)
-            <div class="rifa-container {{ $numeros->ativado ? '-ativado' : '-desativado' }}">
+        @foreach ($deactivatedRaffles as $idRifa => $rifas)
+            <div class="rifa-container {{ $rifas->ativado ? '-ativado' : '-desativado' }}">
                 <div class="rifa-top">
                     <div class="rifa-top-top">
-                        <img class="rifa-icon" src="{{ asset('img/raffles/' . $numeros->imagem) }}" alt="Imagem da rifa">
-                        <h3 class="rifa-title -quotas">Rifa: {{ $numeros->titulo_rifa }}</h3>
+                        <img class="rifa-icon" src="{{ asset('img/raffles/' . $rifas->imagem) }}" alt="Imagem da rifa">
+                        <h3 class="rifa-title -quotas">Rifa: {{ $rifas->titulo_rifa }}</h3>
                     </div>
                     <p>Data do sorteio:
-                        <strong> {{ \Carbon\Carbon::parse($numeros->data_sorteio)->format('d/m/Y') }}
+                        <strong> {{ \Carbon\Carbon::parse($rifas->data_sorteio)->format('d/m/Y') }}
                         </strong>
                     </p>
                     <p>Horario do sorteio
-                        <strong>{{ $numeros->hora_sorteio }}</strong>
+                        <strong>{{ $rifas->hora_sorteio }}</strong>
                     </p>
                     <p>Cotas:</p>
                     <div class="rifa-description -raffle-list">
                         <p>
-                            Compradas: {{ $numerosTotais[$numeros->id]->total ?? 0 }}
+                            Compradas: {{ $numerosTotais[$rifas->id]->total ?? 0 }}
                         </p>
-                        <progress class="progress" max="{{ $qtdTotais[$numeros->id] }}"
-                            value="{{ $numerosTotais[$numeros->id]->total ?? 0 }}"> </progress>
+                        <progress class="progress" max="{{ $qtdTotais[$rifas->id] }}"
+                            value="{{ $numerosTotais[$rifas->id]->total ?? 0 }}"> </progress>
                         <p>
-                            Totais: {{ $qtdTotais[$numeros->id] }}
+                            Totais: {{ $qtdTotais[$rifas->id] }}
                         </p>
                     </div>
-                    <p>Valor por cota: R$<strong>{{ number_format($valorCotas->get($numeros->id) ?? 0, 2, ',', '.') }}
+                    <p>Valor por cota: R$<strong>{{ number_format($valorCotas->get($rifas->id) ?? 0, 2, ',', '.') }}
                         </strong></p>
 
                     <p>Total arrecadado:
-                        R$<strong>{{ number_format(($valorCotas->get($numeros->id) ?? 0) * ($numerosTotais->get($numeros->id)?->total ?? 0), 2, ',', '.') }}
+                        R$<strong>{{ number_format(($valorCotas->get($rifas->id) ?? 0) * ($numerosTotais->get($rifas->id)?->total ?? 0), 2, ',', '.') }}
                         </strong>
                     </p>
 
                     <div class="options">
-                        <a class="btn btn-secondary" href="{{ route('redirecionarRifa', ['id' => $numeros->id]) }}">Ver
+                        <a class="btn btn-secondary" href="{{ route('redirecionarRifa', ['id' => $rifas->id]) }}">Ver
                             Rifa</a>
                         <a type class="btn btn-primary"
-                            href="{{ route('updateMyRaffles', ['id' => $numeros->id]) }}">Editar
+                            href="{{ route('updateMyRaffles', ['id' => $rifas->id]) }}">Editar
                             Rifa</a>
-                        <button type="button" class="btn {{ $numeros->ativado ? 'btn-danger' : 'btn-success' }}"
-                            data-bs-toggle="modal" data-bs-target="#modalConfirmaDesativação{{ $numeros->id }}"
-                            id="btnDesativaRifas">{{ $numeros->ativado ? 'Desativar Rifa' : 'Ativar Rifa' }}</button>
+                        <button type="button" class="btn {{ $rifas->ativado ? 'btn-danger' : 'btn-success' }}"
+                            data-bs-toggle="modal" data-bs-target="#modalConfirmaDesativação{{ $rifas->id }}"
+                            id="btnDesativaRifas">{{ $rifas->ativado ? 'Desativar Rifa' : 'Ativar Rifa' }}</button>
                     </div>
 
-                    <div class="modal fade" id="modalConfirmaDesativação{{ $numeros->id }}" tabindex="-1"
+                    <div class="modal fade" id="modalConfirmaDesativação{{ $rifas->id }}" tabindex="-1"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -166,20 +166,20 @@
                                         <strong>{{ Auth::guard('instituicao')->user()->nome }}</strong>, confirma que irá
                                         desativar a
                                         <br><strong> Rifa: <span
-                                                style="text-transform:uppercase">{{ $numeros->titulo_rifa }}</span></strong>
+                                                style="text-transform:uppercase">{{ $rifas->titulo_rifa }}</span></strong>
                                     </p>
 
                                 </div>
                                 <div class="modal-footer">
                                     <form
-                                        action="{{ $numeros->ativado ? route('desativarRifa', ['id' => $numeros->id]) : route('ativarRifa', ['id' => $numeros->id]) }}"
+                                        action="{{ $rifas->ativado ? route('desativarRifa', ['id' => $rifas->id]) : route('ativarRifa', ['id' => $rifas->id]) }}"
                                         method="GET">
                                         @csrf
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cancelar</button>
                                         <button type="submit"
-                                            class="btn {{ $numeros->ativado ? 'btn-danger' : 'btn-success' }}">
-                                            {{ $numeros->ativado ? 'Desativar Rifa' : 'Ativar Rifa' }}</button>
+                                            class="btn {{ $rifas->ativado ? 'btn-danger' : 'btn-success' }}">
+                                            {{ $rifas->ativado ? 'Desativar Rifa' : 'Ativar Rifa' }}</button>
                                     </form>
                                 </div>
                             </div>
