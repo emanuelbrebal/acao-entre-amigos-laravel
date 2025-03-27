@@ -10,13 +10,13 @@
                     <option value="cpf">Pessoa Física</option>
                     <option value="cnpj">Instituição - Pessoa Jurídica</option>
                 </select>
-                <input class="form-input" type="text" placeholder="CPF" name="cpf" id="campo-cpf">
+                <input class="form-input" type="text" placeholder="CPF" name="cpf" id="campo-cpf" oninput="formataCPF(this)" maxlength="14">
                 <input class="form-input" type="text" placeholder="CNPJ" name="cnpj" id="campo-cnpj"
-                    style="display: none;" disabled>
+                    style="display: none;" disabled oninput="formataCNPJ(this)" maxlength="18">
 
                 <input class="form-input" type="text" placeholder="Nome" name="nome">
                 <input class="form-input" type="text" placeholder="Email" name="email">
-                <input class="form-input" type="text" placeholder="Número de celular" name="celular">
+                <input class="form-input" type="text" placeholder="Número de celular" name="celular" maxlength="15" oninput="formataCelular(this)">
                 <input class="form-input" type="text" placeholder="Endereço" name="endereco">
                 <div class="show-password-div">
                     <svg class="show-password" id="togglePassword1" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -41,8 +41,8 @@
                             <circle cx="12" cy="12" r="3" />
                         </g>
                     </svg>
-                    <input class="form-input" type="password" placeholder="Repita Senha" name="password-check"
-                        id="passwordInput2">
+                    <input class="form-input" type="password" placeholder="Repita Senha" name="password_confirmation"
+                        id="passwordInput2" >
                 </div>
 
                 <button class="form-button" type="submit" id="registroBtn">Registre sua conta!</button>
@@ -55,4 +55,7 @@
             </form>
         </div>
         <script src="{{ asset('js/register.js') }}"></script>
+        <script src="{{ asset('js/formataCPF.js') }}"></script>
+        <script src="{{ asset('js/formataCelular.js') }}"></script>
+        <script src="{{ asset('js/formataCNPJ.js') }}"></script>
     @endsection

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\InstituicaoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RedirectController;
@@ -45,5 +44,7 @@ Route::controller(InstituicaoController::class)->middleware('usuarioLogado')->gr
     Route::post('/editarRifa/{id}', 'editarRifa')->name('editarRifa');
     Route::get('/desativarRifa/{id}', 'desativarRifa')->name('desativarRifa');
     Route::get('/ativarRifa/{id}', 'ativarRifa')->name('ativarRifa');
-    Route::post('/updateUsuario', 'updateUsuario')->name('updateUsuario');
+
+    Route::get('/listarInstituicao', 'listarInstituicao')->name('listarInstituicao');
+    Route::post('/updateInstituicao', 'updateInstituicao')->name('updateInstituicao');
 });
