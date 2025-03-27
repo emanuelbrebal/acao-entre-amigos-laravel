@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\Instituicao;
 use App\Models\Numero;
 use App\Models\Rifa;
@@ -16,41 +17,26 @@ class UsuarioController extends Controller
     public function listarUsuario()
     {
         $user = Auth::guard('usuarios')->user();
-        return view('listarUsuario', compact('user'));
+        return view('users.updateUser', compact('user'));
     }
 
-    public function updateUsuario(Request $request)
+    public function updateUsuario(UpdateUserRequest $request)
     {
         $usuario = Usuarios::find($request->id);
         if (!$usuario) {
-            return response()->json(['error' => 'Usuário não encontrado'], 404);
+            return redirect()->back()->with('error', 'Usuário não encontrado');
         }
-
-        $validated = $request->validate([
-            'nome' => 'nullable|string|max:255',
-            'cpf' => 'nullable|digits:11',
-            'email' => 'nullable|email|max:255',
-            'celular' => 'nullable|string|max:20',
-            'endereco' => 'nullable|string|max:255',
-        ]);
 
         DB::beginTransaction();
 
         try {
-
-            $usuario->update([
-                'nome' => $validated['nome'] ?? $usuario->nome,
-                'cpf' => $validated['cpf'] ?? $usuario->cpf,
-                'email' => $validated['email'] ?? $usuario->email,
-                'celular' => $validated['celular'] ?? $usuario->celular,
-                'endereco' => $validated['endereco'] ?? $usuario->endereco,
-            ]);
+            $usuario->update($request->validated());
             DB::commit();
 
-            return response()->json(['message' => 'Usuário atualizado com sucesso'], 200);
+            return redirect()->back()->with('success', 'Usuário atualizado com sucesso');
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['error' => 'Erro ao atualizar usuário', 'details' => $e->getMessage()], 500);
+            return redirect()->back()->with('error', 'Erro ao atualizar usuário', 'details', $e->getMessage());
         }
     }
 }
