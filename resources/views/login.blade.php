@@ -10,9 +10,9 @@
                     <option value="cpf">Pessoa Física</option>
                     <option value="cnpj">Instituição - Pessoa Jurídica</option>
                 </select>
-                <input class="form-input" type="text" placeholder="CPF" name="cpf" id="campo-cpf">
+                <input class="form-input" type="text" placeholder="CPF" name="cpf" id="campo-cpf" maxlength="14" oninput="formataCPF(this)">
                 <input class="form-input" type="text" placeholder="CNPJ" name="cnpj" id="campo-cnpj"
-                    style="display: none;" disabled>
+                    style="display: none;" maxlength="18" oninput="formataCNPJ(this)" disabled>
 
                 <div class="show-password-div">
                     <svg class="show-password" id="togglePassword" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -38,4 +38,6 @@
 
     </section>
     <script src="{{ asset('js/login.js') }}"></script>
+    <script src="{{ asset('js/formataCPF.js') }}"></script>
+    <script src="{{ asset('js/formataCNPJ.js') }}"></script>
 @endsection
