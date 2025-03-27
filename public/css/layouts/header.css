@@ -12,7 +12,7 @@
     align-items: center;
     width: 100%;
     top: 0;
-
+    height: 12dvh;
 }
 
 .navbar-brand {
@@ -47,7 +47,6 @@
 }
 
 .navigation-item:hover {
-    /* text-decoration: underline; */
     text-decoration: underline;
     transition: ease-in;
 }

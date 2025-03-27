@@ -82,7 +82,7 @@ main{
 .rifas-section {
     display: grid;
     justify-self: center;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     margin-top: 5rem;
     gap: 5rem;
 }
@@ -94,7 +94,7 @@ main{
     align-items: center;
     background-color: #EAEAEA;
     height: 450px;
-    width: 360px;
+    width: 300px;
     border-radius: 10px;
     padding: 1rem;
     box-shadow: 0px 1px 15px var(--primary-green);
@@ -348,7 +348,7 @@ main{
 @media (min-width: 1801px) {
     .rifas-section {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 4rem;
     }
 
@@ -357,6 +357,6 @@ main{
     }
 
     .rifa-card {
-        width: 360px;
+        width: 300px;
     }
 }

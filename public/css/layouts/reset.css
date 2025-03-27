@@ -51,10 +51,12 @@ p{
 
 .container-alerta{
     margin-top: 1rem;
-    width: fit-content !important;
-    justify-self: center !important;
+    width: 100%;
+    display: flex;
+    justify-content: center;
     transition: opacity 0.5s ease-in-out;
     opacity: 1;
+    position: absolute;
     z-index: 1;
 }
 
