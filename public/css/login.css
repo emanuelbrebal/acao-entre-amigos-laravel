@@ -5,12 +5,12 @@
 }
 
 .main-login{
-    height: 75vh;
+    height: 88dvh;
     display: flex;
     justify-content: center;
     align-items: center;
-
-}
+    flex-direction: column;
+}   
 
 .main-login.-register{
     height: 86.5vh !important;

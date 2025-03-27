@@ -4,7 +4,7 @@ html, body, main{
 }
 
 .info-main {
-    min-height: 80vh;
+    min-height: 82dvh;
     height: fit-content;
 }
 
@@ -23,7 +23,7 @@ html, body, main{
 .rifa-infos {
     display: flex;
     flex-direction: row;
-    height: 80vh;
+    height: 82dvh;
 }
 
 .-rifa-info-card {
@@ -65,7 +65,6 @@ html, body, main{
 
 #tabelaNumeros {
     border-collapse: collapse;
-    width: 100%;
 }
 
 #tabelaNumeros td {
@@ -198,12 +197,28 @@ html, body, main{
 
 .organiza-infos, .organiza-btns {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     padding: 1rem;
 }
 
+.organiza-legenda{
+    width: 60dvw;
+}
 
+.organiza-tabela{
+    height: 60dvh;
+}
+
+.tabela-numeros, .organiza-tabela, .organiza-infos{
+    width: 120dvh;
+}
+
+.tabela-cotas{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 .legenda, .legenda-p {
     display: flex;

@@ -20,8 +20,10 @@
     <link rel="stylesheet" href="{{ asset('css/mainInicial.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sobre.css') }}">
     <link rel="stylesheet" href="{{ asset('css/layouts/form.css') }}">
+   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 
 </head>
 
@@ -85,7 +87,13 @@
                                 method="POST" id="form-logout">
                                 @csrf
                                 <div class="organiza-logout">
-                                    <a class="navigation-item" href="{{ route('listarUsuario') }}">Minha conta</a>
+                                    @if (Auth::guard('usuarios')->user())
+                                        <a class="navigation-item" href="{{ route('listarUsuario') }}">Minha conta</a>
+                                    @endif
+                                    
+                                    @if (Auth::guard('instituicao')->user())
+                                        <a class="navigation-item" href="{{ route('listarInstituicao') }}">Minha conta</a>
+                                    @endif
                                     <button type="submit" class="navigation-item btn-logout" id="btnLogout">
                                         Fazer Logout
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -102,16 +110,26 @@
                 </ul>
         </nav>
     </header>
-    <div class="container-alerta container pt-3 fade">
+    <div class="container-alerta">
         @if (session('error'))
-            <div class="alert alert-danger" role="alert">
-                <p class="text-center">{{ session('error') }}</p>
-            </div>
+        <div class="alert alert-danger" role="alert">
+            <p class="text-center">{{ session('error') }}</p>
+        </div>
         @elseif (session('success'))
-            <div class="alert alert-success" role="alert">
-                <p class="text-center">{{ session('success') }}</p>
-            </div>
+        <div class="alert alert-success" role="alert">
+            <p class="text-center">{{ session('success') }}</p>
+        </div>
         @endif
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
     </div>
     <main class="content-main">
         @yield('content')
@@ -123,9 +141,6 @@
             <a href="https://github.com/emanuelbrebal" target="_blank" class="footer-link">github</a>
             <a href="https://www.linkedin.com/in/emanuel-victor-brebal/" target="_blank"
                 class="footer-link">linkedin</a>
-            <a href="" class="footer-link" target="_blank">contatos</a>
-            {{-- fazer um modal com todos os contatos --}}
-
         </div>
     </footer>
 
@@ -137,5 +152,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
 </script>
+<script src="{{asset('js/modalFade.js')}}"  crossorigin="anonymous"> </script>
 
 </html>
