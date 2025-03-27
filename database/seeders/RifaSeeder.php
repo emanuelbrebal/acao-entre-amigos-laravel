@@ -19,6 +19,7 @@ class RifaSeeder extends Seeder
             'preco_numeros' => '10',
             'premiacao' => 'peugeot 208 0km',
             'data_sorteio' => Carbon::createFromFormat('d/m/Y', '16/04/2025')->format('Y-m-d'),
+            'hora_sorteio' => '14:30',
             'imagem' => 'Peugeot-208-2025-Brasil-17.webp',
             'qtd_num' => '1000',
             'id_instituicao' => '1',
@@ -29,6 +30,7 @@ class RifaSeeder extends Seeder
             'premiacao' => 'royal enfield hunter 350cc 0km',
             'imagem' => 'Hunter-350-Branca.avif',
             'data_sorteio' => Carbon::createFromFormat('d/m/Y', '16/04/2025')->format('Y-m-d'),
+            'hora_sorteio' => '12:30',
             'qtd_num' => '25',
             'id_instituicao' => '1',
         ]);
@@ -38,6 +40,7 @@ class RifaSeeder extends Seeder
             'premiacao' => 'pintura a óleo feito pelo artista: Askdsao',
             'imagem' => '8db29175529600585e9c88cf43720b42-1737121271.jpg',
             'data_sorteio' => Carbon::createFromFormat('d/m/Y', '27/04/2025')->format('Y-m-d'),
+            'hora_sorteio' => '17:30',
             'qtd_num' => '10000',
             'id_instituicao' => '1',
         ]);
@@ -47,6 +50,7 @@ class RifaSeeder extends Seeder
             'premiacao' => 'Jogo de panela e utensilios',
             'imagem' => 'KIT00000150_1.png',
             'data_sorteio' => Carbon::createFromFormat('d/m/Y', '22/04/2025')->format('Y-m-d'),
+            'hora_sorteio' => '22:30',
             'qtd_num' => '10',
             'id_instituicao' => '2',
         ]);
