@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Instituicao;
 use App\Models\Numero;
 use App\Models\Rifa;
-use App\Models\Usuarios;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -74,10 +73,9 @@ class RedirectController extends Controller
 
     public function buyNumbers($id)
     {
-        //rota de mostrar todas as cotas compradas
         $rifa = Rifa::where('id', $id)->first();
         $numeros = Numero::where('id_rifa', $id);
-        return view('boughtRaffleNumbers');
+        return view('users.boughtRaffleNumbers');
     }
 
     public function redirecionarCreateRaffle()
@@ -86,7 +84,7 @@ class RedirectController extends Controller
             $instituicao_nome = Auth::guard('instituicao')->user()->nome;
             $instituicao_id = Auth::guard('instituicao')->user()->id;
 
-            return view('createRaffle', [
+            return view('institutions.createRaffle', [
                 'instituicao_nome' => $instituicao_nome,
                 'instituicao_id' => $instituicao_id
             ]);

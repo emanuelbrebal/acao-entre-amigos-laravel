@@ -28,7 +28,8 @@ class UpdateRaffleRequest extends FormRequest
             'preco_numeros' => 'nullable|integer',
             'premiacao' => 'nullable|string|max:30',
             'data_sorteio' => 'nullable|date|after_or_equal:today',
-            'horario_sorteio' => 'nullable|date_format:H:i'
+            'imagem' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'hora_sorteio' => 'nullable|date_format:H:i'
         ];
     }
     public function messages(): array
@@ -51,7 +52,12 @@ class UpdateRaffleRequest extends FormRequest
             'data_sorteio.date' => 'O campo data do sorteio deve ser uma data válida.',
             'data_sorteio.after_or_equal' => 'O campo data precisa ser uma data maior ou igual a hoje.',
 
-            'horario_sorteio.date_format' => 'O campo horário do sorteio deve estar no formato HH:MM (ex: 14:30).',
+            'hora_sorteio.date_format' => 'O campo horário do sorteio deve estar no formato HH:MM (ex: 14:30).',
+
+            'imagem.required' => 'A imagem é obrigatória.',
+            'imagem.image' => 'A imagem deve ser um arquivo de imagem.',
+            'imagem.mimes' => 'A imagem deve ser dos tipos jpeg, png, jpg ou gif.',
+            'imagem.max' => 'A imagem não pode ter mais de 2MB.',
         ];
     }
 }

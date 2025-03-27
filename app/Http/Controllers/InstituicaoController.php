@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateInstitutionRequest;
 use App\Http\Requests\UpdateRaffleRequest;
+use App\Models\Instituicao;
 use App\Models\Numero;
 use App\Models\Rifa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class InstituicaoController extends Controller
 {
@@ -35,22 +38,45 @@ class InstituicaoController extends Controller
 
         $totalArrecadado = $numerosTotais;
 
-        return view('listMyQuotas', compact('activatedRaffles', 'deactivatedRaffles', 'numerosTotais', 'qtdTotais', 'instituicaoLogada', 'valorCotas'));
+        return view('institutions.listMyQuotas', compact('activatedRaffles', 'deactivatedRaffles', 'numerosTotais', 'qtdTotais', 'instituicaoLogada', 'valorCotas'));
     }
 
     public function updateMyRaffles($id)
     {
         $rifa = Rifa::where("id", $id)->first();
-        return view('updateRaffle', compact('rifa'));
+        return view('institutions.updateRaffle', compact('rifa'));
     }
 
     public function editarRifa(UpdateRaffleRequest $request, $id)
     {
         $rifa = Rifa::findOrFail($id);
+        try{
+            $validated = $request->validated();
+            if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
 
-        $rifa->update($request->validated());
+                if ($rifa->imagem && file_exists(public_path('img/raffles/' . $rifa->imagem))) {
+                    unlink(public_path('img/raffles/' . $rifa->imagem));
+                }
+                    
+                $requestImage = $request->file('imagem');
 
-        return redirect()->route('listMyRaffles')->with('success', 'Rifa editada com sucesso!');
+                $extension = $requestImage->extension();
+
+                $imageName = md5($requestImage->getClientOriginalName()) . '-' . strtotime("now") . "." . $extension;
+
+                $requestImage->move(public_path('img/raffles'), $imageName);
+
+                $validated['imagem'] = $imageName;
+            }
+        
+            $rifa->update($validated);
+
+            return redirect()->route('listMyRaffles')->with('success', 'Rifa editada com sucesso!');
+        } catch(\Exception $e){
+            return redirect()->route('listMyRaffles')->with('error', 'Falha ao editar a rifa.');
+
+        }
+
     }
 
     public function desativarRifa($id)
@@ -71,5 +97,27 @@ class InstituicaoController extends Controller
         $rifa->save();
 
         return redirect()->route('listMyRaffles')->with('success', 'Rifa desativada com sucesso!');
+    }
+
+    public function listarInstituicao()
+    {
+        $instituicao = Auth::guard('instituicao')->user();
+        return view('institutions.updateInstitution', compact('instituicao'));
+    }
+
+    public function updateInstituicao(UpdateInstitutionRequest $request){
+        $instituicao = Instituicao::find($request->id);
+    
+        DB::beginTransaction();
+
+        try {
+            $instituicao->update($request->validated());
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Instituição atualizada com sucesso');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Erro ao atualizar instituição', 'details', $e->getMessage());
+        }
     }
 }

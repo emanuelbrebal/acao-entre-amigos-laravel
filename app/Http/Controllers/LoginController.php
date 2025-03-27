@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Models\Instituicao;
 use App\Models\Usuarios;
 use Illuminate\Http\Request;
@@ -10,53 +11,45 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    public function criarRegistro(Request $request)
+    public function criarRegistro(RegisterRequest $request)
     {
-        $validated = [];
+        $validated = $request->validated();
 
         if ($request->tipo_usuario == "cpf") {
-            $validated = $request->validate([
-                'cpf' => 'required|string',
-                'nome' => 'required|string|min:1',
-                'email' => 'required|string|email',
-                'celular' => 'required|string',
-                'endereco' => 'required|string',
-                'password' => 'required|string'
-            ]);
-
-            Usuarios::create([
-                'tipo_usuario' => 'cpf',
-                'cpf' => $validated['cpf'],
-                'nome' => $validated['nome'],
-                'email' => $validated['email'],
-                'celular' => $validated['celular'],
-                'endereco' => $validated['endereco'],
-                'password' => bcrypt($validated['password'])
-            ]);
+            $this->criarUsuario($validated);;
+        } elseif ($request->tipo_usuario == "cnpj") {
+            $this->criarInstituicao($validated);
+        } else {
+            return back()->withErrors(['tipo_usuario' => 'Tipo de usuário inválido.']);
         }
 
-        if ($request->tipo_usuario == "cnpj") {
-            $validated = $request->validate([
-                'cnpj' => 'required|string',
-                'nome' => 'required|string|min:1',
-                'email' => 'required|string|email',
-                'celular' => 'required|string',
-                'endereco' => 'required|string',
-                'password' => 'required|string'
-            ]);
+        return redirect()->route('redirecionarLogin')->with('success', 'Registro criado com sucesso! Por favor, faça login.');
+    }
 
-            Instituicao::create([
-                'tipo_usuario' => 'cnpj',
-                'cnpj' => $validated['cnpj'],
-                'nome' => $validated['nome'],
-                'email' => $validated['email'],
-                'celular' => $validated['celular'],
-                'endereco' => $validated['endereco'],
-                'password' => bcrypt($validated['password'])
-            ]);
-        }
+    private function criarUsuario(array $dados)
+    {
+        Usuarios::create([
+            'tipo_usuario' => 'cpf',
+            'cpf' => $dados['cpf'],
+            'nome' => $dados['nome'],
+            'email' => $dados['email'],
+            'celular' => $dados['celular'],
+            'endereco' => $dados['endereco'],
+            'password' => Hash::make($dados['password']),
+        ]);
+    }
 
-        return redirect()->route('redirecionarHome')->with('success', 'Registro realizado com sucesso!');
+    private function criarInstituicao(array $dados)
+    {
+        Instituicao::create([
+            'tipo_usuario' => 'cnpj',
+            'cnpj' => $dados['cnpj'],
+            'nome' => $dados['nome'],
+            'email' => $dados['email'],
+            'celular' => $dados['celular'],
+            'endereco' => $dados['endereco'],
+            'password' => Hash::make($dados['password']),
+        ]);
     }
 
     public function fazerLogin(Request $request)
@@ -90,10 +83,9 @@ class LoginController extends Controller
 
     public function FazerLogout()
     {
-        if(Auth::guard('usuarios')->check()){
+        if (Auth::guard('usuarios')->check()) {
             Auth::guard('usuarios')->logout();
-        }
-        elseif(Auth::guard('instituicao')->check()){
+        } elseif (Auth::guard('instituicao')->check()) {
             Auth::guard('instituicao')->logout();
         }
         return redirect()->route('redirecionarLogin')->with('success', 'Você foi desconectado com sucesso!');

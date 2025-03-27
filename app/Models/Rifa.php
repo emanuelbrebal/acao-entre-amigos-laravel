@@ -13,6 +13,7 @@ class Rifa extends Model
         'preco_numeros',
         'premiacao',
         'data_sorteio',
+        'hora_sorteio',
         'qtd_num',
         'imagem',
         'id_usuario_vendedor',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateRaffleRequest;
 use App\Models\Numero;
 use App\Models\Pedido;
 use App\Models\Rifa;
@@ -12,19 +13,10 @@ use Illuminate\Support\Facades\Auth;
 
 class RifaController extends Controller
 {
-    public function store(Request $request)
+    public function store(CreateRaffleRequest $request)
     {
         try {
-
-            $validated = $request->validate([
-                'titulo_rifa' => 'required|string',
-                'qtd_num' => 'required|numeric|min:1',
-                'preco_numeros' => 'required|numeric|min:1',
-                'premiacao' => 'required|string',
-                'data_sorteio' => 'required|date|after:today',
-                'imagem' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'id_instituicao' => 'required|numeric|min:1',
-            ]);
+            $validated = $request->validated();
 
             if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
 
@@ -38,12 +30,12 @@ class RifaController extends Controller
 
                 $validated['imagem'] = $imageName;
             }
-
+            
             Rifa::create($validated);
 
             return redirect()->route('redirecionarHome')->with('success', 'Rifa criada com sucesso!');
         } catch (\Exception $e) {
-            dd($e);
+            return redirect()->back()->with('error', 'Falha ao criar rifa.');
         }
     }
 
@@ -106,6 +98,6 @@ class RifaController extends Controller
             }
         }
 
-        return view('boughtRaffleNumbers', compact('rifasAtivadas', 'rifasDesativadas', 'chancesVitoria', 'qtsComprei'));
+        return view('users.boughtRaffleNumbers', compact('rifasAtivadas', 'rifasDesativadas', 'chancesVitoria', 'qtsComprei'));
     }
 }
