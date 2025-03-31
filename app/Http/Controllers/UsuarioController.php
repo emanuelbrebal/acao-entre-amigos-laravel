@@ -23,14 +23,20 @@ class UsuarioController extends Controller
     public function updateUsuario(UpdateUserRequest $request)
     {
         $usuario = Usuarios::find($request->id);
+     
+        $dados = $request->validated();
+        
+        // dd($usuario, $dados);
+
         if (!$usuario) {
             return redirect()->back()->with('error', 'Usuário não encontrado');
         }
 
+        
         DB::beginTransaction();
 
         try {
-            $usuario->update($request->validated());
+            $usuario->update($dados);
             DB::commit();
 
             return redirect()->back()->with('success', 'Usuário atualizado com sucesso');

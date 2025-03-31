@@ -28,6 +28,8 @@ class LoginController extends Controller
 
     private function criarUsuario(array $dados)
     {
+        $dados['cpf'] = preg_replace('/\D/', '', $dados['cpf']);
+        $dados['celular'] = preg_replace('/\D/', '', $dados['celular']);
         Usuarios::create([
             'tipo_usuario' => 'cpf',
             'cpf' => $dados['cpf'],
@@ -41,6 +43,8 @@ class LoginController extends Controller
 
     private function criarInstituicao(array $dados)
     {
+        $dados['cnpj'] = preg_replace('/\D/', '', $dados['cnpj']);
+        $dados['celular'] = preg_replace('/\D/', '', $dados['celular']);
         Instituicao::create([
             'tipo_usuario' => 'cnpj',
             'cnpj' => $dados['cnpj'],
@@ -77,7 +81,7 @@ class LoginController extends Controller
 
             return back()->withErrors(['login' => 'Credenciais inválidas. Verifique seus dados e tente novamente.']);
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            return redirect()->back()->with('error', 'Erro ao atualizar instituição', 'details', $e->getMessage());
         }
     }
 

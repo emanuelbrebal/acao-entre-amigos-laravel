@@ -106,12 +106,18 @@ class InstituicaoController extends Controller
     }
 
     public function updateInstituicao(UpdateInstitutionRequest $request){
-        $instituicao = Instituicao::find($request->id);
-    
+        $instituicao = Instituicao::findOrFail($request->id);
+        $dados = $request->validated();
+        
+        if (!$instituicao) {
+            return redirect()->back()->with('error', 'Usuário não encontrado.');
+        }
+
+
         DB::beginTransaction();
 
         try {
-            $instituicao->update($request->validated());
+            $instituicao->update($dados);
             DB::commit();
 
             return redirect()->back()->with('success', 'Instituição atualizada com sucesso');

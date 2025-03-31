@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+use Illuminate\Validation\Rule;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,10 +24,16 @@ class UpdateInstitutionRequest extends FormRequest
     {
         return [
             'nome' => 'nullable|string|max:255',
-            'cnpj' => 'nullable|digits:14|unique:instituicao,cnpj',
+            'cnpj' => [
+            'nullable',
+            'string',
+            'digits:11',
+            Rule::unique('instituicao', 'cnpj')->ignore($this->id),
+        ],
             'email' => 'nullable|email|max:255|unique:instituicao,email',
-            'celular' => 'nullable|string|regex:/^\(?\d{2}\)?[\s-]?\d{4,5}-?\d{4}$/',
+            'celular' => 'required|string|regex:/^\d{11}$/',
             'endereco' => 'nullable|string|max:255',
+            
         ];
     }
 
