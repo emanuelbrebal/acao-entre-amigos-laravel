@@ -14,6 +14,7 @@ class Instituicao extends Authenticatable
         'email',
         'celular',
         'endereco',
+        'password',
         'id_rifa'
     ];
 

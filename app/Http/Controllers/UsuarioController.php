@@ -23,6 +23,7 @@ class UsuarioController extends Controller
     public function updateUsuario(UpdateUserRequest $request)
     {
         $usuario = Usuarios::find($request->id);
+
         if (!$usuario) {
             return redirect()->back()->with('error', 'Usuário não encontrado');
         }
@@ -30,13 +31,20 @@ class UsuarioController extends Controller
         DB::beginTransaction();
 
         try {
-            $usuario->update($request->validated());
+            $dados = array_filter($request->validated(), function ($value) {
+                return $value !== null;
+            });
+
+            $usuario->update($dados);
             DB::commit();
 
             return redirect()->back()->with('success', 'Usuário atualizado com sucesso');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Erro ao atualizar usuário', 'details', $e->getMessage());
+            return redirect()->back()->with([
+                'error' => 'Erro ao atualizar usuário',
+                'details' => $e->getMessage()
+            ]);
         }
     }
 }

@@ -72,8 +72,6 @@ class RegisterRequest extends FormRequest
 
             'tipo_usuario.required' => 'O tipo de usuário é obrigatório.',
             'tipo_usuario.in' => 'O tipo de usuário deve ser CPF ou CNPJ.',
-
-
         ];
     }
 }

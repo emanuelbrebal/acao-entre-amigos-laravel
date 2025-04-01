@@ -57,7 +57,7 @@ class InstituicaoController extends Controller
                 if ($rifa->imagem && file_exists(public_path('img/raffles/' . $rifa->imagem))) {
                     unlink(public_path('img/raffles/' . $rifa->imagem));
                 }
-                    
+
                 $requestImage = $request->file('imagem');
 
                 $extension = $requestImage->extension();
@@ -68,7 +68,7 @@ class InstituicaoController extends Controller
 
                 $validated['imagem'] = $imageName;
             }
-        
+
             $rifa->update($validated);
 
             return redirect()->route('listMyRaffles')->with('success', 'Rifa editada com sucesso!');
@@ -105,19 +105,31 @@ class InstituicaoController extends Controller
         return view('institutions.updateInstitution', compact('instituicao'));
     }
 
-    public function updateInstituicao(UpdateInstitutionRequest $request){
-        $instituicao = Instituicao::find($request->id);
-    
-        DB::beginTransaction();
+    public function updateInstituicao(UpdateInstitutionRequest $request)
+{
+    $instituicao = Instituicao::find($request->id);
 
-        try {
-            $instituicao->update($request->validated());
-            DB::commit();
-
-            return redirect()->back()->with('success', 'Instituição atualizada com sucesso');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->with('error', 'Erro ao atualizar instituição', 'details', $e->getMessage());
-        }
+    if (!$instituicao) {
+        return redirect()->back()->with('error', 'Instituição não encontrada.');
     }
+
+    DB::beginTransaction();
+
+    try {
+        $dados = array_filter($request->validated(), function($value) {
+            return $value !== null;
+        });
+        
+        $instituicao->update($dados);
+        DB::commit();
+
+        return redirect()->back()->with('success', 'Instituição atualizada com sucesso');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->with([
+            'error' => 'Erro ao atualizar instituição',
+            'details' => $e->getMessage()
+        ]);
+    }
+}
 }
