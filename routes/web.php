@@ -12,7 +12,7 @@ Route::controller(RedirectController::class)->middleware('usuarioLogado')->group
     Route::get('/', 'redirecionarHome')->name('redirecionarDefault');
     Route::get('/rifa/{id}', 'redirecionarRifa')->name('redirecionarRifa');
     Route::get('/sobre', 'redirecionarSobre')->name('redirecionarSobre');
-    Route::get('/createRaffle', 'redirecionarCreateRaffle')->name('redirecionarCreateRaffle');
+    Route::get('/create-raffle', 'redirecionarCreateRaffle')->name('redirecionarCreateRaffle');
     Route::get('/buscar', 'redirecionarBusca')->name('buscar');
 });
 
@@ -22,29 +22,29 @@ Route::controller(RedirectController::class)->group(function () {
 });
 
 Route::controller(LoginController::class)->group(function () {
-    Route::post('/criarRegistro', 'criarRegistro')->name('criarRegistro');
-    Route::post('/fazerLogin', 'fazerLogin')->name('fazerLogin');
+    Route::post('/criar-registro', 'criarRegistro')->name('criarRegistro');
+    Route::post('/fazer-login', 'fazerLogin')->name('fazerLogin');
     Route::post('/logout', 'fazerLogout')->name('fazerLogout');
 });
 
 Route::controller(RifaController::class)->middleware('usuarioLogado')->group(function () {
-    Route::post('/createRaffle/store', 'store')->name('cadastrarRifa');
-    Route::post('/buyRaffleNumbers', 'buyRaffleNumbers')->name('buyRaffleNumbers');
-    Route::get('/boughtRaffleNumbers', 'boughtRaffleNumbers')->name('boughtRaffleNumbers');
+    Route::post('/create-raffle/store', 'store')->name('cadastrarRifa');
+    Route::post('/buy-raffle-numbers', 'buyRaffleNumbers')->name('buyRaffleNumbers');
+    Route::get('/bought-raffle-numbers', 'boughtRaffleNumbers')->name('boughtRaffleNumbers');
 });
 
 Route::controller(UsuarioController::class)->middleware('usuarioLogado')->group(function () {
-    Route::get('/listarUsuario', 'listarUsuario')->name('listarUsuario');
-    Route::post('/updateUsuario', 'updateUsuario')->name('updateUsuario');
+    Route::get('/listar-usuario', 'listarUsuario')->name('listarUsuario');
+    Route::post('/update-usuario', 'updateUsuario')->name('updateUsuario');
 });
 
 Route::controller(InstituicaoController::class)->middleware('usuarioLogado')->group(function () {
-    Route::get('/listMyRaffles', 'listMyRaffles')->name('listMyRaffles');
-    Route::get('/updateMyRaffles/{id}', 'updateMyRaffles')->name('updateMyRaffles');
-    Route::post('/editarRifa/{id}', 'editarRifa')->name('editarRifa');
-    Route::get('/desativarRifa/{id}', 'desativarRifa')->name('desativarRifa');
-    Route::get('/ativarRifa/{id}', 'ativarRifa')->name('ativarRifa');
+    Route::get('/list-my-raffles', 'listMyRaffles')->name('listMyRaffles');
+    Route::get('/update-my-raffles/{id}', 'updateMyRaffles')->name('updateMyRaffles');
+    Route::post('/editar-rifa/{id}', 'editarRifa')->name('editarRifa');
+    Route::get('/desativar-rifa/{id}', 'desativarRifa')->name('desativarRifa');
+    Route::get('/ativar-rifa/{id}', 'ativarRifa')->name('ativarRifa');
 
-    Route::get('/listarInstituicao', 'listarInstituicao')->name('listarInstituicao');
-    Route::post('/updateInstituicao', 'updateInstituicao')->name('updateInstituicao');
+    Route::get('/listar-instituicao', 'listarInstituicao')->name('listarInstituicao');
+    Route::post('/update-instituicao', 'updateInstituicao')->name('updateInstituicao');
 });

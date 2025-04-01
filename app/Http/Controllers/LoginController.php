@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Instituicao;
 use App\Models\Usuarios;
@@ -56,7 +57,7 @@ class LoginController extends Controller
         ]);
     }
 
-    public function fazerLogin(Request $request)
+    public function fazerLogin(LoginRequest $request)
     {
         try {
             if ($request->tipo_usuario == "cpf") {

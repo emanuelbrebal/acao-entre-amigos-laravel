@@ -37,10 +37,10 @@ class UpdateUserRequest extends FormRequest
             'digits:11',
             Rule::unique('usuarios', 'cpf')->ignore($this->id),
         ],
-            'email' => 'nullable|email|max:255|unique:usuarios,email,',
-            'celular' => 'nullable|string|regex:/^\d{11}$/',
+            'email' => 'nullable|email|max:255',
+            'celular' => 'nullable|string|min:10|max:11',
             'endereco' => 'nullable|string|max:255',
-         
+
         ];
     }
 
@@ -52,7 +52,8 @@ class UpdateUserRequest extends FormRequest
             'nome.regex' => 'O nome deve conter apenas letras e espaços.',
             'nome.max' => 'O nome não pode ter mais de 255 caracteres.',
 
-            'cpf.digits' => 'O CPF deve conter exatamente 14 números.',
+            'cpf.digits' => 'O CPF deve conter exatamente 11 números.',
+            'cpf.digits' => 'O CPF deve conter exatamente 11 números.',
             'cpf.unique' => 'Este CPF já está cadastrado.',
 
             'email.email' => 'Por favor, insira um e-mail válido.',
@@ -60,6 +61,8 @@ class UpdateUserRequest extends FormRequest
             'email.unique' => 'Este e-mail já está em uso.',
 
             'celular.regex' => 'O celular deve estar no formato (XX) XXXXX-XXXX ou (XX) XXXX-XXXX.',
+            'celular.min' => 'O celular precisa ter no mínimo 10 dígitos.',
+            'celular.min' => 'O celular precisa ter no máximo 11 dígitos.',
 
             'endereco.max' => 'O endereço não pode ter mais de 255 caracteres.',
         ];
