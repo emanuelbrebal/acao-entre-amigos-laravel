@@ -93,13 +93,9 @@
     border: none;
 }
 
-.-reset-cotas{
-    background-color: var(--blue) !important;
-    color: var(--white)  !important;
-}
-
-.btn.-comprar-cotas:hover{
-    transform: scale(1.05);
+.btn.-reset-cotas{
+    background-color: var(--blue);
+    color: var(--white) ;
 }
 
 .btn.btn-submit{
