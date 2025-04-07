@@ -39,26 +39,32 @@
 
         </div>
         <div class="tabela-rifa">
-            <h1 class="cotacao">escolha suas cotas:</h1>
+            @if (Auth::guard('usuarios')->check())
+                <h1 class="cotacao">escolha suas cotas:</h1>
+            @elseif(Auth::guard('instituicao')->check())
+                <h1 class="cotacao">verifique as cotas compradas:</h1>
+            @endif
             <div class="tabela-cotas">
                 <form class="organiza-tabela" action="{{ route('buyRaffleNumbers') }}" method="POST"
                     id="form-selecionados">
                     @csrf
                     @for ($i = 1; $i <= $rifa->qtd_num; $i++)
-                        <div class="numero" id="numero_{{ $i }}">
+                        <div class="numero" id="numero_{{ $i }}"}}>
                             @php
                                 $numeroComprado = collect($numerosCompradosArray)->firstWhere('descricao', $i);
                             @endphp
 
                             @if ($numeroComprado)
-                                <div class="div-quota {{$numeroComprado['comprador'] == $userID ? "-sua-cota" : "-comprada"}}">
+                                <div
+                                    class="div-quota {{ $numeroComprado['comprador'] == $userID ? '-sua-cota' : '-comprada' }}">
                                     <input type="checkbox" value="{{ $i }}"
                                         class="check-quota -cursor-bloqueado" id="checkbox-{{ $i }}">
                                     {{ $i }}
                                 </div>
                             @else
                                 <div class="div-quota">
-                                    <input type="checkbox" value="{{ $i }}" class="check-quota"
+                                    <input type="checkbox" value="{{ $i }}"
+                                        class="check-quota {{ Auth::guard('instituicao') ? '-cursor-bloqueado' : ' ' }}"
                                         id="checkbox-{{ $i }}" onclick="atualizaEstadoCotas(this)">
                                     {{ $i }}
                                 </div>
@@ -71,10 +77,12 @@
                 <div class="legenda">
                     <div class="cota -disponivel"></div>
                     <p>Disponível</p>
-                    <div class="cota -selecionada"></div>
-                    <p>Selecionada</p>
-                    <div class="cota -sua-cota"></div>
-                    <p>Sua cota</p>
+                    @if (Auth::guard('usuarios')->check())
+                        <div class="cota -selecionada"></div>
+                        <p>Selecionada</p>
+                        <div class="cota -sua-cota"></div>
+                        <p>Sua cota</p>
+                    @endif
                     <div class="cota -comprada"></div>
                     <p>Comprada</p>
                 </div>
@@ -84,59 +92,59 @@
         </div>
 
         <div class="rifa-info -rifa-info-card -carrinho">
-            <h1 class="">Resumo do pedido:</h1>
-            <div class="info-instituicao">
-                <div class="info-sorteio">
-                    <p>Cotas selecionadas: </p>
-                    <p id="array-quotas"> Nenhuma cota selecionada.</p>
+            @if (Auth::guard('usuarios')->check())
+                <h1 class="">Resumo do pedido:</h1>
+                <div class="info-instituicao">
+                    <div class="info-sorteio">
+                        <p>Cotas selecionadas: </p>
+                        <p id="array-quotas"> Nenhuma cota selecionada.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="info-instituicao">
-                <div class="info-sorteio">
-                    <p>Qtd. Cotas Selecionadas: <strong> <span id="qtdQuotas"> </span> </strong></p>
-                    <p>Valor por cota: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
-                            unid.</strong></p>
+                <div class="info-instituicao">
+                    <div class="info-sorteio">
+                        <p>Qtd. Cotas Selecionadas: <strong> <span id="qtdQuotas"> </span> </strong></p>
+                        <p>Valor por cota: <strong> R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
+                                unid.</strong></p>
+                    </div>
+                    <p>Total: <strong> <span id="total">R$ 0,00</span></strong></p>
+                    <div class="buttonSubmit">
+                        <button type="button" class="btn -reset-cotas" id="btnReset">Limpar Cotas</button>
+                        <button type="button" class="btn -comprar-cotas" data-bs-toggle="modal"
+                            data-bs-target="#modalConfirmaCompra" id="btnCompraRifas">Comprar cotas</button>
+                    </div>
                 </div>
-                <p>Total: <strong> <span id="total">R$ 0,00</span></strong></p>
-                <div class="buttonSubmit">
-                    <button type="button" class="btn -reset-cotas" id="btnReset">Limpar Cotas</button>
-                    <button type="button" class="btn -comprar-cotas" data-bs-toggle="modal"
-                        data-bs-target="#modalConfirmaCompra" id="btnCompraRifas">Comprar cotas</button>
 
-                </div>
-            </div>
+                <div class="modal fade" id="modalConfirmaCompra" tabindex="-1" aria-labelledby="modalConfirmaCompra"
+                    aria-hidden="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="modalConfirmaCompra">Confirmação de pedido</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Você, <strong>{{ Auth::guard('usuarios')->user()->nome }}</strong>, confirma seu pedido das
+                                cotas
+                                dos seguintes números:
+                                <p id="array-quotas-carrinho"><strong></strong></p>
+                                <p>No valor de <strong>R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
+                                    </strong>
+                                    por cota,</p>
+                                <p>Com o valor total de: <strong> <span id="total-modal"></span></strong></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 
-        </div>
-
-        @if (Auth::guard('usuarios')->user())
-            <div class="modal fade" id="modalConfirmaCompra" tabindex="-1" aria-labelledby="modalConfirmaCompra"
-                aria-hidden="false">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="modalConfirmaCompra">Confirmação de pedido</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Você, <strong>{{ Auth::guard('usuarios')->user()->nome }}</strong>, confirma seu pedido das
-                            cotas
-                            dos seguintes números:
-                            <p id="array-quotas-carrinho"><strong></strong></p>
-                            <p>No valor de <strong>R${{ number_format(round($rifa->preco_numeros, 2), 2, ',', '.') }}
-                                </strong>
-                                por cota,</p>
-                            <p>Com o valor total de: <strong> <span id="total-modal"></span></strong></p>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-
-                            <button type="submit" class="btn btn-primary">Comprar</button>
+                                <button type="submit" class="btn btn-primary">Comprar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @endif
+            @elseif (Auth::guard('instituicao')->check())
+                <h1>Aqui vão ficar dados estatísticos da rifa</h1>
+            @endif
+        </div>
         </form>
         <div id="dados" data-numeros-comprados="{{ json_encode($numerosComprados) }}"
             data-qtd-num="{{ $rifa->qtd_num }}" data-price-per-quota="{{ $rifa->preco_numeros }}"

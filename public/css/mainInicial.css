@@ -180,7 +180,10 @@ main{
 .organiza-logout{
     display: flex;
     flex-direction: row;
+    border: solid 2px var(--grey);
     gap: 3px;
+    position: absolute;
+    z-index: 2;
 }
 
 .form-logout{

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Instituicao;
 use App\Models\Numero;
 use App\Models\Rifa;
+use App\Models\Usuarios;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -62,7 +63,15 @@ class RedirectController extends Controller
         $numerosComprados = Numero::where('id_rifa', $id)->where('comprado', true)->get(['descricao', 'comprador']);
         $numerosCompradosArray = $numerosComprados->toArray();
         $rifasDisponiveis = $qtdNum - $numerosComprados->count();
-        $userID = Auth::guard('usuarios')->user()->id;
+        if(Auth::guard('usuarios')->check()){
+            $userID = Auth::guard('usuarios')->user()->id;
+        }
+        else if(Auth::guard('instituicao')->check()){
+            $userID = Auth::guard('instituicao')->user()->id;
+        }
+        else{
+            $userID = null;
+        }
 
         return view('rifa', compact('rifa', 'numero', 'instituicao', 'qtdNum', 'numerosComprados', 'rifasDisponiveis', 'numerosCompradosArray', 'userID'));
     }
