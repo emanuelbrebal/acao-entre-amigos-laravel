@@ -59,10 +59,12 @@ class RedirectController extends Controller
         $numero = Numero::where('id_rifa', $id)->get();
         $instituicao = Instituicao::where('id', $rifa->id_instituicao)->first();
         $qtdNum = $rifa->qtd_num;
-        $numerosComprados = Numero::where('id_rifa', $id)->where('comprado', true)->get();
+        $numerosComprados = Numero::where('id_rifa', $id)->where('comprado', true)->get(['descricao', 'comprador']);
+        $numerosCompradosArray = $numerosComprados->toArray();
         $rifasDisponiveis = $qtdNum - $numerosComprados->count();
+        $userID = Auth::guard('usuarios')->user()->id;
 
-        return view('rifa', compact('rifa', 'numero', 'instituicao', 'qtdNum', 'numerosComprados', 'rifasDisponiveis'));
+        return view('rifa', compact('rifa', 'numero', 'instituicao', 'qtdNum', 'numerosComprados', 'rifasDisponiveis', 'numerosCompradosArray', 'userID'));
     }
 
     public function redirecionarSobre()

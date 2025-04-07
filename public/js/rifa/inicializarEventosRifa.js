@@ -1,7 +1,10 @@
 function inicializarEventosRifa(){
-    gerarTabela(0);
     atualizarArrayQuotas();
     mostraTotalCotas();
     mostraValorTotal();
     atualizaEstadoCotas();
 }
+document.addEventListener('DOMContentLoaded', function() {
+    inicializarEventosRifa();
+});
+

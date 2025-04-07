@@ -38,12 +38,15 @@ Route::controller(UsuarioController::class)->middleware('usuarioLogado')->group(
     Route::post('/update-usuario', 'updateUsuario')->name('updateUsuario');
 });
 
-Route::controller(InstituicaoController::class)->middleware('usuarioLogado')->group(function () {
+Route::controller(InstituicaoController::class)->middleware('instituicaoLogada')->group(function () {
     Route::get('/list-my-raffles', 'listMyRaffles')->name('listMyRaffles');
     Route::get('/update-my-raffles/{id}', 'updateMyRaffles')->name('updateMyRaffles');
     Route::post('/editar-rifa/{id}', 'editarRifa')->name('editarRifa');
+
     Route::get('/desativar-rifa/{id}', 'desativarRifa')->name('desativarRifa');
     Route::get('/ativar-rifa/{id}', 'ativarRifa')->name('ativarRifa');
+
+    // Route::get('/rifa/{id}', 'redirecionarRifa')->name('redirecionarRifa');
 
     Route::get('/listar-instituicao', 'listarInstituicao')->name('listarInstituicao');
     Route::post('/update-instituicao', 'updateInstituicao')->name('updateInstituicao');

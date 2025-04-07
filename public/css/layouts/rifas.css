@@ -56,18 +56,11 @@ html, body, main{
     border-radius: 8px;
 }
 
-.tabela-cotas{
-    /* width: 50%;
-    height: 100%;
-    display: inline-block;
-    justify-content: center; */
-}
-
 #tabelaNumeros {
     border-collapse: collapse;
 }
 
-#tabelaNumeros td {
+.numero {
     border: 1px solid black;
     border-radius: 30px;
     gap: 1px;
@@ -94,8 +87,10 @@ html, body, main{
 .-show{
     cursor: auto !important;
     border-radius: 50px;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    flex-direction: column;
 }
 
 .-show:hover {
@@ -208,10 +203,15 @@ html, body, main{
 
 .organiza-tabela{
     height: 60dvh;
+    overflow: auto;
+}
+
+.tabela-numeros{
+    width: 100%;
 }
 
 .tabela-numeros, .organiza-tabela, .organiza-infos{
-    width: 120dvh;
+    width: 100dvh;
 }
 
 .tabela-cotas{
@@ -223,7 +223,7 @@ html, body, main{
 .legenda, .legenda-p {
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: 10px;
     justify-content: start;
     align-items: center;
     height: 40px;
@@ -237,19 +237,24 @@ html, body, main{
     border-radius: 40px;
 }
 
-
 .-selecionada {
     background-color: var(--primary-green);
 }
 
 .-comprada {
     background-color: var(--grey);
+    /* color: white; */
+    cursor: not-allowed;
 }
 
 .-sua-cota {
     background-color: var(--orange);
+    cursor: not-allowed;
 }
 
+.-cursor-bloqueado{
+    cursor: not-allowed;
+}
 
 .footer-link{
     text-transform: capitalize;

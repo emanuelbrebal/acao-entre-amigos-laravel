@@ -15,10 +15,10 @@ class UserSeeder extends Seeder
     {
         Usuarios::create([
             'nome' => 'Lara Veloso',
-            'cpf' => '111.222.333-44',
+            'cpf' => '12193661456',
             'email' => 'laraveloso@gmail.com',
             'password' => bcrypt('123'),
-            'celular' => '',
+            'celular' => '82999654909',
             'endereco' => 'Rua das laranjeiras 123',
         ]);
     }

@@ -1,20 +1,32 @@
-function atualizaEstadoCotas() {
+function atualizaEstadoCotas(input) {
     const numerosComprados = JSON.parse(window.dados.getAttribute("data-numeros-comprados"));
     const usuarioLogado = window.dados.getAttribute("data-usuario-logado");
 
-    numerosComprados.forEach(cota => {
-        const checkbox = document.getElementById(`checkbox-${cota.descricao}`);
-        const tableData = document.getElementById(`numero_${cota.descricao}`);
+    if (!window.numerosSelecionados) {
+        window.numerosSelecionados = new Set();
+    }
 
-        if (checkbox && tableData) {
-            if (cota.comprador == usuarioLogado) {
-                tableData.style.backgroundColor = "var(--orange)";
-            } else {
-                tableData.style.backgroundColor = "var(--grey)";
-            }
+    const valorSelecionado = input.value;
+    if(input.checked){
+        input.parentElement.classList.add("-selecionada");
+        adicionarValorSelecionado(valorSelecionado);
+        atualizarArrayQuotas();
+        mostraValorTotal();
+    }
+    else{
+        input.parentElement.classList.remove("-selecionada");
+        removerValorSelecionado(valorSelecionado);
+        atualizarArrayQuotas();
+        mostraValorTotal();
+    }
+    mostraTotalCotas();
+    // sessionStorage TODO
+}
 
-            tableData.style.pointerEvents = "none";
-            checkbox.disabled = true;
-        }
-    });
+function adicionarValorSelecionado(valor){
+    window.numerosSelecionados.add(valor);
+}
+
+function removerValorSelecionado(valor){
+    window.numerosSelecionados.delete(valor);
 }
