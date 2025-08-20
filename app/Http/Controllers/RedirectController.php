@@ -20,6 +20,10 @@ class RedirectController extends Controller
             ->get();
         return view('main', compact('rifas', 'user'));
     }
+    public function redirecionarIndex()
+    {
+        return view('index');
+    }
 
     public function redirecionarBusca(Request $request)
     {
@@ -27,12 +31,12 @@ class RedirectController extends Controller
 
         if ($pesquisa) {
             $rifas = Rifa::where('titulo_rifa', 'ilike', '%' . $pesquisa . '%')
-            ->where('ativado', true)
-            ->get();
+                ->where('ativado', true)
+                ->get();
         } else {
             $rifas = Rifa::orderBy('created_at', 'desc')
-            ->where('ativado', true)
-            ->get();
+                ->where('ativado', true)
+                ->get();
         }
         return view('main', compact('rifas'));
     }

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Home Page - Ação Entre Amigos')
+@section('title', 'Explorar Rifas - Ação Entre Amigos')
 <link rel="stylesheet" href="{{ asset('css/mainInicial.css') }}">
 @section('content')
     <div class="d-flex main-search">

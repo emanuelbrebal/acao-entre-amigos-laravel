@@ -7,9 +7,10 @@ use App\Http\Controllers\RifaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', [RedirectController::class, 'redirecionarIndex'])->name('redirecionarIndex');
+
 Route::controller(RedirectController::class)->middleware('usuarioLogado')->group(function () {
     Route::get('/home', 'redirecionarHome')->name('redirecionarHome');
-    Route::get('/', 'redirecionarHome')->name('redirecionarDefault');
     Route::get('/rifa/{id}', 'redirecionarRifa')->name('redirecionarRifa');
     Route::get('/sobre', 'redirecionarSobre')->name('redirecionarSobre');
     Route::get('/create-raffle', 'redirecionarCreateRaffle')->name('redirecionarCreateRaffle');
