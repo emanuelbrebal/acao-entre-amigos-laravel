@@ -1,66 +1,78 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎟️ Ação entre amigos
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Plataforma Full Stack para gestão de rifas digitais.
+> **Contexto:** Este projeto foi um marco fundamental na minha jornada, desenvolvido para consolidar os conhecimentos adquiridos no início do meu estágio em desenvolvimento Web.
 
-## About Laravel
+### 💻 Sobre o Projeto (A Jornada)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+O **Ação entre amigos** nasceu não apenas para resolver o problema de gestão de rifas manuais, mas principalmente como meu **primeiro grande desafio Full Stack**.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+O objetivo era claro: pegar tudo que eu estava aprendendo no estágio (PHP, Laravel, MVC) e aplicar em um produto real, do zero. Foi neste projeto que saí da teoria e entendi, na prática, como conectar um front-end dinâmico a um banco de dados relacional, lidando com regras de negócio reais.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+### 🛠 Tecnologias (O Alicerce)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Utilizei a stack clássica e robusta que fundamentou minha base como desenvolvedor:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Back-end:** PHP 8.2 e Laravel 11(Framework MVC).
+- **Front-end:** Blade Templates (Renderização no servidor) e Bootstrap 5 (Estilização).
+- **Interatividade:** JavaScript Vanilla (Manipulação do DOM).
+- **Banco de Dados:** PostgreSQL.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+### ✨ Funcionalidades Entregues
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Apesar de ser um projeto de aprendizado, foquei em entregar um fluxo completo:
 
-### Premium Partners
+- [x] **Landing Page e design responsivo:** Aprendizados e melhorias em HTML, CSS e JS básicos para solidificar conhecimentos.
+- [x] **CRUD de Campanhas:** Criação, edição e exclusão de rifas.
+- [x] **Grid de Bilhetes:** Geração visual dos números (000 a 999) com status (Livre/Reservado).
+- [x] **Cadastro e Autenticação de Usuários/Admins(Instituições):** CRUD de usuário e autenticação com o próprio laravel em si (método attempt($credentials)).
+- [x] **Buscas** Uso de queries com o Eloquent para filtragem de rifas.
+- [ ] **Filtragem das rifas:** Construção de filtros para melhorar consultas.
+- [x] **Fluxo de Compra:** O usuário pode selecionar números de rifas e "comprar", tornado-os "reservados".
+- [x] **Validação de Dados:** Uso das `Requests` do Laravel para impedir dados inválidos.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+### 🧠 O que eu aprendi (Consolidação)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Este projeto foi minha "escola" para conceitos que uso até hoje:
 
-## Code of Conduct
+1. **Arquitetura MVC na Prática:** Foi aqui que entendi de verdade a responsabilidade de cada camada (Model, View, Controller) e por que não devemos misturar lógica de banco de dados na visualização.
+2. **Relacionamentos SQL:** Aprendi a modelar tabelas relacionais (Uma Rifa *tem muitos* Números; Um Número *pertence a* uma Rifa) e tabelas-pivô (Usuários compraram 1 ou muitos números).
+3. **Blade & Componentização:** Como reutilizar pedaços de código HTML (como headers e cards) para não repetir código.
+4. **O problema da Concorrência:** Tive meu primeiro contato com o conceito de *Race Conditions* (o que acontece se duas pessoas clicarem no número 50 ao mesmo tempo?) e comecei a estudar como transações de banco de dados e filas de mensageria resolvem isso.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+### 🚀 Melhorias (Visão de Futuro)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Olhando hoje para este projeto, com a experiência que adquiri, eu implementaria:
 
-## License
+- [ ] **Filas (Queues):** Para processar as reservas em segundo plano.
+- [ ] **API Rest:** Separar o Back-end do Front-end para permitir um app mobile.
+- [ ] **Testes Automatizados:** Garantir que a lógica de venda nunca quebre.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+### 📦 Como rodar o projeto
+
+```bash
+# 1. Clone o repositório
+$git clone [https://github.com/emanuelbrebal/acao-entre-amigos.git$](https://github.com/emanuelbrebal/acao-entre-amigos.git$) cd acao-entre-amigos
+
+# 2. Instale as dependências
+$ composer install
+$ npm install
+
+# 3. Configure o ambiente
+$cp .env.example .env$ php artisan key:generate
+
+# 4. Rode as migrações (Criação do Banco)
+$ php artisan migrate
+
+# 5. Inicie o servidor
+$ php artisan serve
