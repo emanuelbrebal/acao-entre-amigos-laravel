@@ -53,6 +53,7 @@ Este projeto foi minha "escola" para conceitos que uso até hoje:
 Olhando hoje para este projeto, com a experiência que adquiri, eu implementaria:
 
 - [ ] **Filas (Queues):** Para processar as reservas em segundo plano.
+- [ ] **Implementação de Mutex:** Para evitar race conditions.
 - [ ] **API Rest:** Separar o Back-end do Front-end para permitir um app mobile.
 - [ ] **Testes Automatizados:** Garantir que a lógica de venda nunca quebre.
 
